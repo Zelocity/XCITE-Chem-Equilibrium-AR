@@ -9,7 +9,7 @@ public class SliderScript : MonoBehaviour
 
     [SerializeField] private Slider slider;
 
-    int num = 0;
+    public static int numNO2 = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -24,16 +24,20 @@ public class SliderScript : MonoBehaviour
     {
        //Debug.Log(slider.value);
 
-       if (slider.value > num)
+       if (slider.value > numNO2)
         {
-            GetComponent<ParticleGeneration>().InstantiateGameObjects();
-            num++;
+            GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"));
+            numNO2++;
         }
-       if (slider.value < num)
+       if (slider.value < numNO2)
         {
             GetComponent<ParticleGeneration>().DestroyGameObjects();
-            num--;
+            numNO2--;
         }
 
     }
+
+    //getter and setter for N02 Number count
+    public static int GetNumN02 () {return numNO2;}
+    public static void SetNumN02(int num) {numNO2 = num;}
 }

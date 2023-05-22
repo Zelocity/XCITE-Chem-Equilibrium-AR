@@ -17,7 +17,9 @@ public class ParticleGeneration : MonoBehaviour
         moleculeList = new List<GameObject>();
     }
 
-    public void InstantiateGameObjects()
+
+    //added gameobject parameter to generate different objects. (for NO2 and N2O4)
+    public void InstantiateGameObjects(GameObject prefab)
     {
         
         //Assign random variables to x, y, z rotation axis

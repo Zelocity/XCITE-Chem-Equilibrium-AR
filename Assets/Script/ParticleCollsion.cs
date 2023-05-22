@@ -25,8 +25,11 @@ public class ParticleCollsion : MonoBehaviour
         if (thisCollider.CompareTag("Nitrogen") && otherCollider.CompareTag("Nitrogen"))
         {
             Debug.LogWarning("Nitrogens Hit!");
-            Destroy(collision.gameObject);
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
+
+            GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("/Molecule"));
+
 
         }
 
