@@ -1502,12 +1502,32 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2081679414819818765, guid: 1f4eca57fbc3b4ebf8d2315da28cbe89, type: 3}
+      propertyPath: m_TagString
+      value: Chamber
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081679415240892359, guid: 1f4eca57fbc3b4ebf8d2315da28cbe89, type: 3}
+      propertyPath: m_TagString
+      value: Chamber
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081679415386630513, guid: 1f4eca57fbc3b4ebf8d2315da28cbe89, type: 3}
+      propertyPath: m_TagString
+      value: Chamber
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081679415577654992, guid: 1f4eca57fbc3b4ebf8d2315da28cbe89, type: 3}
+      propertyPath: m_TagString
+      value: Chamber
+      objectReference: {fileID: 0}
     - target: {fileID: 2081679415577654997, guid: 1f4eca57fbc3b4ebf8d2315da28cbe89, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2081679415635952660, guid: 1f4eca57fbc3b4ebf8d2315da28cbe89, type: 3}
       propertyPath: m_Name
+      value: Chamber
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081679415635952660, guid: 1f4eca57fbc3b4ebf8d2315da28cbe89, type: 3}
+      propertyPath: m_TagString
       value: Chamber
       objectReference: {fileID: 0}
     - target: {fileID: 2081679415635952663, guid: 1f4eca57fbc3b4ebf8d2315da28cbe89, type: 3}
@@ -1554,6 +1574,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2081679416377751298, guid: 1f4eca57fbc3b4ebf8d2315da28cbe89, type: 3}
+      propertyPath: m_TagString
+      value: Chamber
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081679416690380521, guid: 1f4eca57fbc3b4ebf8d2315da28cbe89, type: 3}
+      propertyPath: m_TagString
+      value: Chamber
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f4eca57fbc3b4ebf8d2315da28cbe89, type: 3}
 --- !u!1001 &6186367830614891064
@@ -1563,6 +1591,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1666263581, guid: 396c0db860c554a02aa58a6ceecccfa5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003522981008712553, guid: 396c0db860c554a02aa58a6ceecccfa5, type: 3}
+      propertyPath: m_TagString
+      value: Nitrogen
+      objectReference: {fileID: 0}
+    - target: {fileID: 1987112478855929243, guid: 396c0db860c554a02aa58a6ceecccfa5, type: 3}
+      propertyPath: m_TagString
+      value: Oxygen
+      objectReference: {fileID: 0}
     - target: {fileID: 5931484519866170417, guid: 396c0db860c554a02aa58a6ceecccfa5, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1614,6 +1654,10 @@ PrefabInstance:
     - target: {fileID: 6420740064974317195, guid: 396c0db860c554a02aa58a6ceecccfa5, type: 3}
       propertyPath: m_TagString
       value: NO2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696332053575268676, guid: 396c0db860c554a02aa58a6ceecccfa5, type: 3}
+      propertyPath: m_TagString
+      value: Oxygen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 396c0db860c554a02aa58a6ceecccfa5, type: 3}

@@ -31,7 +31,7 @@ public class ParticlePhysics : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
 
-        Bounce(collision.contacts[0].normal);
+        Bounce(collision.GetContact(0).normal);
 
     }
 
