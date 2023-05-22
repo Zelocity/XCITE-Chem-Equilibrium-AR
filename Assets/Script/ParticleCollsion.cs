@@ -8,8 +8,9 @@ public class ParticleCollsion : MonoBehaviour
     //public Rigidbody rb;
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Molecule") {
-            //Debug.Log("Particle Hit!");
+        if (collision.gameObject.tag == "NO2") {
+            Debug.Log("Particle Hit!");
+            
         }
 
     }

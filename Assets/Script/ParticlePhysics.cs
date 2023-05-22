@@ -15,14 +15,10 @@ public class ParticlePhysics : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-
         //Particle is given a random velocity vector at start
         float randNum = Random.Range(1f, 4f) * SpeedMultiplier;
         rb.velocity = new Vector3(0, -randNum, randNum);
         //Note: could implement a multiplier for different particle speeds
-
-
-
 
     }
 
@@ -45,7 +41,7 @@ public class ParticlePhysics : MonoBehaviour
         var direction = Vector3.Reflect(lastFrameVelocity.normalized, collisionNormal);
 
         //Debug.Log("Out Direction: " + direction);
-        rb.velocity = direction * Mathf.Max(speed, 5 * SpeedMultiplier);
+        rb.velocity = direction * Mathf.Max(speed, 2 * SpeedMultiplier);
     }
 }
 

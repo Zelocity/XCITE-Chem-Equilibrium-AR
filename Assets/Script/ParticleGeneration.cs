@@ -19,10 +19,19 @@ public class ParticleGeneration : MonoBehaviour
 
     public void InstantiateGameObjects()
     {
-        float randNum = Random.Range(-2f, 2f);
+        
+        //Assign random variables to x, y, z rotation axis
+        var rV = prefab.transform.rotation.eulerAngles;
+        rV.x = Random.Range(-180f, 180f);
+        rV.y = Random.Range(-180f, 180f);
+        rV.z = Random.Range(-180f, 180f);
+        prefab.transform.rotation = Quaternion.Euler(rV);
+
         //Create new molecule at random position and add it to list
-        generate = Instantiate(prefab, new Vector3(randNum,randNum,randNum), transform.rotation);
+        float randNum = Random.Range(-2.5f, 2f);
+        generate = Instantiate(prefab, new Vector3(randNum,randNum,randNum), prefab.transform.rotation);
         moleculeList.Add(generate);
+
         //Debug.Log(moleculeList.Count);
         //Move new molecule in random direction
         generate.transform.Translate(new Vector3(0, 0, 1 * Time.deltaTime));
@@ -41,5 +50,9 @@ public class ParticleGeneration : MonoBehaviour
             moleculeList.TrimExcess();
         }
         Debug.Log(moleculeList.Count);
+    }
+    public int ListCount()
+    {
+        return moleculeList.Count();
     }
 }
