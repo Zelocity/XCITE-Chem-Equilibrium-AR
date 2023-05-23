@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ParticleCollsion : MonoBehaviour
 {
+    public GameObject particleGen;
     private void OnCollisionEnter(Collision collision)
     {
         //Gets collider for object that was hit by the particle from molecule
@@ -30,7 +31,7 @@ public class ParticleCollsion : MonoBehaviour
 
 
             //create molecule prefab. CRASHES when nitrogens collide. 
-            GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("Molecule"));
+            particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("Molecule"));
 
 
         }
