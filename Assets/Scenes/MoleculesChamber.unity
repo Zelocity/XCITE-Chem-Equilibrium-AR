@@ -135,14 +135,14 @@ GameObject:
   - component: {fileID: 300188923}
   - component: {fileID: 300188922}
   - component: {fileID: 300188921}
-  - component: {fileID: 300188920}
+  - component: {fileID: 300188924}
   m_Layer: 5
   m_Name: DeleteButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &300188919
 RectTransform:
   m_ObjectHideFlags: 0
@@ -164,18 +164,6 @@ RectTransform:
   m_AnchoredPosition: {x: 185, y: -319}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &300188920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300188918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd0c31d28e48e4970ad58259cc5e65cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &300188921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,9 +208,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 300188920}
-        m_TargetAssemblyTypeName: ParticleGeneration, Assembly-CSharp
-        m_MethodName: DestroyGameObjects
+      - m_Target: {fileID: 300188924}
+        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+        m_MethodName: DestroyButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 300188924}
+        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+        m_MethodName: UpdateCount
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -270,6 +270,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300188918}
   m_CullTransparentMesh: 1
+--- !u!114 &300188924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300188918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d6706bc4d524cf3a2fa44f11ce86c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleNum: {fileID: 525877775}
+  particleGen: {fileID: 1283138046}
 --- !u!1 &525877772
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +342,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 'NO2: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -732,6 +746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6ab63e97ac143d3a789403f4e5e04a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleGen: {fileID: 1283138046}
 --- !u!1 &1171790039
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +825,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1195308499}
   - component: {fileID: 1195308500}
-  - component: {fileID: 1195308501}
   - component: {fileID: 1195308502}
   m_Layer: 5
   m_Name: Molecule Slider
@@ -905,18 +919,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1195308501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195308498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd0c31d28e48e4970ad58259cc5e65cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+      - m_Target: {fileID: 1195308502}
+        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+        m_MethodName: UpdateCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1195308502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,6 +944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleNum: {fileID: 525877775}
+  particleGen: {fileID: 1283138046}
 --- !u!1 &1201459930
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +1058,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244590321}
   m_CullTransparentMesh: 1
+--- !u!1 &1283138046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1283138048}
+  - component: {fileID: 1283138047}
+  m_Layer: 0
+  m_Name: ParticleGeneration
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1283138047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283138046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0c31d28e48e4970ad58259cc5e65cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1283138048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283138046}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -18.878887, y: -210.61237, z: 952.3142}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1424153732
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,7 +1258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3538948367888176005, guid: 1e0a0579a9e4a4287b18f78d7a1771da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.04
+      value: -30.1
       objectReference: {fileID: 0}
     - target: {fileID: 3538948367888176005, guid: 1e0a0579a9e4a4287b18f78d7a1771da, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1254,7 +1313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1518672986
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1296,7 +1355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1621423238
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1363,8 +1422,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1621423242}
-        m_TargetAssemblyTypeName: ParticleGeneration, Assembly-CSharp
-        m_MethodName: InstantiateGameObjects
+        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+        m_MethodName: CreateButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1621423242}
+        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+        m_MethodName: UpdateCount
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1421,9 +1492,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1621423237}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd0c31d28e48e4970ad58259cc5e65cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 75d6706bc4d524cf3a2fa44f11ce86c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleNum: {fileID: 525877775}
+  particleGen: {fileID: 1283138046}
 --- !u!1 &1643244326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1852,7 +1925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5931484519866170417, guid: 396c0db860c554a02aa58a6ceecccfa5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.1
+      value: -34.1
       objectReference: {fileID: 0}
     - target: {fileID: 5931484519866170417, guid: 396c0db860c554a02aa58a6ceecccfa5, type: 3}
       propertyPath: m_LocalPosition.y
