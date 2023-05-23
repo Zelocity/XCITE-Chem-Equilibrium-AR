@@ -7,7 +7,7 @@ public class ParticlePhysics : MonoBehaviour
     [SerializeField] private float SpeedMultiplier = 1f;
 
     private Vector3 lastFrameVelocity;
-    public Rigidbody rb;
+    private Rigidbody rb;
     
 
     // Start is called before the first frame update
