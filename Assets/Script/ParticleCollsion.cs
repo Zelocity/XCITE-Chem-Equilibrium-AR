@@ -30,7 +30,7 @@ public class ParticleCollsion : MonoBehaviour
 
 
             //create molecule prefab. CRASHES when nitrogens collide. 
-            GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("/Molecule"));
+            GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("Molecule"));
 
 
         }

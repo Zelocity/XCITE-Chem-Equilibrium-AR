@@ -6,7 +6,7 @@ using System.Linq;
 public class ParticleGeneration : MonoBehaviour
 {
     //Prefab of obbject being generated, aka molecule
-    public GameObject prefab;
+    //public GameObject prefab;
     //Gameobject to be created 
     private GameObject generate;
     //List to hold all objects
@@ -34,7 +34,7 @@ public class ParticleGeneration : MonoBehaviour
         generate = Instantiate(prefab, new Vector3(randNum,randNum,randNum), prefab.transform.rotation);
         moleculeList.Add(generate);
 
-        //Debug.Log(moleculeList.Count);
+        Debug.Log(moleculeList.Count);
         //Move new molecule in random direction
         generate.transform.Translate(new Vector3(0, 0, 1 * Time.deltaTime));
     }
