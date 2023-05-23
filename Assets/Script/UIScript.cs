@@ -13,7 +13,9 @@ public class UIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        particleNum.text = "NO2: " + numNO2;//SliderScript.GetNumN02();
+        //+1 to account for the fact it starts with one
+        //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
+        particleNum.text = "NO2: " + numNO2 + 1;
     }
 
     public void SliderController(Slider slider)
