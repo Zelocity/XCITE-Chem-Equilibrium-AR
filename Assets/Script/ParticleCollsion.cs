@@ -28,6 +28,8 @@ public class ParticleCollsion : MonoBehaviour
             //Destroy(collision.gameObject);
             //Destroy(collision.gameObject);
 
+
+            //create molecule prefab. CRASHES when nitrogens collide. 
             GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("/Molecule"));
 
 
