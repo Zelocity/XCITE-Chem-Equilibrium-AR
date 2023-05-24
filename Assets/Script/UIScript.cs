@@ -7,7 +7,8 @@ using TMPro;
 public class UIScript : MonoBehaviour
 {
     //Vars
-    public static int numNO2 = 0;
+    private static int numNO2 = 0;
+    private static int numN2O4 = 0;
     public TextMeshProUGUI particleNum;
     public GameObject particleGen;
 
@@ -37,9 +38,15 @@ public class UIScript : MonoBehaviour
         numNO2--;
     }
 
-    public void UpdateCount()
+    public void N02Count()
     {
         //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
         particleNum.text = "NO2: " + numNO2;
+    }
+
+    public void N2O4Count()
+    {
+        //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
+        particleNum.text = "NO2: " + numN2O4;
     }
 }
