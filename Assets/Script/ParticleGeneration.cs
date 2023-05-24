@@ -53,13 +53,4 @@ public class ParticleGeneration : MonoBehaviour
         }
         Debug.Log(moleculeList.Count);
     }
-    public int ListCount()
-    {
-        return moleculeList.Count();
-    }
-
-    public List<GameObject> getList()
-    {
-        return moleculeList;
-    }
 }

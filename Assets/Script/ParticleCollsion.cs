@@ -6,7 +6,6 @@ using UnityEngine;
 public class ParticleCollsion : MonoBehaviour
 {
     public GameObject particleGen;
-    static public List<GameObject> moleculeList;
     private void OnCollisionEnter(Collision collision)
     {
         //Gets collider for object that was hit by the particle from molecule
