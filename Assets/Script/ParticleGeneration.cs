@@ -57,4 +57,9 @@ public class ParticleGeneration : MonoBehaviour
     {
         return moleculeList.Count();
     }
+
+    public List<GameObject> getList()
+    {
+        return moleculeList;
+    }
 }

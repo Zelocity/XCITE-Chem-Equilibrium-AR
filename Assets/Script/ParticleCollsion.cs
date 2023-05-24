@@ -6,6 +6,7 @@ using UnityEngine;
 public class ParticleCollsion : MonoBehaviour
 {
     public GameObject particleGen;
+    static public List<GameObject> moleculeList;
     private void OnCollisionEnter(Collision collision)
     {
         //Gets collider for object that was hit by the particle from molecule
@@ -26,11 +27,9 @@ public class ParticleCollsion : MonoBehaviour
         if (thisCollider.CompareTag("Nitrogen") && otherCollider.CompareTag("Nitrogen"))
         {
             Debug.LogWarning("Nitrogens Hit!");
-            //Destroy(collision.gameObject);
-            //Destroy(collision.gameObject);
+            Destroy(collision.gameObject);
+            Destroy(collision.gameObject);
 
-
-            //create molecule prefab. CRASHES when nitrogens collide. 
             particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("Molecule"));
 
 
