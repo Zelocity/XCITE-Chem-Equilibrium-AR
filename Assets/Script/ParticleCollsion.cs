@@ -26,19 +26,20 @@ public class ParticleCollsion : MonoBehaviour
 
         //thisCollider.CompareTag("Nitrogen") && otherCollider.CompareTag("Nitrogen")
 
-        if (collision.collider.gameObject.CompareTag("Nitrogen"))
-        {
+        //if (collision.collider.gameObject.CompareTag("Nitrogen"))
+        if (thisCollider.CompareTag("Nitrogen") && otherCollider.CompareTag("Nitrogen"))
+            {
             Debug.LogWarning("Nitrogens Hit!");
             Destroy(collision.gameObject);
             //Destroy(otherCollider.gameObject);
 
             
-            particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("Molecule"));
+            particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("N2O4"));
         }
 
-        if (thisCollider.CompareTag("Oxygen") && otherCollider.CompareTag("Oxygen"))
+        if (thisCollider.CompareTag("Nitrogen") && otherCollider.CompareTag("Oxygen"))
         {
-            Debug.Log("oxygens Hit!");
+            Debug.Log("Nitrogen Hit Oxygen!");
 
         }
 

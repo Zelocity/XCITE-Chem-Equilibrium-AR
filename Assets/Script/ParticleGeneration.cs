@@ -21,7 +21,7 @@ public class ParticleGeneration : MonoBehaviour
     //added gameobject parameter to generate different objects. (for NO2 and N2O4)
     public void InstantiateGameObjects(GameObject prefab)
     {
-        
+        Debug.Log(prefab);
         //Assign random variables to x, y, z rotation axis
         var rV = prefab.transform.rotation.eulerAngles;
         rV.x = Random.Range(-180f, 180f);
