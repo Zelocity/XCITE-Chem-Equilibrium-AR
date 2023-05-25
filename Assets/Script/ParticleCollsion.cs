@@ -30,7 +30,7 @@ public class ParticleCollsion : MonoBehaviour
         {
             Debug.LogWarning("Nitrogens Hit!");
             Destroy(collision.gameObject);
-            Destroy(collision.gameObject);
+            //Destroy(otherCollider.gameObject);
 
             
             particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("Molecule"));

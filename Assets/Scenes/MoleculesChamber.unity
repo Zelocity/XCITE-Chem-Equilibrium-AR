@@ -2057,7 +2057,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1195308502}
         m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
-        m_MethodName: UpdateCount
+        m_MethodName: N02Count
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2605,7 +2605,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1621423242}
         m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
-        m_MethodName: UpdateCount
+        m_MethodName: N02Count
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
