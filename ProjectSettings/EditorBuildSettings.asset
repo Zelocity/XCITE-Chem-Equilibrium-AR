@@ -4,5 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MoleculesChamber.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 512c851ed382a024aa22258fe9d58044, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 94589a552ba12a548bc6108dff5356fe, type: 2}
