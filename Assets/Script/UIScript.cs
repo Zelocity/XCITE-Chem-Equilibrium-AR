@@ -34,14 +34,18 @@ public class UIScript : MonoBehaviour
     public void CreateButton()
     {
         particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"));
-        numNO2++;
+        numNO2 += 25;
     }
 
     public void DestroyButton()
     {
-        List<GameObject> list = GetComponent<ParticleGeneration>().GetNO2List();
-        particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects();
-        numNO2--;
+        if (numNO2 != 0)
+        {
+            particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects();
+            numNO2--;
+        }
+        
+        Debug.Log(numNO2);
     }
 
     public void N02Count()

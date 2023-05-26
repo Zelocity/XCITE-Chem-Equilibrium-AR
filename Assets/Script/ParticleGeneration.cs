@@ -20,7 +20,7 @@ public class ParticleGeneration : MonoBehaviour
 
 
     //added gameobject parameter to generate different objects. (for NO2 and N2O4)
-    public void InstantiateGameObjects(GameObject prefab)
+    public void InstantiateGameObjects(GameObject prefab) 
     {
         Debug.Log(prefab);
         //Assign random variables to x, y, z rotation axis
@@ -31,13 +31,18 @@ public class ParticleGeneration : MonoBehaviour
         prefab.transform.rotation = Quaternion.Euler(rV);
 
         //Create new molecule at random position and add it to list
-        float randNum = Random.Range(-2.5f, 2f);
-        generate = Instantiate(prefab, new Vector3(randNum,randNum,randNum), prefab.transform.rotation);
-        moleculeList.Add(generate);
+        for (int i = 0; i < 25; i++)
+        {
+            generate = Instantiate(prefab, new Vector3(Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f)), prefab.transform.rotation);
+            moleculeList.Add(generate);
+            generate.transform.Translate(new Vector3(0, 0, 1 * Time.deltaTime));
+        }
+
+       
 
         Debug.Log(moleculeList.Count);
         //Move new molecule in random direction
-        generate.transform.Translate(new Vector3(0, 0, 1 * Time.deltaTime));
+        
     }
 
     //Function to destroy molecules
@@ -46,13 +51,13 @@ public class ParticleGeneration : MonoBehaviour
     {
         int currCount = moleculeList.Count;
 
-        if (currCount != 0)
+        if (currCount >= 0)
         {
             Destroy(moleculeList[currCount - 1]);
             moleculeList.RemoveAt(currCount - 1);
             moleculeList.TrimExcess();
         }
-        Debug.Log(moleculeList.Count);
+        Debug.Log("List count = " + moleculeList.Count);
     }
 
     public List<GameObject> GetNO2List()

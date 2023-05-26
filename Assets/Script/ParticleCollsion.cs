@@ -46,7 +46,7 @@ public class ParticleCollsion : MonoBehaviour
 
             //generates N2O4 Molecule and puts it into a separate array (similar to particlegeneration
             float randNum = Random.Range(-2.5f, 2f);
-            generateN2O4 = Instantiate(GameObject.Find("N2O4"), new Vector3(randNum, randNum, randNum), GameObject.Find("N2O4").transform.rotation);
+            generateN2O4 = Instantiate(GameObject.Find("N2O4"), transform.position, GameObject.Find("N2O4").transform.rotation);
             N2O4List.Add(generateN2O4);
             generateN2O4.transform.Translate(new Vector3(0, 0, 1 * Time.deltaTime));
             //
