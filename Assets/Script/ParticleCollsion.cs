@@ -1,13 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 
 public class ParticleCollsion : MonoBehaviour
 {
     public GameObject particleGen;
+    private GameObject generateN2O4;
+
+    //creates list that holds only N2O4. (the other list holds only NO2)
+    [SerializeField] static public List<GameObject> N2O4List;
+
+    private void Start()
+    {
+        N2O4List = new List<GameObject>();
+    } 
+
     private void OnCollisionEnter(Collision collision)
     {
+
         //Gets collider for object that was hit by the particle from molecule
         Collider otherCollider = collision.GetContact(0).otherCollider;
 
@@ -31,10 +42,18 @@ public class ParticleCollsion : MonoBehaviour
             {
             Debug.LogWarning("Nitrogens Hit!");
             Destroy(collision.gameObject);
-            //Destroy(otherCollider.gameObject);
 
-            
-            particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("N2O4"));
+
+            //generates N2O4 Molecule and puts it into a separate array (similar to particlegeneration
+            float randNum = Random.Range(-2.5f, 2f);
+            generateN2O4 = Instantiate(GameObject.Find("N2O4"), new Vector3(randNum, randNum, randNum), GameObject.Find("N2O4").transform.rotation);
+            N2O4List.Add(generateN2O4);
+            generateN2O4.transform.Translate(new Vector3(0, 0, 1 * Time.deltaTime));
+            //
+
+
+            //OLD CODE
+            //particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("N2O4"));
         }
 
         if (thisCollider.CompareTag("Nitrogen") && otherCollider.CompareTag("Oxygen"))

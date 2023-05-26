@@ -12,8 +12,12 @@ public class UIScript : MonoBehaviour
     public TextMeshProUGUI particleNum;
     public GameObject particleGen;
 
+
+    
+
     public void SliderController(Slider slider)
     {
+        List<GameObject> list = GetComponent<ParticleGeneration>().GetNO2List();
         if (slider.value > numNO2)
         {
             particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"));
@@ -21,6 +25,7 @@ public class UIScript : MonoBehaviour
         }
         if (slider.value < numNO2)
         {
+            
             particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects();
             numNO2--;
         }
@@ -34,6 +39,7 @@ public class UIScript : MonoBehaviour
 
     public void DestroyButton()
     {
+        List<GameObject> list = GetComponent<ParticleGeneration>().GetNO2List();
         particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects();
         numNO2--;
     }
@@ -47,6 +53,6 @@ public class UIScript : MonoBehaviour
     public void N2O4Count()
     {
         //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
-        particleNum.text = "NO2: " + numN2O4;
+        particleNum.text = "N2O4: " + numN2O4;
     }
 }
