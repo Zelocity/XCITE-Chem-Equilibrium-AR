@@ -9,11 +9,11 @@ public class ParticleCollsion : MonoBehaviour
     private GameObject generateN2O4;
 
     //creates list that holds only N2O4. (the other list holds only NO2)
-    [SerializeField] static public List<GameObject> N2O4List;
+    //[SerializeField] static public List<GameObject> N2O4List;
 
     private void Start()
     {
-        N2O4List = new List<GameObject>();
+        //N2O4List = new List<GameObject>();
     } 
 
     private void OnCollisionEnter(Collision collision)
@@ -28,32 +28,14 @@ public class ParticleCollsion : MonoBehaviour
         //Debug.Log("This collider tag is:" + thisCollider.tag);
         //Debug.Log("Other collider tag is:" + otherCollider.tag);
 
-        //Made it to detect if individual particles clash with each other.
-        //NOTE: I think because this script is attached to all NO2 molecules, incl uding the generated ones,
-        //the code below runs for each one, thus 2 messages are printed for one collision,
-        //thus i think two game objects also call the Destroy method on itself and the other.
-        //This isn't a problem now since we just destroy them, but it might be later when we try to generate new N204 molecules
-        //We need to make sure we generate 1 and not 2 new ones
-
-        //thisCollider.CompareTag("Nitrogen") && otherCollider.CompareTag("Nitrogen")
-
-        //if (collision.collider.gameObject.CompareTag("Nitrogen"))
+     
         if (thisCollider.CompareTag("Nitrogen") && otherCollider.CompareTag("Nitrogen"))
-            {
+        {
+
             Debug.LogWarning("Nitrogens Hit!");
             Destroy(collision.gameObject);
-
-
-            //generates N2O4 Molecule and puts it into a separate array (similar to particlegeneration
-            float randNum = Random.Range(-2.5f, 2f);
-            generateN2O4 = Instantiate(GameObject.Find("N2O4"), transform.position, GameObject.Find("N2O4").transform.rotation);
-            N2O4List.Add(generateN2O4);
-            generateN2O4.transform.Translate(new Vector3(0, 0, 1 * Time.deltaTime));
-            //
-
-
-            //OLD CODE
-            //particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("N2O4"));
+            particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("N2O4"), 1);
+            
         }
 
         if (thisCollider.CompareTag("Nitrogen") && otherCollider.CompareTag("Oxygen"))

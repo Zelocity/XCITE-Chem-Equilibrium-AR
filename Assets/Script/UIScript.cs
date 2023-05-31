@@ -20,20 +20,20 @@ public class UIScript : MonoBehaviour
         List<GameObject> list = GetComponent<ParticleGeneration>().GetNO2List();
         if (slider.value > numNO2)
         {
-            particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"));
+            particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 25);
             numNO2++;
         }
         if (slider.value < numNO2)
         {
             
-            particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects();
+            particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("NO2");
             numNO2--;
         }
     }
 
     public void CreateButton()
     {
-        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"));
+        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 1);
         numNO2 += 25;
     }
 
@@ -41,7 +41,7 @@ public class UIScript : MonoBehaviour
     {
         if (numNO2 != 0)
         {
-            particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects();
+            particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("NO2");
             numNO2--;
         }
         

@@ -8,7 +8,7 @@ public class N2O4Generation : MonoBehaviour
     //Prefab of obbject being generated, aka molecule
     //public GameObject prefab;
     //Gameobject to be created 
-    private GameObject generate;
+    static public GameObject generate;
     //List to hold all objects
     [SerializeField] static public List<GameObject> N2O4List = null;
 
@@ -17,7 +17,6 @@ public class N2O4Generation : MonoBehaviour
     {
         N2O4List = new List<GameObject>();
     }
-
 
     //added gameobject parameter to generate different objects. (for NO2 and N2O4)
     public void InstantiateGameObjects(GameObject prefab)
@@ -32,7 +31,7 @@ public class N2O4Generation : MonoBehaviour
 
         //Create new molecule at random position and add it to list
         float randNum = Random.Range(-2.5f, 2f);
-        generate = Instantiate(prefab, new Vector3(randNum, randNum, randNum), prefab.transform.rotation);
+        generate = Instantiate(prefab, transform.position, prefab.transform.rotation);
         N2O4List.Add(generate);
 
         Debug.Log(N2O4List.Count);
@@ -42,7 +41,7 @@ public class N2O4Generation : MonoBehaviour
 
     //Function to destroy molecules
     //Currently it only destroys last object that was added to list after creating one
-    public void DestroyGameObjects()
+    public void DestroyObjectDelayed()
     {
         int currCount = N2O4List.Count;
 
