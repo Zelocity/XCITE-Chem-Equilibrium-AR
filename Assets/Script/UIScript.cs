@@ -33,7 +33,7 @@ public class UIScript : MonoBehaviour
 
     public void CreateButton()
     {
-        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 1);
+        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 25);
         numNO2 += 25;
     }
 
