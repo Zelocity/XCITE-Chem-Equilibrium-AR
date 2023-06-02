@@ -49,8 +49,8 @@ public class ParticleGeneration : MonoBehaviour
 
        
 
-        Debug.Log("MOLECULE LIST:" + moleculeList.Count);
-        Debug.Log("N2O4 LIST:" + N2O4List.Count);
+        //Debug.Log("MOLECULE LIST:" + moleculeList.Count);
+        //Debug.Log("N2O4 LIST:" + N2O4List.Count);
         //Move new molecule in random direction
 
     }
@@ -70,7 +70,7 @@ public class ParticleGeneration : MonoBehaviour
                 moleculeList.RemoveAt(MolcurrCount - 1);
                 moleculeList.TrimExcess();
             }
-            Debug.Log("Molecule List count after deletion = " + moleculeList.Count);
+            //Debug.Log("Molecule List count after deletion = " + moleculeList.Count);
         }
 
         if (tag == "N2O4")
@@ -81,7 +81,7 @@ public class ParticleGeneration : MonoBehaviour
                 N2O4List.RemoveAt(N2O4currCount - 1);
                 N2O4List.TrimExcess();
             }
-            Debug.Log("N2O4 List count after deletion = " + N2O4List.Count);
+            //Debug.Log("N2O4 List count after deletion = " + N2O4List.Count);
         }
     }
 

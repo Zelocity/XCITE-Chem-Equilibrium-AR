@@ -13,7 +13,7 @@ public class UIScript : MonoBehaviour
     public GameObject particleGen;
 
 
-    
+
 
     public void SliderController(Slider slider)
     {
@@ -25,7 +25,7 @@ public class UIScript : MonoBehaviour
         }
         if (slider.value < numNO2)
         {
-            
+
             particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("NO2");
             numNO2--;
         }
@@ -44,19 +44,16 @@ public class UIScript : MonoBehaviour
             particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("NO2");
             numNO2--;
         }
-        
-        Debug.Log(numNO2);
+
+        //Debug.Log(numNO2);
     }
 
-    public void N02Count()
-    {
-        //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
-        particleNum.text = "NO2: " + numNO2;
-    }
 
-    public void N2O4Count()
-    {
-        //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
-        particleNum.text = "N2O4: " + numN2O4;
-    }
+    //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
+    public void N02Count() { particleNum.text = "NO2: " + numNO2; }
+
+    //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
+    public void N2O4Count() { particleNum.text = "N2O4: " + numN2O4; }
+
+    public void Molecule_Math(int NO2_num, int N2O4_num) { numNO2 += NO2_num; numN2O4 += N2O4_num;}
 }
