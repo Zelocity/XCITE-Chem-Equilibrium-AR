@@ -8,12 +8,8 @@ public class UIScript : MonoBehaviour
 {
     //Vars
     private static int numNO2 = 0;
-    private static int numN2O4 = 0;
     public TextMeshProUGUI particleNum;
     public GameObject particleGen;
-
-
-
 
     public void SliderController(Slider slider)
     {
@@ -52,8 +48,4 @@ public class UIScript : MonoBehaviour
     //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
     public void N02Count() { particleNum.text = "NO2: " + numNO2; }
 
-    //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
-    public void N2O4Count() { particleNum.text = "N2O4: " + numN2O4; }
-
-    public void Molecule_Math(int NO2_num, int N2O4_num) { numNO2 += NO2_num; numN2O4 += N2O4_num;}
 }
