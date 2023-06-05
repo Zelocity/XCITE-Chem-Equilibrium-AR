@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MoleculesChamber.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: aac46329fad9f2847a5a4007ade82c05, type: 2}
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 7098d8e3f45d9412480a1d5b7acec433, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 100d7f4938d70463bb637e3d20c272ff, type: 2}
+    com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: 202c5a979ed534e548bac08aa4e464bf, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 512c851ed382a024aa22258fe9d58044, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 94589a552ba12a548bc6108dff5356fe, type: 2}
