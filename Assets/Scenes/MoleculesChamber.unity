@@ -2255,7 +2255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d6706bc4d524cf3a2fa44f11ce86c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleCountText: {fileID: 299694678}
+  particleCountText: {fileID: 536530127}
   particleGen: {fileID: 1283138046}
   particleCreationNum: 1
 --- !u!114 &944744169
@@ -2305,6 +2305,18 @@ MonoBehaviour:
       - m_Target: {fileID: 944744168}
         m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
         m_MethodName: DestroyButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 944744168}
+        m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+        m_MethodName: N02Count
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

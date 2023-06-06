@@ -14,7 +14,7 @@ public class ParticleCollsion : MonoBehaviour
     private void Start()
     {
 
-    } 
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -36,8 +36,6 @@ public class ParticleCollsion : MonoBehaviour
             Destroy(collision.gameObject);
             particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("N2O4"), 1);
             Destroy(gameObject);
-
-            //nums.Molecule_Math(-2, 1);
 
         }
         //Debug.Log("This collider tag is:" + thisCollider.tag);
