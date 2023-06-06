@@ -14,7 +14,7 @@ public class ParticleGeneration : MonoBehaviour
     [SerializeField] static public List<GameObject> N2O4List = null;
 
 
-    private void Start()
+    private void Awake()
     {
         moleculeList = new List<GameObject>();
         N2O4List = new List<GameObject>();
