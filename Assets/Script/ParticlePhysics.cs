@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ParticlePhysics : MonoBehaviour
 {
-    [SerializeField] private float SpeedMultiplier = 1f;
+    [SerializeField] public float SpeedMultiplier = 1f;
 
     private Vector3 lastFrameVelocity;
     private Rigidbody rb;
@@ -43,5 +43,8 @@ public class ParticlePhysics : MonoBehaviour
         //Debug.Log("Out Direction: " + direction);
         rb.velocity = direction * Mathf.Max(speed, 2 * SpeedMultiplier);
     }
+
+    public float GetSpeed() { return SpeedMultiplier; }
+    public void SetSpeed(float speed) { SpeedMultiplier = speed; }
 }
 

@@ -15,6 +15,13 @@ public class UIScript : MonoBehaviour
     public int particleCreationNum;
     static private List<GameObject> currN2O4List = null;
 
+    /* FROM TEMPERATURE BRANCH
+    private static int temp = 0;
+    private float initSpeed = 1;
+    public GameObject NO2;
+    public GameObject N204;
+    */
+
     // Update is called once per frame
     void Update()
     {
@@ -40,6 +47,24 @@ public class UIScript : MonoBehaviour
             numNO2--;
         }
     }
+
+    /*FROM TEMPERATURE BRANCH
+    public void TempSliderController(Slider slider)
+    {
+        if (slider.value > temp)
+        {
+            NO2.GetComponent<ParticlePhysics>().SetSpeed(initSpeed + 1);
+            N204.GetComponent<ParticlePhysics>().SetSpeed(initSpeed + 1);
+            temp++;
+        }
+        if (slider.value < temp)
+        {
+            NO2.GetComponent<ParticlePhysics>().SetSpeed(initSpeed - 1);
+            N204.GetComponent<ParticlePhysics>().SetSpeed(initSpeed - 1);
+            temp--;
+        }
+    }
+    */
 
     public void CreateButton()
     {
