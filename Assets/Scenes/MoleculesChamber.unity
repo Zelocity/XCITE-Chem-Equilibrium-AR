@@ -2230,6 +2230,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: N2O4
       objectReference: {fileID: 0}
+    - target: {fileID: 8477683457587576258, guid: c481739d3289f6c4a97d7338df0fdd95, type: 3}
+      propertyPath: particleGen
+      value: 
+      objectReference: {fileID: 1283138046}
     - target: {fileID: 8477683457587576259, guid: c481739d3289f6c4a97d7338df0fdd95, type: 3}
       propertyPath: m_RootOrder
       value: 1
