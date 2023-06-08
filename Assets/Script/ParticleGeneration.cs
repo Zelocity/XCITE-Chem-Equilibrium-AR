@@ -21,10 +21,9 @@ public class ParticleGeneration : MonoBehaviour
     }
 
 
-    //added gameobject parameter to generate different objects. (for NO2 and N2O4)
-    public void InstantiateGameObjects(GameObject prefab, int count) 
+    //function takes in the type of object, the number of object it should spawn, and the position to spawn it at. 
+    public void InstantiateGameObjects(GameObject prefab, int count, Vector3 position)
     {
-        //Debug.Log(prefab);
         //Assign random variables to x, y, z rotation axis
         var rV = prefab.transform.rotation.eulerAngles;
         rV.x = Random.Range(-180f, 180f);
@@ -35,24 +34,30 @@ public class ParticleGeneration : MonoBehaviour
         //Create new molecule at random position and add it to list
         for (int i = 0; i < count; i++)
         {
-            generate = Instantiate(prefab, new Vector3(Random.Range(1f, 10f), Random.Range(0.5f, 10f), Random.Range(0f, 8f)), prefab.transform.rotation);
-            if(generate.CompareTag("NO2"))
+            //checks to see if tag is NO2 or N2O4
+            if (prefab.CompareTag("NO2"))
             {
+                //randPos holds random position
+                Vector3 randPos = new Vector3(Random.Range(1f, 10f), Random.Range(0.5f, 10f), Random.Range(0f, 8f));
+
+                //generate holds an instant of prefab with random position and current rotation
+                generate = Instantiate(prefab, randPos, prefab.transform.rotation);
+
+                //adds instant to the NO2 list.
                 moleculeList.Add(generate);
             }
-            else if(generate.CompareTag("N2O4"))
+            else if (prefab.CompareTag("N2O4"))
             {
+                //generate holds an instant of prefab with position from parameter and current rotation.
+                generate = Instantiate(prefab, position, prefab.transform.rotation);
+
+                //adds instant to the N2O4 list.
                 N2O4List.Add(generate);
             }
             generate.transform.Translate(new Vector3(0, 0, 1 * Time.deltaTime));
         }
-
-       
-
         //Debug.Log("MOLECULE LIST:" + moleculeList.Count);
         //Debug.Log("N2O4 LIST:" + N2O4List.Count);
-        //Move new molecule in random direction
-
     }
 
     //Function to destroy molecules

@@ -32,9 +32,10 @@ public class ParticleCollsion : MonoBehaviour
         // else continue, and check if nitrogens hit.
         if (thisCollider.CompareTag("Nitrogen") && otherCollider.CompareTag("Nitrogen"))
         {
+            Vector3 position = collision.contacts[0].point;
             collision.gameObject.GetComponent<ParticleCollsion>().doNothing = true;
             Destroy(collision.gameObject);
-            particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("N2O4"), 1);
+            particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("N2O4"), 1, position);
             Destroy(gameObject);
 
         }
