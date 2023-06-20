@@ -36,7 +36,8 @@ public class ParticleCollsion : MonoBehaviour
             particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("N2O4"), 1, position);
             Destroy(gameObject);
 
-            UpdateN2O4UI.numN2O4++;
+            UIScript.numN2O4++;
+            UIScript.numNO2 -= 2;
 
             //nums.Molecule_Math(-2, 1);
 

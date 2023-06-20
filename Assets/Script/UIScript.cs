@@ -7,27 +7,31 @@ using TMPro;
 public class UIScript : MonoBehaviour
 {
     //Vars
-    private static int numNO2 = 0;
+    public static int numNO2 = 0;
     public TextMeshProUGUI particleNum;
     public GameObject particleGen;
 
-    public void SliderController(Slider slider)
-    {
-        //List<GameObject> list = GetComponent<ParticleGeneration>().GetNO2List();
-        //if (slider.value > numNO2)
-        //{
-            
-        //    Vector3 position = new Vector3(Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f));
-        //    particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 1, position);
-        //    numNO2++;
-        //}
-        //if (slider.value < numNO2)
-        //{
+    public TextMeshProUGUI n2o4Num;
+    public static int numN2O4 = 0;
 
-        //    particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("NO2");
-        //    numNO2--;
-        //}
+    private void Start()
+    {
+        n2o4Num = GetComponent<TextMeshProUGUI>();
     }
+
+    private void Update()
+    {
+        if (tag == "N02 Counter") {
+            N02Count();
+        }
+        
+        if (tag == "N204 Counter")
+        {
+            N204Count();
+
+        }   
+    }
+
 
     public void CreateButton()
     {
@@ -50,5 +54,7 @@ public class UIScript : MonoBehaviour
 
     //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
     public void N02Count() { particleNum.text = "NO2: " + numNO2; }
+
+    public void N204Count() { string str = "N2O4: " + numN2O4.ToString(); n2o4Num.text = str; }
 
 }
