@@ -53,8 +53,8 @@ public class UIScript : MonoBehaviour
 
 
     //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
-    public void N02Count() { particleNum.text = "NO2: " + numNO2; }
+    public void N02Count() { particleNum.text = numNO2.ToString(); }
 
-    public void N204Count() { string str = "N2O4: " + numN2O4.ToString(); n2o4Num.text = str; }
+    public void N204Count() { string str = numN2O4.ToString(); n2o4Num.text = str; }
 
 }
