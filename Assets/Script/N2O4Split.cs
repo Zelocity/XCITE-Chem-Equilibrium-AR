@@ -26,7 +26,6 @@ public class N2O4Split : MonoBehaviour
 
         if (timer > 10f && listSize > 0)
         {
-
             Debug.Log("5 SECONDS PASSED. About to delete");
             particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("N2O4");
             particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 2, new Vector3(0, 0, 0));
