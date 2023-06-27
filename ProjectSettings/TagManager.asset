@@ -9,6 +9,8 @@ TagManager:
   - Oxygen
   - N2O4
   - Chamber
+  - N204 Counter
+  - N02 Counter
   layers:
   - Default
   - TransparentFX
