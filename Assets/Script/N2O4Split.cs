@@ -13,8 +13,10 @@ public class N2O4Split : MonoBehaviour
     private int listSize = 0;
     private List<GameObject> currList = null;
 
+
     void Start()
     {
+        Debug.Log("start N2O4 script");
         timer = 0f;
     }
     // Start is called before the first frame update
@@ -24,14 +26,16 @@ public class N2O4Split : MonoBehaviour
         listSize = currList.Count;
         timer += Time.deltaTime;
 
+        
+
         if (timer > 10f && listSize > 0)
         {
             Debug.Log("5 SECONDS PASSED. About to delete");
-            particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("N2O4");
+            waiter();
+            int thisIndex = ParticleGeneration.moleculeList.IndexOf(gameObject);
+            particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("N2O4", thisIndex);
             particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 2, new Vector3(0, 0, 0));
             timer = 0f;
-            UIScript.numNO2 += 2; 
-            UIScript.numN2O4--;
         }
 
         //StartCoroutine(waiter());
@@ -40,7 +44,9 @@ public class N2O4Split : MonoBehaviour
     // Update is called once per frame
     IEnumerator waiter()
     {
-       yield return new WaitForSeconds(5);
-       Object.Destroy(this.gameObject);
+
+
+        yield return new WaitForSeconds(5);
+        
     }
 }

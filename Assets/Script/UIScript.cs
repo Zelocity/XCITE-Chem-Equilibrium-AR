@@ -7,15 +7,16 @@ using TMPro;
 public class UIScript : MonoBehaviour
 {
     //Vars
-    public static int numNO2 = 0;
-    public TextMeshProUGUI particleNum;
     public GameObject particleGen;
-
+    public static int numNO2;
 
     public TextMeshProUGUI n2o4Num;
-    public static int numN2O4 = 0;
+    public static int numN2O4;
 
+    public TextMeshProUGUI mag_str;
+    private static int mag_num;
 
+    public TextMeshProUGUI particleNum;
     public static int conc_select = 0;
     public static List<int> conc_option = new List<int>() { 1, 5, 10, 25, 50 };
 
@@ -23,19 +24,27 @@ public class UIScript : MonoBehaviour
     private void Start()
     {
         n2o4Num = GetComponent<TextMeshProUGUI>();
+        mag_str = GetComponent<TextMeshProUGUI>();
+
     }
 
     private void Update()
     {
-        if (tag == "N02 Counter") {
+        numNO2 = ParticleGeneration.moleculeList.Count;
+        numN2O4 = ParticleGeneration.N2O4List.Count;
+
+        if (tag == "N02 Counter")
+        {
             N02Count();
         }
-        
-        if (tag == "N204 Counter")
+        else if (tag == "N204 Counter")
         {
             N204Count();
-
-        }   
+        }
+        else if (tag == "Magnitude Num")
+        {
+            MagnitudeNum();
+        }
     }
 
 
@@ -46,8 +55,6 @@ public class UIScript : MonoBehaviour
         numNO2 += conc_option[conc_select];
     }
 
-
-
     public void DestroyButton()
     {
         
@@ -57,24 +64,16 @@ public class UIScript : MonoBehaviour
             if (numConc > numNO2)
             {
                 numConc = numNO2;
-                numNO2 = 0;
-            }
-            else
-            {
-                numNO2 -= conc_option[conc_select];
             }
 
             for (int i = 0; i < numConc; i++)
             {
-                particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("NO2");
+                particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("NO2" ,-1);
             }
 
         }
         //Debug.Log(numNO2);
     }
-
-
-
 
     public void Add_Conc()
     {
@@ -92,5 +91,7 @@ public class UIScript : MonoBehaviour
     public void N02Count() { particleNum.text = numNO2.ToString(); }
 
     public void N204Count() { string str = numN2O4.ToString(); n2o4Num.text = str; }
+
+    public void MagnitudeNum() { string str = conc_option[conc_select].ToString(); mag_str.text = str; }
 
 }
