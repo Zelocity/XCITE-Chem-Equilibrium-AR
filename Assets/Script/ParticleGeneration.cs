@@ -13,7 +13,6 @@ public class ParticleGeneration : MonoBehaviour
     [SerializeField] static public List<GameObject> moleculeList = null;
     [SerializeField] static public List<GameObject> N2O4List = null;
 
-
     private void Awake()
     {
         moleculeList = new List<GameObject>();
@@ -29,7 +28,7 @@ public class ParticleGeneration : MonoBehaviour
         rV.y = Random.Range(-180f, 180f);
         rV.z = Random.Range(-180f, 180f);
         prefab.transform.rotation = Quaternion.Euler(rV);
-
+     
         //Create new molecule at random position and add it to list
         for (int i = 0; i < count; i++)
         {
@@ -44,6 +43,8 @@ public class ParticleGeneration : MonoBehaviour
 
                 //adds instant to the NO2 list.
                 moleculeList.Add(generate);
+
+                Debug.Log("Molecule List count after spawn = " + moleculeList.Count);
             }
             else if(prefab.CompareTag("N2O4"))
             {
@@ -61,28 +62,39 @@ public class ParticleGeneration : MonoBehaviour
 
     //Function to destroy molecules
     //Currently it only destroys last object that was added to list after creating one
-    public void DestroyGameObjects(string tag)
+    public void DestroyGameObjects(string tag, int index)
     {
         int MolcurrCount = moleculeList.Count;
         int N2O4currCount = N2O4List.Count;
 
-        if (tag == "NO2")
+        if (tag == "NO2" && MolcurrCount > 0)
         {
-            if (MolcurrCount > 0)
+            if (index == -1)
             {
                 Destroy(moleculeList[MolcurrCount - 1]);
                 moleculeList.RemoveAt(MolcurrCount - 1);
                 moleculeList.TrimExcess();
             }
+            else
+            {                Destroy(moleculeList[index]);
+                moleculeList.RemoveAt(index);
+                moleculeList.TrimExcess();
+            }
             //Debug.Log("Molecule List count after deletion = " + moleculeList.Count);
         }
 
-        if (tag == "N2O4")
+        if (tag == "N2O4" && N2O4currCount > 0)
         {
-            if (N2O4currCount > 0)
+            if (index == -1)
             {
                 Destroy(N2O4List[N2O4currCount - 1]);
                 N2O4List.RemoveAt(N2O4currCount - 1);
+                N2O4List.TrimExcess();
+            }
+            else
+            {
+                Destroy(N2O4List[index]);
+                N2O4List.RemoveAt(index);
                 N2O4List.TrimExcess();
             }
             //Debug.Log("N2O4 List count after deletion = " + N2O4List.Count);
@@ -98,4 +110,16 @@ public class ParticleGeneration : MonoBehaviour
     {
         return N2O4List;
     }
+
+    public void clear_NO2()
+    {
+        moleculeList.Clear();
+    }
+
+    public void clear_N2O4()
+    {
+        N2O4List.Clear();
+    }
+
+    
 }
