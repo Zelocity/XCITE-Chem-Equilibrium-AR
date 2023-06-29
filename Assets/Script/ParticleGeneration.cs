@@ -54,7 +54,7 @@ public class ParticleGeneration : MonoBehaviour
                 //adds instant to the N2O4 list.
                 N2O4List.Add(generate);
             }
-            //generate.transform.Translate(new Vector3(0, 0, 1 * Time.deltaTime));
+            generate.transform.Translate(new Vector3(0, 0, 1 * Time.deltaTime));
         }
         //Debug.Log("MOLECULE LIST:" + moleculeList.Count);
         //Debug.Log("N2O4 LIST:" + N2O4List.Count);
@@ -110,4 +110,16 @@ public class ParticleGeneration : MonoBehaviour
     {
         return N2O4List;
     }
+
+    public void clear_NO2()
+    {
+        moleculeList.Clear();
+    }
+
+    public void clear_N2O4()
+    {
+        N2O4List.Clear();
+    }
+
+    
 }

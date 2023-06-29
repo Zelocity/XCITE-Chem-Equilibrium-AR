@@ -77,14 +77,19 @@ public class UIScript : MonoBehaviour
 
     public void Add_Conc()
     {
-        if (conc_select == conc_option.Count - 1) { return; }
+        if (conc_select == conc_option.Count - 1) return;
         conc_select++;
     }
 
     public void Subtract_Conc()
     {
-        if (conc_select <= 0) { return; }
+        if (conc_select <= 0) return;
         conc_select--;
+    }
+
+    public void Clear_Particles()
+    {
+        
     }
 
     //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
