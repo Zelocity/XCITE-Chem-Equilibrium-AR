@@ -13,11 +13,34 @@ public class ParticleGeneration : MonoBehaviour
     [SerializeField] static public List<GameObject> moleculeList = null;
     [SerializeField] static public List<GameObject> N2O4List = null;
 
+    private bool active_split = false; 
+
+    private float timer = 0f;
+
     private void Awake()
     {
         moleculeList = new List<GameObject>();
         N2O4List = new List<GameObject>();
     }
+
+    private void Update()
+    {
+
+
+        //if (N2O4List.Count > 0)
+        //{
+        //    N2O4Split();
+        //}
+        //else
+        //{
+        //    timer = 0;
+        //}
+        
+
+
+        
+    }
+
 
     //function takes in the type of object, the number of object it should spawn, and the position to spawn it at. 
     public void InstantiateGameObjects(GameObject prefab, int count, Vector3 position) 
@@ -44,7 +67,7 @@ public class ParticleGeneration : MonoBehaviour
                 //adds instant to the NO2 list.
                 moleculeList.Add(generate);
 
-                Debug.Log("Molecule List count after spawn = " + moleculeList.Count);
+                //Debug.Log("Molecule List count after spawn = " + moleculeList.Count);
             }
             else if(prefab.CompareTag("N2O4"))
             {
@@ -110,16 +133,4 @@ public class ParticleGeneration : MonoBehaviour
     {
         return N2O4List;
     }
-
-    public void clear_NO2()
-    {
-        moleculeList.Clear();
-    }
-
-    public void clear_N2O4()
-    {
-        N2O4List.Clear();
-    }
-
-    
 }

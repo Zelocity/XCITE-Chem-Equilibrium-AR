@@ -89,7 +89,9 @@ public class UIScript : MonoBehaviour
 
     public void Clear_Particles()
     {
-        
+        ParticleGeneration.moleculeList.Clear();
+        ParticleGeneration.N2O4List.Clear();
+
     }
 
     //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
