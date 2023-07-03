@@ -8,6 +8,9 @@ public class UIScript : MonoBehaviour
 {
     //Vars
     public GameObject particleGen;
+
+    public GameObject lid;
+
     public static int numNO2;
 
     public TextMeshProUGUI n2o4Num;
@@ -21,11 +24,17 @@ public class UIScript : MonoBehaviour
     public static List<int> conc_option = new List<int>() { 1, 5, 10, 25, 50 };
 
 
+    private static float lid_start_pos;
+    private static float lid_current_pos;
+    private static bool up_lid_pressure;
+    private static bool down_lid_pressure;
+
+
     private void Start()
     {
         n2o4Num = GetComponent<TextMeshProUGUI>();
         mag_str = GetComponent<TextMeshProUGUI>();
-
+        lid_start_pos = lid.transform.localPosition.z;
     }
 
     private void Update()
@@ -44,6 +53,21 @@ public class UIScript : MonoBehaviour
         else if (tag == "Magnitude Num")
         {
             MagnitudeNum();
+        }
+
+
+        lid_current_pos = lid.transform.localPosition.z;
+        float lid_level_diff = lid_start_pos - lid_current_pos;
+
+        if (up_lid_pressure == true && lid_start_pos > lid_current_pos)
+        {
+            Debug.Log("go up");
+            lid.transform.Translate(Vector3.forward * Time.deltaTime);
+        }
+        else if (down_lid_pressure == true && lid_level_diff < 412)
+        {
+            Debug.Log("go down");
+            lid.transform.Translate(Vector3.back * Time.deltaTime);
         }
     }
 
@@ -93,6 +117,10 @@ public class UIScript : MonoBehaviour
         ParticleGeneration.N2O4List.Clear();
 
     }
+
+    public void Up_Button(bool up) { up_lid_pressure = up; }
+
+    public void Down_Button(bool down) { down_lid_pressure = down; }
 
     //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
     public void N02Count() { particleNum.text = numNO2.ToString(); }

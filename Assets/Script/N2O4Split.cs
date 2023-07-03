@@ -35,9 +35,9 @@ public class N2O4Split : MonoBehaviour
             if (timer >= 5)
             {
                 
-                Debug.Log("5 SECONDS PASSED. About to delete " + thisIndex + " This Object: " + gameObject.name + " N2O4 Count: " + listSize);
+                //Debug.Log("5 SECONDS PASSED. About to delete " + thisIndex + " This Object: " + gameObject.name + " N2O4 Count: " + listSize);
                 particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("N2O4", thisIndex);
-                particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 2, new Vector3(0, 0, 0));
+                particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 2, transform.localPosition);
                 timer = 0f;
             }
         } else

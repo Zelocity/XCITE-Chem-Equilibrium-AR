@@ -60,7 +60,6 @@ public class ParticleGeneration : MonoBehaviour
             {
                 //randPos holds random position
                 Vector3 randPos = new Vector3(Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f));
-
                 //generate holds an instant of prefab with random position and current rotation
                 generate = Instantiate(prefab, randPos, prefab.transform.rotation);
 
@@ -99,7 +98,8 @@ public class ParticleGeneration : MonoBehaviour
                 moleculeList.TrimExcess();
             }
             else
-            {                Destroy(moleculeList[index]);
+            {
+                Destroy(moleculeList[index]);
                 moleculeList.RemoveAt(index);
                 moleculeList.TrimExcess();
             }
