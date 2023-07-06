@@ -13,10 +13,6 @@ public class ParticleGeneration : MonoBehaviour
     [SerializeField] static public List<GameObject> moleculeList = null;
     [SerializeField] static public List<GameObject> N2O4List = null;
 
-    private bool active_split = false; 
-
-    private float timer = 0f;
-
     private void Awake()
     {
         moleculeList = new List<GameObject>();

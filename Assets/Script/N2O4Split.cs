@@ -15,7 +15,6 @@ public class N2O4Split : MonoBehaviour
     [SerializeField] public int time_to_split = 0;
 
     private int listSize = 0;
-    private List<GameObject> currList = null;
 
     private static int thisIndex;
 
