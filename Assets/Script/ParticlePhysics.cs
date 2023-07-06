@@ -30,9 +30,7 @@ public class ParticlePhysics : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
         Bounce(collision.GetContact(0).normal);
-
     }
 
     private void Bounce(Vector3 collisionNormal)
@@ -41,7 +39,7 @@ public class ParticlePhysics : MonoBehaviour
         var direction = Vector3.Reflect(lastFrameVelocity.normalized, collisionNormal);
 
         //Debug.Log("Out Direction: " + direction);
-        rb.velocity = direction * Mathf.Max(speed, 2 * SpeedMultiplier);
+        rb.velocity = direction * Mathf.Max(speed, 2*SpeedMultiplier);
     }
 }
 

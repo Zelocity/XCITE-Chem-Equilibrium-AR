@@ -43,7 +43,7 @@ public class ParticleGeneration : MonoBehaviour
 
 
     //function takes in the type of object, the number of object it should spawn, and the position to spawn it at. 
-    public void InstantiateGameObjects(GameObject prefab, int count, Vector3 position) 
+    public void InstantiateGameObjects(GameObject prefab, int count, Vector3 position, bool isSpliting) 
     {
         //Assign random variables to x, y, z rotation axis
         var rV = prefab.transform.rotation.eulerAngles;
@@ -51,18 +51,29 @@ public class ParticleGeneration : MonoBehaviour
         rV.y = Random.Range(-180f, 180f);
         rV.z = Random.Range(-180f, 180f);
         prefab.transform.rotation = Quaternion.Euler(rV);
-     
+
+        int newPos_Z = 2;
+
         //Create new molecule at random position and add it to list
         for (int i = 0; i < count; i++)
         {
             //checks to see if tag is NO2 or N2O4
             if (prefab.CompareTag("NO2"))
             {
-                //randPos holds random position
-                Vector3 randPos = new Vector3(Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f));
+                if (!isSpliting)
+                {
+                    //randPos holds random position
+                    position = new Vector3(Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f));
+                } else
+                {
 
+                    position.z = newPos_Z;
+                    newPos_Z *= -1;
+                }
+
+                
                 //generate holds an instant of prefab with random position and current rotation
-                generate = Instantiate(prefab, randPos, prefab.transform.rotation);
+                generate = Instantiate(prefab, position, prefab.transform.rotation);
 
                 //adds instant to the NO2 list.
                 moleculeList.Add(generate);
@@ -99,7 +110,8 @@ public class ParticleGeneration : MonoBehaviour
                 moleculeList.TrimExcess();
             }
             else
-            {                Destroy(moleculeList[index]);
+            {
+                Destroy(moleculeList[index]);
                 moleculeList.RemoveAt(index);
                 moleculeList.TrimExcess();
             }
