@@ -39,7 +39,7 @@ public class ParticleCollsion : MonoBehaviour
             Destroy(collision.gameObject);
 
             //instantiate one N2O4 object 
-            particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("N2O4"), 1, position);
+            particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("N2O4"), 1, position, false);
 
             //Save index of this gameObject from the NO2 List
             int thisIndex = ParticleGeneration.moleculeList.IndexOf(gameObject);

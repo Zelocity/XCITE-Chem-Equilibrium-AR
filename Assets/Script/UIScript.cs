@@ -61,12 +61,12 @@ public class UIScript : MonoBehaviour
 
         if (up_lid_pressure == true && lid_start_pos > lid_current_pos)
         {
-            Debug.Log("go up");
+            //Debug.Log("go up");
             lid.transform.Translate(Vector3.forward * Time.deltaTime);
         }
         else if (down_lid_pressure == true && lid_level_diff < 412)
         {
-            Debug.Log("go down");
+            //Debug.Log("go down");
             lid.transform.Translate(Vector3.back * Time.deltaTime);
         }
     }
@@ -74,8 +74,8 @@ public class UIScript : MonoBehaviour
 
     public void CreateButton()
     {
-        //create NO2 object with specified quantity at random location. IGNORE THIRD PARAMETER HERE
-        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), conc_option[conc_select], new Vector3(0,0,0));
+        //create NO2 object with specified quantity at random location. IGNORE THIRD PARAMETER HERE, 4th indicates if particle is splitting.
+        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), conc_option[conc_select], new Vector3(0,0,0), false);
         numNO2 += conc_option[conc_select];
     }
 
