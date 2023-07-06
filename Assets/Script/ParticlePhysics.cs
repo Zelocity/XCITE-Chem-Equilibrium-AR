@@ -8,7 +8,7 @@ public class ParticlePhysics : MonoBehaviour
 
     private Vector3 lastFrameVelocity;
     private Rigidbody rb;
-    
+    float currentNum; 
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +25,12 @@ public class ParticlePhysics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SpeedMultiplier != currentNum)
+        {
+            Debug.Log("this is working");
+            rb.velocity *= SpeedMultiplier;
+        }
+        currentNum = SpeedMultiplier;
         lastFrameVelocity = rb.velocity;
     }
 
@@ -39,7 +45,8 @@ public class ParticlePhysics : MonoBehaviour
         var direction = Vector3.Reflect(lastFrameVelocity.normalized, collisionNormal);
 
         //Debug.Log("Out Direction: " + direction);
-        rb.velocity = direction * Mathf.Max(speed, 2*SpeedMultiplier);
+        rb.velocity = direction.normalized * Mathf.Max(speed, 2);
+         
     }
 }
 

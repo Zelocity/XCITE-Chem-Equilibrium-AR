@@ -19,25 +19,6 @@ public class ParticleGeneration : MonoBehaviour
         N2O4List = new List<GameObject>();
     }
 
-    private void Update()
-    {
-
-
-        //if (N2O4List.Count > 0)
-        //{
-        //    N2O4Split();
-        //}
-        //else
-        //{
-        //    timer = 0;
-        //}
-        
-
-
-        
-    }
-
-
     //function takes in the type of object, the number of object it should spawn, and the position to spawn it at. 
     public void InstantiateGameObjects(GameObject prefab, int count, Vector3 position, bool isSpliting) 
     {
