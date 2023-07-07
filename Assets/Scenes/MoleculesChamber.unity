@@ -348,10 +348,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  lid: {fileID: 1569584897}
-  n2o4Num: {fileID: 0}
+  N2O_Counter: {fileID: 525877775}
+  N2O4_Counter: {fileID: 483941867}
   mag_str: {fileID: 0}
-  particleNum: {fileID: 525877775}
+  lid: {fileID: 1569584897}
 --- !u!114 &185747547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,10 +887,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  lid: {fileID: 1569584897}
-  n2o4Num: {fileID: 0}
+  N2O_Counter: {fileID: 525877775}
+  N2O4_Counter: {fileID: 483941867}
   mag_str: {fileID: 0}
-  particleNum: {fileID: 525877775}
+  lid: {fileID: 1569584897}
 --- !u!1001 &466423759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1153,10 +1153,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  lid: {fileID: 1569584897}
-  n2o4Num: {fileID: 0}
+  N2O_Counter: {fileID: 0}
+  N2O4_Counter: {fileID: 0}
   mag_str: {fileID: 0}
-  particleNum: {fileID: 0}
+  lid: {fileID: 1569584897}
 --- !u!1 &525877772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,10 +1306,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  lid: {fileID: 1569584897}
-  n2o4Num: {fileID: 0}
+  N2O_Counter: {fileID: 0}
+  N2O4_Counter: {fileID: 0}
   mag_str: {fileID: 0}
-  particleNum: {fileID: 525877775}
+  lid: {fileID: 1569584897}
 --- !u!1 &529728429
 GameObject:
   m_ObjectHideFlags: 0
@@ -2342,10 +2342,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 0}
-  lid: {fileID: 1569584897}
-  n2o4Num: {fileID: 0}
+  N2O_Counter: {fileID: 0}
+  N2O4_Counter: {fileID: 0}
   mag_str: {fileID: 0}
-  particleNum: {fileID: 0}
+  lid: {fileID: 1569584897}
 --- !u!1 &909823357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,10 +2435,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 0}
+  N2O_Counter: {fileID: 0}
+  N2O4_Counter: {fileID: 0}
+  mag_str: {fileID: 956147300}
   lid: {fileID: 1569584897}
-  n2o4Num: {fileID: 0}
-  mag_str: {fileID: 0}
-  particleNum: {fileID: 0}
 --- !u!114 &956147300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3239,10 +3239,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  lid: {fileID: 1569584897}
-  n2o4Num: {fileID: 0}
+  N2O_Counter: {fileID: 525877775}
+  N2O4_Counter: {fileID: 483941867}
   mag_str: {fileID: 0}
-  particleNum: {fileID: 525877775}
+  lid: {fileID: 1569584897}
 --- !u!114 &1517459768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3658,10 +3658,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 0}
-  lid: {fileID: 1569584897}
-  n2o4Num: {fileID: 0}
+  N2O_Counter: {fileID: 0}
+  N2O4_Counter: {fileID: 0}
   mag_str: {fileID: 0}
-  particleNum: {fileID: 0}
+  lid: {fileID: 1569584897}
 --- !u!114 &1536531441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3963,10 +3963,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  lid: {fileID: 1569584897}
-  n2o4Num: {fileID: 0}
+  N2O_Counter: {fileID: 525877775}
+  N2O4_Counter: {fileID: 483941867}
   mag_str: {fileID: 0}
-  particleNum: {fileID: 525877775}
+  lid: {fileID: 1569584897}
 --- !u!1 &1698981625
 GameObject:
   m_ObjectHideFlags: 0
@@ -4677,10 +4677,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  lid: {fileID: 1569584897}
-  n2o4Num: {fileID: 0}
+  N2O_Counter: {fileID: 525877775}
+  N2O4_Counter: {fileID: 483941867}
   mag_str: {fileID: 0}
-  particleNum: {fileID: 0}
+  lid: {fileID: 1569584897}
 --- !u!114 &2094831016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4727,7 +4727,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2094831015}
         m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
-        m_MethodName: Clear_Particles
+        m_MethodName: Temperature_Change
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

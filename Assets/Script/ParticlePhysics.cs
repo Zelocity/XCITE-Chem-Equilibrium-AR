@@ -27,7 +27,7 @@ public class ParticlePhysics : MonoBehaviour
     {
         if (SpeedMultiplier != currentNum)
         {
-            Debug.Log("this is working");
+            Debug.Log("Setting/Changing Current Speed");
             rb.velocity *= SpeedMultiplier;
         }
         currentNum = SpeedMultiplier;

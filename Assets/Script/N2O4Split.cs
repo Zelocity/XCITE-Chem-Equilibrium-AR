@@ -7,15 +7,10 @@ using UnityEngine;
 
 public class N2O4Split : MonoBehaviour
 {
-
     public GameObject particleGen;
-
-
     float timer = 0f;
     [SerializeField] public int time_to_split = 0;
-
     private int listSize = 0;
-
     private static int thisIndex;
 
     void Start()
@@ -23,7 +18,6 @@ public class N2O4Split : MonoBehaviour
         timer = 0f;
     }
 
-    // Start is called before the first frame update
     void Update()
     {
         listSize = particleGen.GetComponent<ParticleGeneration>().GetN2O4List().Count;
