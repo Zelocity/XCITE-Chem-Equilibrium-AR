@@ -31,27 +31,43 @@ public class UIScript : MonoBehaviour
     private static bool down_lid_pressure;
 
     //Temperature
-    private Slider temp_slider;
-    private TextMeshProUGUI temp_str;
+    public Slider temp_slider;
+    private static bool temp_point_up;
+    private static float prev_value = 0f;
+    private static float curr_value;
+    //public static  TextMeshProUGUI temp_str;
 
 
     private void Start()
     {
-        N2O4_Counter = GetComponent<TextMeshProUGUI>();
-        mag_str = GetComponent<TextMeshProUGUI>();
-        lid_start_pos = lid.transform.localPosition.z;
+        switch (tag)
+        {
+            case "Untagged":
+                break;
 
-        //temp_slider.onValueChanged.AddListener((v) =>
-        //{
-        //    temp_str.text = v.ToString("0.00");
-        //});
+            case "N02 Counter":
+                N02Count();
+                return;
+
+            case "N204 Counter":
+                N2O4_Counter = GetComponent<TextMeshProUGUI>();
+                return;
+
+            case "Magnitude Num":
+                mag_str = GetComponent<TextMeshProUGUI>();
+                return;
+
+            case "Pressure":
+                lid_start_pos = lid.transform.localPosition.z;
+                return;
+        }
+
     }
 
     private void Update()
     {
-        //COUNTER
 
-
+        
         switch (tag)
         {
             case "Untagged":
@@ -68,10 +84,30 @@ public class UIScript : MonoBehaviour
             case "Magnitude Num":
                 MagnitudeNum();
                 return;
-        }    
 
-        //PRESSURE
-        if ((up_lid_pressure || down_lid_pressure)) { Lid_Movement();}
+            case "Temperature":
+                if (temp_point_up)
+                {
+                    curr_value = temp_slider.value;
+
+
+                    float temp_difference = curr_value - prev_value;
+                    Debug.Log("Curr value: " + curr_value + "prev value: " + prev_value + "temp diff: " + temp_difference);
+
+                    Temperature_Change(temp_difference);
+                    
+                }
+                else
+                {
+                    prev_value = curr_value;
+                }
+                return;
+
+            case "Pressure":
+                if ((up_lid_pressure || down_lid_pressure)) { Lid_Movement(); }
+                return;
+        }
+        
     }
 
 
@@ -115,9 +151,15 @@ public class UIScript : MonoBehaviour
 
     public void Clear_Particles()
     {
-        ParticleGeneration.moleculeList.Clear();
-        ParticleGeneration.N2O4List.Clear();
+        //Debug.Log("Clearing Particles");
+        List<GameObject> NO2_List = ParticleGeneration.moleculeList;
+        List<GameObject> N2O4_List = ParticleGeneration.N2O4List;
 
+        while (NO2_List.Count != 0 || N2O4_List.Count != 0)
+        {
+            particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("N2O4", 0);
+            particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("NO2", 0);
+        }
     }
 
     public void Lid_Movement()
@@ -128,14 +170,34 @@ public class UIScript : MonoBehaviour
         if (up_lid_pressure == true && lid_start_pos > lid_current_pos)
         {
             //Debug.Log("go up");
-            lid.transform.Translate(Vector3.forward * Time.deltaTime / 5);
+            lid.transform.Translate(Vector3.forward * Time.deltaTime / 2);
         }
         else if (down_lid_pressure == true && lid_level_diff < 412)
         {
             //Debug.Log("go down");
-            lid.transform.Translate(Vector3.back * Time.deltaTime / 5);
+            lid.transform.Translate(Vector3.back * Time.deltaTime / 2);
         }
     }
+
+    public void Temperature_Change(float difference)
+    {
+        List<GameObject> NO2_List = ParticleGeneration.moleculeList;
+        List<GameObject> N2O4_List = ParticleGeneration.N2O4List;
+
+        int i = 0;
+        while (i < NO2_List.Count) {
+            NO2_List[i].GetComponent<ParticlePhysics>().Modify_Speed(difference);
+            i++;
+        }
+
+        int j = 0;
+        while (j < N2O4_List.Count)
+        {
+            N2O4_List[j].GetComponent<ParticlePhysics>().Modify_Speed(difference);
+            j++;
+        }
+    }
+
 
     public void N02Count()
     {
@@ -154,7 +216,9 @@ public class UIScript : MonoBehaviour
     public void Pressure_Up_Button(bool up) { up_lid_pressure = up; }
 
     public void Pressure_Down_Button(bool down) { down_lid_pressure = down; }
-    
+
+    public void Temp_Slider(bool up) { temp_point_up = up; }
+
     public void MagnitudeNum() { string str = conc_option[conc_select].ToString(); mag_str.text = str; }
 
 }

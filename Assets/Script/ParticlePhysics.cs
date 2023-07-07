@@ -24,11 +24,25 @@ public class ParticlePhysics : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         if (SpeedMultiplier != currentNum)
         {
-            Debug.Log("Setting/Changing Current Speed");
-            rb.velocity *= SpeedMultiplier;
+            Debug.Log("Speed Multiplier: " + SpeedMultiplier);
+            //Debug.Log("Setting/Changing Current Speed");
+            if (SpeedMultiplier < 0)
+            {
+                //rb.velocity *= -SpeedMultiplier;
+            }
+            else if (SpeedMultiplier > 0)
+            {
+                //rb.velocity *= SpeedMultiplier + 1;
+                rb.AddForce(rb.velocity.normalized * SpeedMultiplier);
+            }
+            else
+            {
+                return;
+            }
+
         }
         currentNum = SpeedMultiplier;
         lastFrameVelocity = rb.velocity;
@@ -47,6 +61,15 @@ public class ParticlePhysics : MonoBehaviour
         //Debug.Log("Out Direction: " + direction);
         rb.velocity = direction.normalized * Mathf.Max(speed, 2);
          
+    }
+
+    public void Modify_Speed(float multiplier) 
+    {
+        Debug.LogWarning("multiplier " + multiplier);
+        SpeedMultiplier = multiplier;
+
+
+ 
     }
 }
 

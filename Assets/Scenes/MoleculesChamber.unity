@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 185747546}
   m_Layer: 5
   m_Name: magnitude_up
-  m_TagString: N02 Counter
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,10 +348,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  N2O_Counter: {fileID: 525877775}
+  NO2_Counter: {fileID: 525877775}
   N2O4_Counter: {fileID: 483941867}
   mag_str: {fileID: 0}
   lid: {fileID: 1569584897}
+  temp_slider: {fileID: 0}
 --- !u!114 &185747547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,10 +888,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  N2O_Counter: {fileID: 525877775}
+  NO2_Counter: {fileID: 525877775}
   N2O4_Counter: {fileID: 483941867}
   mag_str: {fileID: 0}
   lid: {fileID: 1569584897}
+  temp_slider: {fileID: 0}
 --- !u!1001 &466423759
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1153,10 +1155,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  N2O_Counter: {fileID: 0}
-  N2O4_Counter: {fileID: 0}
+  NO2_Counter: {fileID: 525877775}
+  N2O4_Counter: {fileID: 483941867}
   mag_str: {fileID: 0}
   lid: {fileID: 1569584897}
+  temp_slider: {fileID: 0}
 --- !u!1 &525877772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,10 +1309,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  N2O_Counter: {fileID: 0}
-  N2O4_Counter: {fileID: 0}
+  NO2_Counter: {fileID: 525877775}
+  N2O4_Counter: {fileID: 483941867}
   mag_str: {fileID: 0}
   lid: {fileID: 1569584897}
+  temp_slider: {fileID: 0}
 --- !u!1 &529728429
 GameObject:
   m_ObjectHideFlags: 0
@@ -2176,7 +2180,7 @@ GameObject:
   - component: {fileID: 847688421}
   m_Layer: 5
   m_Name: Up_Button
-  m_TagString: Untagged
+  m_TagString: Pressure
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2342,10 +2346,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 0}
-  N2O_Counter: {fileID: 0}
+  NO2_Counter: {fileID: 0}
   N2O4_Counter: {fileID: 0}
   mag_str: {fileID: 0}
   lid: {fileID: 1569584897}
+  temp_slider: {fileID: 0}
 --- !u!1 &909823357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,10 +2440,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 0}
-  N2O_Counter: {fileID: 0}
+  NO2_Counter: {fileID: 0}
   N2O4_Counter: {fileID: 0}
   mag_str: {fileID: 956147300}
   lid: {fileID: 1569584897}
+  temp_slider: {fileID: 0}
 --- !u!114 &956147300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3201,7 +3207,7 @@ GameObject:
   - component: {fileID: 1517459767}
   m_Layer: 5
   m_Name: maginitude_down
-  m_TagString: N02 Counter
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3239,10 +3245,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  N2O_Counter: {fileID: 525877775}
+  NO2_Counter: {fileID: 525877775}
   N2O4_Counter: {fileID: 483941867}
   mag_str: {fileID: 0}
   lid: {fileID: 1569584897}
+  temp_slider: {fileID: 0}
 --- !u!114 &1517459768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3537,7 +3544,7 @@ GameObject:
   - component: {fileID: 1536531440}
   m_Layer: 5
   m_Name: Down_Button
-  m_TagString: Untagged
+  m_TagString: Pressure
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3658,10 +3665,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 0}
-  N2O_Counter: {fileID: 0}
+  NO2_Counter: {fileID: 0}
   N2O4_Counter: {fileID: 0}
   mag_str: {fileID: 0}
   lid: {fileID: 1569584897}
+  temp_slider: {fileID: 0}
 --- !u!114 &1536531441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3718,7 +3726,7 @@ GameObject:
   - component: {fileID: 1565559034}
   m_Layer: 5
   m_Name: Pressure
-  m_TagString: Untagged
+  m_TagString: Pressure
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3963,10 +3971,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  N2O_Counter: {fileID: 525877775}
+  NO2_Counter: {fileID: 525877775}
   N2O4_Counter: {fileID: 483941867}
   mag_str: {fileID: 0}
   lid: {fileID: 1569584897}
+  temp_slider: {fileID: 0}
 --- !u!1 &1698981625
 GameObject:
   m_ObjectHideFlags: 0
@@ -3977,9 +3986,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1698981626}
   - component: {fileID: 1698981627}
+  - component: {fileID: 1698981628}
   m_Layer: 5
   m_Name: Slider
-  m_TagString: Untagged
+  m_TagString: Temperature
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4051,13 +4061,31 @@ MonoBehaviour:
   m_FillRect: {fileID: 1440329867}
   m_HandleRect: {fileID: 2107690583}
   m_Direction: 2
-  m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 0.5
+  m_MinValue: 1
+  m_MaxValue: 5
+  m_WholeNumbers: 1
+  m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1698981628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698981625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d6706bc4d524cf3a2fa44f11ce86c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleGen: {fileID: 1283138046}
+  NO2_Counter: {fileID: 0}
+  N2O4_Counter: {fileID: 0}
+  mag_str: {fileID: 0}
+  lid: {fileID: 0}
+  temp_slider: {fileID: 1698981627}
 --- !u!1 &1720358045
 GameObject:
   m_ObjectHideFlags: 0
@@ -4677,10 +4705,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleGen: {fileID: 1283138046}
-  N2O_Counter: {fileID: 525877775}
+  NO2_Counter: {fileID: 525877775}
   N2O4_Counter: {fileID: 483941867}
   mag_str: {fileID: 0}
   lid: {fileID: 1569584897}
+  temp_slider: {fileID: 0}
 --- !u!114 &2094831016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4727,7 +4756,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2094831015}
         m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
-        m_MethodName: Temperature_Change
+        m_MethodName: Clear_Particles
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
