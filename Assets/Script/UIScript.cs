@@ -29,16 +29,27 @@ public class UIScript : MonoBehaviour
     private static bool up_lid_pressure;
     private static bool down_lid_pressure;
 
+    private Slider temp_slider;
+    private TextMeshProUGUI temp_str;
+
 
     private void Start()
     {
         n2o4Num = GetComponent<TextMeshProUGUI>();
         mag_str = GetComponent<TextMeshProUGUI>();
         lid_start_pos = lid.transform.localPosition.z;
+
+        temp_slider.onValueChanged.AddListener((v) =>
+        {
+            temp_str.text = v.ToString("0.00");
+        });
     }
 
     private void Update()
     {
+
+
+        //COUNTER
         numNO2 = ParticleGeneration.moleculeList.Count;
         numN2O4 = ParticleGeneration.N2O4List.Count;
 
@@ -56,18 +67,19 @@ public class UIScript : MonoBehaviour
         }
 
 
+        //PRESSURE 
         lid_current_pos = lid.transform.localPosition.z;
         float lid_level_diff = lid_start_pos - lid_current_pos;
 
         if (up_lid_pressure == true && lid_start_pos > lid_current_pos)
         {
             //Debug.Log("go up");
-            lid.transform.Translate(Vector3.forward * Time.deltaTime);
+            lid.transform.Translate(Vector3.forward * Time.deltaTime / 5);
         }
         else if (down_lid_pressure == true && lid_level_diff < 412)
         {
             //Debug.Log("go down");
-            lid.transform.Translate(Vector3.back * Time.deltaTime);
+            lid.transform.Translate(Vector3.back * Time.deltaTime / 5);
         }
     }
 
@@ -118,11 +130,14 @@ public class UIScript : MonoBehaviour
 
     }
 
-    public void Up_Button(bool up) { up_lid_pressure = up; }
+    public void Pressure_Up_Button(bool up) { up_lid_pressure = up; }
 
-    public void Down_Button(bool down) { down_lid_pressure = down; }
+    public void Pressure_Down_Button(bool down) { down_lid_pressure = down; }
 
-    //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
+    public void Temperature_up_Button(bool down) { down_lid_pressure = down; }
+
+    public void Temperature_Down_Button(bool down) { down_lid_pressure = down; }
+    
     public void N02Count() { particleNum.text = numNO2.ToString(); }
 
     public void N204Count() { string str = numN2O4.ToString(); n2o4Num.text = str; }

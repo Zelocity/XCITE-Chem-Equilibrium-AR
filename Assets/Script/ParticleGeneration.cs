@@ -29,7 +29,7 @@ public class ParticleGeneration : MonoBehaviour
         rV.z = Random.Range(-180f, 180f);
         prefab.transform.rotation = Quaternion.Euler(rV);
 
-        int newPos_Z = 2;
+        float newPos_Z = 0.5f;
 
         //Create new molecule at random position and add it to list
         for (int i = 0; i < count; i++)
@@ -43,7 +43,6 @@ public class ParticleGeneration : MonoBehaviour
                     position = new Vector3(Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f));
                 } else
                 {
-
                     position.z = newPos_Z;
                     newPos_Z *= -1;
                 }
