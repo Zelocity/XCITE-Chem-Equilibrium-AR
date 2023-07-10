@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class ParticlePhysics : MonoBehaviour
 {
-    [SerializeField] private float SpeedMultiplier = 1f;
-
-    private Vector3 lastFrameVelocity;
+    [Header("Rigidbody")]
     private Rigidbody rb;
-    float currentNum; 
+
+    [Header("Speed")]
+    private float maxSpeed = 10;
+    private float minSpeed = 0;
+    private float speedRange = 1;
+    private float avgSpeed;
+
+
+
+
+    //[SerializeField] private float speedMultiplier = 1f;
+    private Vector3 lastFrameVelocity;
+    float currMultiplier;
+
 
     // Start is called before the first frame update
     void Start()
@@ -16,36 +27,40 @@ public class ParticlePhysics : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         //Particle is given a random velocity vector at start
-        float randNum = Random.Range(1f, 4f) * SpeedMultiplier;
-        rb.velocity = new Vector3(0, -randNum, randNum);
+        float randNum = Random.Range(1f, 4f);
+        rb.velocity = new Vector3(-20, -20, -20);
         //Note: could implement a multiplier for different particle speeds
 
     }
 
     // Update is called once per frame
-    void Update()
-    { 
-        if (SpeedMultiplier != currentNum)
-        {
-            Debug.Log("Speed Multiplier: " + SpeedMultiplier);
-            //Debug.Log("Setting/Changing Current Speed");
-            if (SpeedMultiplier < 0)
-            {
-                //rb.velocity *= -SpeedMultiplier;
-            }
-            else if (SpeedMultiplier > 0)
-            {
-                //rb.velocity *= SpeedMultiplier + 1;
-                rb.AddForce(rb.velocity.normalized * SpeedMultiplier);
-            }
-            else
-            {
-                return;
-            }
+    void FixedUpdate()
+    {
 
-        }
-        currentNum = SpeedMultiplier;
+        //Debug.Log("average speed: " + avgSpeed);
+        Speed_Range(avgSpeed, speedRange);
         lastFrameVelocity = rb.velocity;
+
+        //if (speedMultiplier != currMultiplier)
+        //{
+        //    Debug.Log("Speed Multiplier: " + speedMultiplier);
+        //    //Debug.Log("Setting/Changing Current Speed");
+        //    if (speedMultiplier < 0)
+        //    {
+        //        rb.velocity *= -speedMultiplier;
+        //    }
+        //    else if (speedMultiplier > 0)
+        //    {
+        //        rb.velocity *= speedMultiplier + 1;
+        //        //rb.AddForce(rb.velocity.normalized * speedMultiplier);
+        //    }
+        //    else
+        //    {
+        //        return;
+        //    }
+        //}
+        //currMultiplier = speedMultiplier;
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -63,13 +78,55 @@ public class ParticlePhysics : MonoBehaviour
          
     }
 
-    public void Modify_Speed(float multiplier) 
+    public void Speed_Limit(float min, float max) {
+
+        //if (gameObject.name == "NO2(Clone)") {
+        //    Debug.Log("Current Speed: " + rb.velocity.magnitude);
+        //}
+        
+        if (rb.velocity.magnitude > max)
+        {
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, max);
+        }
+        if (rb.velocity.magnitude <= min)
+        {
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, min);
+        }
+        if (gameObject.name == "NO2(Clone)")
+        {
+            //Debug.Log("Current Speed: " + rb.velocity.magnitude);
+        }
+    }
+
+    public void Modify_Average_Speed(float value)
     {
-        Debug.LogWarning("multiplier " + multiplier);
-        SpeedMultiplier = multiplier;
-
-
+        avgSpeed = value;
  
+    }
+
+    public void Speed_Range(float avgSpeed, float numFromAvg)
+    {
+
+        float min, max;
+        min = avgSpeed - numFromAvg;
+        max = avgSpeed + numFromAvg;
+
+        if (max > maxSpeed)
+        {
+            max = maxSpeed;
+        }
+        if (min < minSpeed)
+        {
+            min = minSpeed;
+        }
+        if (gameObject.name == "NO2(Clone)")
+        {
+            Debug.LogWarning(min + " " + max);
+        }
+        
+        Speed_Limit(min, max);
+
+
     }
 }
 

@@ -33,13 +33,14 @@ public class UIScript : MonoBehaviour
     //Temperature
     public Slider temp_slider;
     private static bool temp_point_up;
-    private static float prev_value = 0f;
     private static float curr_value;
     //public static  TextMeshProUGUI temp_str;
 
 
     private void Start()
     {
+
+        
         switch (tag)
         {
             case "Untagged":
@@ -60,14 +61,15 @@ public class UIScript : MonoBehaviour
             case "Pressure":
                 lid_start_pos = lid.transform.localPosition.z;
                 return;
+            case "Temperature":
+                Temperature_Change(temp_slider.value);
+                return;
         }
 
     }
 
     private void Update()
     {
-
-        
         switch (tag)
         {
             case "Untagged":
@@ -88,18 +90,15 @@ public class UIScript : MonoBehaviour
             case "Temperature":
                 if (temp_point_up)
                 {
-                    curr_value = temp_slider.value;
+                    //float temp_difference = curr_value - prev_value;
+                    //Debug.Log("Curr value: " + curr_value + "prev value: " + prev_value + "temp diff: " + temp_difference);
 
-
-                    float temp_difference = curr_value - prev_value;
-                    Debug.Log("Curr value: " + curr_value + "prev value: " + prev_value + "temp diff: " + temp_difference);
-
-                    Temperature_Change(temp_difference);
+                    Temperature_Change(temp_slider.value);
                     
                 }
                 else
                 {
-                    prev_value = curr_value;
+                    //prev_value = curr_value;
                 }
                 return;
 
@@ -179,21 +178,21 @@ public class UIScript : MonoBehaviour
         }
     }
 
-    public void Temperature_Change(float difference)
+    public void Temperature_Change(float value)
     {
         List<GameObject> NO2_List = ParticleGeneration.moleculeList;
         List<GameObject> N2O4_List = ParticleGeneration.N2O4List;
 
         int i = 0;
         while (i < NO2_List.Count) {
-            NO2_List[i].GetComponent<ParticlePhysics>().Modify_Speed(difference);
+            NO2_List[i].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
             i++;
         }
 
         int j = 0;
         while (j < N2O4_List.Count)
         {
-            N2O4_List[j].GetComponent<ParticlePhysics>().Modify_Speed(difference);
+            N2O4_List[j].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
             j++;
         }
     }
