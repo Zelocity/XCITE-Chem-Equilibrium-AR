@@ -12,6 +12,8 @@ TagManager:
   - N204 Counter
   - N02 Counter
   - Magnitude Num
+  - Temperature
+  - Pressure
   layers:
   - Default
   - TransparentFX

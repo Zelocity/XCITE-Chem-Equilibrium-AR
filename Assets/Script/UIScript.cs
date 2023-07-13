@@ -6,69 +6,108 @@ using TMPro;
 
 public class UIScript : MonoBehaviour
 {
-    //Vars
+
     public GameObject particleGen;
 
-    public GameObject lid;
-
+    //N2O
+    public TextMeshProUGUI NO2_Counter;
     public static int numNO2;
 
-    public TextMeshProUGUI n2o4Num;
+    //N2O4
+    public TextMeshProUGUI N2O4_Counter;
     public static int numN2O4;
 
+    //Particle Concentration
     public TextMeshProUGUI mag_str;
+    private static List<int> conc_option = new List<int>() { 1, 5, 10, 25, 50 };
     private static int mag_num;
+    private static int conc_select = 0;
 
-    public TextMeshProUGUI particleNum;
-    public static int conc_select = 0;
-    public static List<int> conc_option = new List<int>() { 1, 5, 10, 25, 50 };
-
-
+    //Lid
+    public GameObject lid;
     private static float lid_start_pos;
     private static float lid_current_pos;
     private static bool up_lid_pressure;
     private static bool down_lid_pressure;
 
+    //Temperature
+    public Slider temp_slider;
+    private static bool temp_point_up;
+    private static float curr_value;
+    //public static  TextMeshProUGUI temp_str;
+
 
     private void Start()
     {
-        n2o4Num = GetComponent<TextMeshProUGUI>();
-        mag_str = GetComponent<TextMeshProUGUI>();
-        lid_start_pos = lid.transform.localPosition.z;
+
+        
+        switch (tag)
+        {
+            case "Untagged":
+                break;
+
+            case "N02 Counter":
+                N02Count();
+                return;
+
+            case "N204 Counter":
+                N2O4_Counter = GetComponent<TextMeshProUGUI>();
+                return;
+
+            case "Magnitude Num":
+                mag_str = GetComponent<TextMeshProUGUI>();
+                return;
+
+            case "Pressure":
+                lid_start_pos = lid.transform.localPosition.z;
+                return;
+
+            case "Temperature":
+                Temperature_Change(temp_slider.value);
+                return;
+        }
+
     }
 
     private void Update()
     {
-        numNO2 = ParticleGeneration.moleculeList.Count;
-        numN2O4 = ParticleGeneration.N2O4List.Count;
+        switch (tag)
+        {
+            case "Untagged":
+                break;
 
-        if (tag == "N02 Counter")
-        {
-            N02Count();
-        }
-        else if (tag == "N204 Counter")
-        {
-            N204Count();
-        }
-        else if (tag == "Magnitude Num")
-        {
-            MagnitudeNum();
-        }
+            case "N02 Counter":
+                N02Count();
+                return;
 
+            case "N204 Counter":
+                N204Count();
+                return;
 
-        lid_current_pos = lid.transform.localPosition.z;
-        float lid_level_diff = lid_start_pos - lid_current_pos;
+            case "Magnitude Num":
+                MagnitudeNum();
+                return;
 
-        if (up_lid_pressure == true && lid_start_pos > lid_current_pos)
-        {
-            //Debug.Log("go up");
-            lid.transform.Translate(Vector3.forward * Time.deltaTime);
+            case "Temperature":
+                if (temp_point_up)
+                {
+                    //float temp_difference = curr_value - prev_value;
+                    //Debug.Log("Curr value: " + curr_value + "prev value: " + prev_value + "temp diff: " + temp_difference);
+
+                    Temperature_Change(temp_slider.value);
+                    
+                }
+                else
+                {
+                    //prev_value = curr_value;
+                }
+                return;
+
+            case "Pressure":
+                if ((up_lid_pressure || down_lid_pressure)) { Lid_Movement(); }
+                return;
         }
-        else if (down_lid_pressure == true && lid_level_diff < 412)
-        {
-            //Debug.Log("go down");
-            lid.transform.Translate(Vector3.back * Time.deltaTime);
-        }
+        
     }
 
 
@@ -81,7 +120,6 @@ public class UIScript : MonoBehaviour
 
     public void DestroyButton()
     {
-        
         if (numNO2 != 0)
         {
             int numConc = conc_option[conc_select];
@@ -113,19 +151,73 @@ public class UIScript : MonoBehaviour
 
     public void Clear_Particles()
     {
-        ParticleGeneration.moleculeList.Clear();
-        ParticleGeneration.N2O4List.Clear();
+        //Debug.Log("Clearing Particles");
+        List<GameObject> NO2_List = ParticleGeneration.moleculeList;
+        List<GameObject> N2O4_List = ParticleGeneration.N2O4List;
 
+        while (NO2_List.Count != 0 || N2O4_List.Count != 0)
+        {
+            particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("N2O4", 0);
+            particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("NO2", 0);
+        }
     }
 
-    public void Up_Button(bool up) { up_lid_pressure = up; }
+    public void Lid_Movement()
+    {
+        lid_current_pos = lid.transform.localPosition.z;
+        float lid_level_diff = lid_start_pos - lid_current_pos;
 
-    public void Down_Button(bool down) { down_lid_pressure = down; }
+        if (up_lid_pressure == true && lid_start_pos > lid_current_pos)
+        {
+            //Debug.Log("go up");
+            lid.transform.Translate(Vector3.forward * Time.deltaTime);
+        }
+        else if (down_lid_pressure == true && lid_level_diff < 412)
+        {
+            //Debug.Log("go down");
+            lid.transform.Translate(Vector3.back * Time.deltaTime);
+        }
+    }
 
-    //Moved molecule object outside of chamber for count to reflect the molecules inside chamber
-    public void N02Count() { particleNum.text = numNO2.ToString(); }
+    public void Temperature_Change(float value)
+    {
+        List<GameObject> NO2_List = ParticleGeneration.moleculeList;
+        List<GameObject> N2O4_List = ParticleGeneration.N2O4List;
 
-    public void N204Count() { string str = numN2O4.ToString(); n2o4Num.text = str; }
+        int i = 0;
+        while (i < NO2_List.Count) {
+            NO2_List[i].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
+            i++;
+        }
+
+        int j = 0;
+        while (j < N2O4_List.Count)
+        {
+            N2O4_List[j].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
+            j++;
+        }
+    }
+
+
+    public void N02Count()
+    {
+        numNO2 = ParticleGeneration.moleculeList.Count;
+        numN2O4 = ParticleGeneration.N2O4List.Count;
+        NO2_Counter.text = numNO2.ToString();
+    }
+
+    public void N204Count()
+    {
+        numNO2 = ParticleGeneration.moleculeList.Count;
+        numN2O4 = ParticleGeneration.N2O4List.Count;
+        string str = numN2O4.ToString(); N2O4_Counter.text = str;
+    }
+
+    public void Pressure_Up_Button(bool up) { up_lid_pressure = up; }
+
+    public void Pressure_Down_Button(bool down) { down_lid_pressure = down; }
+
+    public void Temp_Slider(bool up) { temp_point_up = up; }
 
     public void MagnitudeNum() { string str = conc_option[conc_select].ToString(); mag_str.text = str; }
 
