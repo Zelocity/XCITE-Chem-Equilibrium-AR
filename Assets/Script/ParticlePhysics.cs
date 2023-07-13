@@ -15,8 +15,7 @@ public class ParticlePhysics : MonoBehaviour
 
 
 
-
-    //[SerializeField] private float speedMultiplier = 1f;
+    private float speedMultiplier = 1f;
     private Vector3 lastFrameVelocity;
     float currMultiplier;
 
@@ -41,26 +40,15 @@ public class ParticlePhysics : MonoBehaviour
         Speed_Range(avgSpeed, speedRange);
         lastFrameVelocity = rb.velocity;
 
-        //if (speedMultiplier != currMultiplier)
-        //{
-        //    Debug.Log("Speed Multiplier: " + speedMultiplier);
-        //    //Debug.Log("Setting/Changing Current Speed");
-        //    if (speedMultiplier < 0)
-        //    {
-        //        rb.velocity *= -speedMultiplier;
-        //    }
-        //    else if (speedMultiplier > 0)
-        //    {
-        //        rb.velocity *= speedMultiplier + 1;
-        //        //rb.AddForce(rb.velocity.normalized * speedMultiplier);
-        //    }
-        //    else
-        //    {
-        //        return;
-        //    }
-        //}
-        //currMultiplier = speedMultiplier;
-        
+        if (speedMultiplier != currMultiplier)
+        {
+            Debug.Log("Speed Multiplier: " + speedMultiplier + " rb.velocity: " + rb.velocity);
+            //Debug.Log("Setting/Changing Current Speed");
+            rb.velocity *= speedMultiplier;
+
+        }
+        currMultiplier = speedMultiplier;
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -88,9 +76,9 @@ public class ParticlePhysics : MonoBehaviour
         {
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, max);
         }
-        if (rb.velocity.magnitude <= min)
+        if (rb.velocity.magnitude < min)
         {
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, min);
+            rb.velocity *= 1.1f;
         }
         if (gameObject.name == "NO2(Clone)")
         {
@@ -101,6 +89,7 @@ public class ParticlePhysics : MonoBehaviour
     public void Modify_Average_Speed(float value)
     {
         avgSpeed = value;
+        speedMultiplier = value; 
  
     }
 
@@ -119,10 +108,10 @@ public class ParticlePhysics : MonoBehaviour
         {
             min = minSpeed;
         }
-        if (gameObject.name == "NO2(Clone)")
-        {
-            Debug.LogWarning(min + " " + max);
-        }
+        //if (gameObject.name == "NO2(Clone)")
+        //{
+        //    Debug.LogWarning(min + " " + max);
+        //}
         
         Speed_Limit(min, max);
 

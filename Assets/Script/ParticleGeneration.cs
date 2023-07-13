@@ -24,27 +24,26 @@ public class ParticleGeneration : MonoBehaviour
     {
         //Assign random variables to x, y, z rotation axis
         var rV = prefab.transform.rotation.eulerAngles;
-        rV.x = Random.Range(-180f, 180f);
-        rV.y = Random.Range(-180f, 180f);
-        rV.z = Random.Range(-180f, 180f);
-        prefab.transform.rotation = Quaternion.Euler(rV);
-
-        float newPos_Z = 0.5f;
+        float newPos_Z = position.z;
 
         //Create new molecule at random position and add it to list
         for (int i = 0; i < count; i++)
         {
+            rV.x = Random.Range(-180f, 180f);
+            rV.y = Random.Range(-180f, 180f);
+            rV.z = Random.Range(-180f, 180f);
+            prefab.transform.rotation = Quaternion.Euler(rV);
             //checks to see if tag is NO2 or N2O4
             if (prefab.CompareTag("NO2"))
             {
                 if (!isSpliting)
                 {
                     //randPos holds random position
-                    position = new Vector3(Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f), Random.Range(-2.5f, 2.5f));
+                    position = new Vector3(Random.Range(-2.5f, 2.5f), Random.Range(-5f, 5f), Random.Range(-2.5f, 2.5f));
                 } else
                 {
                     position.z = newPos_Z;
-                    newPos_Z *= -1;
+                    newPos_Z += 1;
                 }
 
                 

@@ -61,6 +61,7 @@ public class UIScript : MonoBehaviour
             case "Pressure":
                 lid_start_pos = lid.transform.localPosition.z;
                 return;
+
             case "Temperature":
                 Temperature_Change(temp_slider.value);
                 return;
@@ -169,12 +170,12 @@ public class UIScript : MonoBehaviour
         if (up_lid_pressure == true && lid_start_pos > lid_current_pos)
         {
             //Debug.Log("go up");
-            lid.transform.Translate(Vector3.forward * Time.deltaTime / 2);
+            lid.transform.Translate(Vector3.forward * Time.deltaTime);
         }
         else if (down_lid_pressure == true && lid_level_diff < 412)
         {
             //Debug.Log("go down");
-            lid.transform.Translate(Vector3.back * Time.deltaTime / 2);
+            lid.transform.Translate(Vector3.back * Time.deltaTime);
         }
     }
 
