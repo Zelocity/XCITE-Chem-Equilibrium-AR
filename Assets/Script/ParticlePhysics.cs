@@ -8,14 +8,14 @@ public class ParticlePhysics : MonoBehaviour
     private Rigidbody rb;
 
     [Header("Speed")]
-    private float maxSpeed = 10;
+    private float maxSpeed = 8;
     private float minSpeed = 0;
-    private float speedRange = 1;
-    private float avgSpeed;
+    private float speedRange = 2;
+    private float avgSpeed = 5.5f;
 
 
 
-    private float speedMultiplier = 1f;
+    private float speedMultiplier = 5.5f;
     private Vector3 lastFrameVelocity;
     float currMultiplier;
 
@@ -26,8 +26,12 @@ public class ParticlePhysics : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         //Particle is given a random velocity vector at start
-        float randNum = Random.Range(1f, 4f);
-        rb.velocity = new Vector3(-20, -20, -20);
+        float num1, num2, num3;
+        num1 = Random.Range(-5f, 5f);
+        num2 = Random.Range(-5f, 5f);
+        num3 = Random.Range(-5f, 5f);
+        rb.velocity = new Vector3(num1, num2, num3);
+
         //Note: could implement a multiplier for different particle speeds
 
     }
@@ -42,7 +46,7 @@ public class ParticlePhysics : MonoBehaviour
 
         if (speedMultiplier != currMultiplier)
         {
-            Debug.Log("Speed Multiplier: " + speedMultiplier + " rb.velocity: " + rb.velocity);
+            //Debug.Log("Speed Multiplier: " + speedMultiplier + " rb.velocity: " + rb.velocity);
             //Debug.Log("Setting/Changing Current Speed");
             rb.velocity *= speedMultiplier;
 

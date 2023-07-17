@@ -18,9 +18,9 @@ public class UIScript : MonoBehaviour
     public static int numN2O4;
 
     //Particle Concentration
-    public TextMeshProUGUI mag_str;
+    public TextMeshProUGUI conc_str;
+    public Slider conc_slider;
     private static List<int> conc_option = new List<int>() { 1, 5, 10, 25, 50 };
-    private static int mag_num;
     private static int conc_select = 0;
 
     //Lid
@@ -48,23 +48,27 @@ public class UIScript : MonoBehaviour
 
             case "N02 Counter":
                 N02Count();
-                return;
+                break;
 
             case "N204 Counter":
                 N2O4_Counter = GetComponent<TextMeshProUGUI>();
-                return;
+                break;
 
             case "Magnitude Num":
-                mag_str = GetComponent<TextMeshProUGUI>();
-                return;
+                conc_slider.onValueChanged.AddListener((v) =>
+                {
+                    conc_str = GetComponent<TextMeshProUGUI>();
+                });
+                
+                break;
 
             case "Pressure":
                 lid_start_pos = lid.transform.localPosition.z;
-                return;
+                break;
 
             case "Temperature":
-                Temperature_Change(temp_slider.value);
-                return;
+                Temperature_Change(5.5f);
+                break;
         }
 
     }
@@ -78,34 +82,26 @@ public class UIScript : MonoBehaviour
 
             case "N02 Counter":
                 N02Count();
-                return;
+                break;
 
             case "N204 Counter":
                 N204Count();
-                return;
+                break;
 
             case "Magnitude Num":
                 MagnitudeNum();
-                return;
+                break;
 
             case "Temperature":
                 if (temp_point_up)
                 {
-                    //float temp_difference = curr_value - prev_value;
-                    //Debug.Log("Curr value: " + curr_value + "prev value: " + prev_value + "temp diff: " + temp_difference);
-
                     Temperature_Change(temp_slider.value);
-                    
                 }
-                else
-                {
-                    //prev_value = curr_value;
-                }
-                return;
+                break;
 
             case "Pressure":
                 if ((up_lid_pressure || down_lid_pressure)) { Lid_Movement(); }
-                return;
+                break;
         }
         
     }
@@ -177,6 +173,13 @@ public class UIScript : MonoBehaviour
             //Debug.Log("go down");
             lid.transform.Translate(Vector3.back * Time.deltaTime);
         }
+
+        //inputs percentage in decimal to set spawn height since spawn length is 10 and lid distance is 412.
+        //there's probably a better way to do this.
+        particleGen.GetComponent<ParticleGeneration>().Spawn_Height(1 - (lid_level_diff / 412f));
+
+
+
     }
 
     public void Temperature_Change(float value)
@@ -219,6 +222,6 @@ public class UIScript : MonoBehaviour
 
     public void Temp_Slider(bool up) { temp_point_up = up; }
 
-    public void MagnitudeNum() { string str = conc_option[conc_select].ToString(); mag_str.text = str; }
+    public void MagnitudeNum() { string str = conc_option[conc_select].ToString(); conc_str.text = str; }
 
 }

@@ -9,6 +9,7 @@ public class ParticleGeneration : MonoBehaviour
     //public GameObject prefab;
     //Gameobject to be created 
     private GameObject generate;
+    private float spawnHeight;
     //List to hold all objects
     [SerializeField] static public List<GameObject> moleculeList = null;
     [SerializeField] static public List<GameObject> N2O4List = null;
@@ -39,7 +40,7 @@ public class ParticleGeneration : MonoBehaviour
                 if (!isSpliting)
                 {
                     //randPos holds random position
-                    position = new Vector3(Random.Range(-2.5f, 2.5f), Random.Range(-5f, 5f), Random.Range(-2.5f, 2.5f));
+                    position = new Vector3(Random.Range(-3.2f, 3.2f), Random.Range(-5.1f, spawnHeight), Random.Range(-3.2f, 3.2f));
                 } else
                 {
                     position.z = newPos_Z;
@@ -120,4 +121,11 @@ public class ParticleGeneration : MonoBehaviour
     {
         return N2O4List;
     }
+
+    public void Spawn_Height(float num)
+    {
+        spawnHeight = (10 * num) - 5;
+        Debug.Log(spawnHeight);
+    }
+   
 }
