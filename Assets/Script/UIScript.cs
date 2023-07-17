@@ -20,8 +20,7 @@ public class UIScript : MonoBehaviour
     //Particle Concentration
     public TextMeshProUGUI conc_str;
     public Slider conc_slider;
-    private static List<int> conc_option = new List<int>() { 1, 5, 10, 25, 50 };
-    private static int conc_select = 0;
+    private static int conc_num;
 
     //Lid
     public GameObject lid;
@@ -33,7 +32,6 @@ public class UIScript : MonoBehaviour
     //Temperature
     public Slider temp_slider;
     private static bool temp_point_up;
-    private static float curr_value;
     //public static  TextMeshProUGUI temp_str;
 
 
@@ -54,13 +52,12 @@ public class UIScript : MonoBehaviour
                 N2O4_Counter = GetComponent<TextMeshProUGUI>();
                 break;
 
-            case "Magnitude Num":
-                conc_slider.onValueChanged.AddListener((v) =>
-                {
-                    conc_str = GetComponent<TextMeshProUGUI>();
-                });
-                
-                break;
+            //case "Magnitude Num":
+            //    conc_slider.onValueChanged.AddListener((v) =>
+            //    {
+            //        conc_str = GetComponent<TextMeshProUGUI>();
+            //    });
+            //    break;
 
             case "Pressure":
                 lid_start_pos = lid.transform.localPosition.z;
@@ -110,15 +107,15 @@ public class UIScript : MonoBehaviour
     public void CreateButton()
     {
         //create NO2 object with specified quantity at random location. IGNORE THIRD PARAMETER HERE, 4th indicates if particle is splitting.
-        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), conc_option[conc_select], new Vector3(0,0,0), false);
-        numNO2 += conc_option[conc_select];
+        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), conc_num, new Vector3(0,0,0), false);
+        numNO2 += conc_num;
     }
 
     public void DestroyButton()
     {
         if (numNO2 != 0)
         {
-            int numConc = conc_option[conc_select];
+            int numConc = conc_num;
             if (numConc > numNO2)
             {
                 numConc = numNO2;
@@ -131,18 +128,6 @@ public class UIScript : MonoBehaviour
 
         }
         //Debug.Log(numNO2);
-    }
-
-    public void Add_Conc()
-    {
-        if (conc_select == conc_option.Count - 1) return;
-        conc_select++;
-    }
-
-    public void Subtract_Conc()
-    {
-        if (conc_select <= 0) return;
-        conc_select--;
     }
 
     public void Clear_Particles()
@@ -222,6 +207,6 @@ public class UIScript : MonoBehaviour
 
     public void Temp_Slider(bool up) { temp_point_up = up; }
 
-    public void MagnitudeNum() { string str = conc_option[conc_select].ToString(); conc_str.text = str; }
+    public void MagnitudeNum() { conc_num = (int)conc_slider.value;  }
 
 }
