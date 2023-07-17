@@ -20,7 +20,7 @@ public class UIScript : MonoBehaviour
     //Particle Concentration
     public TextMeshProUGUI conc_str;
     public Slider conc_slider;
-    private static int conc_num;
+    private static int conc_num = 1;
 
     //Lid
     public GameObject lid;
@@ -207,6 +207,6 @@ public class UIScript : MonoBehaviour
 
     public void Temp_Slider(bool up) { temp_point_up = up; }
 
-    public void MagnitudeNum() { conc_num = (int)conc_slider.value;  }
+    public void MagnitudeNum() { conc_num = (int)conc_slider.value; conc_str.text = conc_num.ToString(); }
 
 }

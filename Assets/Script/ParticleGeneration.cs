@@ -125,7 +125,6 @@ public class ParticleGeneration : MonoBehaviour
     public void Spawn_Height(float num)
     {
         spawnHeight = (10 * num) - 5;
-        Debug.Log(spawnHeight);
     }
    
 }
