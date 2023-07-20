@@ -35,6 +35,7 @@ public class N2O4Split : MonoBehaviour
                 //Debug.Log("X: " + transform.localPosition.x + " Y: " + transform.localPosition.y + " Z: " + transform.localPosition.z);
 
                 particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 2, transform.position, true);
+                //particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 2, help, true);
                 timer = 0f;
             }
         } else
