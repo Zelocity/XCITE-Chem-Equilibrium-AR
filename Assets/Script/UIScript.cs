@@ -52,13 +52,6 @@ public class UIScript : MonoBehaviour
                 N2O4_Counter = GetComponent<TextMeshProUGUI>();
                 break;
 
-            //case "Magnitude Num":
-            //    conc_slider.onValueChanged.AddListener((v) =>
-            //    {
-            //        conc_str = GetComponent<TextMeshProUGUI>();
-            //    });
-            //    break;
-
             case "Pressure":
                 lid_start_pos = lid.transform.localPosition.z;
                 break;
@@ -190,15 +183,14 @@ public class UIScript : MonoBehaviour
     public void N02Count()
     {
         numNO2 = ParticleGeneration.moleculeList.Count;
-        numN2O4 = ParticleGeneration.N2O4List.Count;
-        NO2_Counter.text = numNO2.ToString();
+        NO2_Counter.text = "NO<sub>2</sub> = " + numNO2.ToString();
     }
 
     public void N204Count()
     {
-        numNO2 = ParticleGeneration.moleculeList.Count;
         numN2O4 = ParticleGeneration.N2O4List.Count;
-        string str = numN2O4.ToString(); N2O4_Counter.text = str;
+        string str = "N<sub>2</sub>O<sub>4</sub> = " + numN2O4.ToString();
+        N2O4_Counter.text = str;
     }
 
     public void Pressure_Up_Button(bool up) { up_lid_pressure = up; }

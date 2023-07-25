@@ -6,7 +6,6 @@ using System.Linq;
 public class ParticleCollsion : MonoBehaviour
 {
     public GameObject particleGen;
-    private GameObject generateN2O4;
 
     //boolean for checking if particles collided already.
     public bool doNothing;
@@ -28,7 +27,7 @@ public class ParticleCollsion : MonoBehaviour
         {
             //Save the position of collision
             Vector3 position = collision.contacts[0].point;
-            collision.gameObject.GetComponent<ParticleCollsion>().doNothing = true;
+            //collision.gameObject.GetComponent<ParticleCollsion>().doNothing = true;
 
             //Save index of this gameObject from the NO2 List
             int otherIndex = ParticleGeneration.moleculeList.IndexOf(collision.gameObject);

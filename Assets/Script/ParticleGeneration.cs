@@ -65,12 +65,10 @@ public class ParticleGeneration : MonoBehaviour
 
                         if (position.y < spawnHeight - 5)
                         {
-                            Debug.Log("this does work");
                             newPos_Y += splitDistance;
                         }
                         else
                         {
-                            Debug.Log("this doesnt work");
                             newPos_Y -= splitDistance;
                         }
 
@@ -164,8 +162,13 @@ public class ParticleGeneration : MonoBehaviour
 
     public void Spawn_Height(float num)
     {
-        Debug.Log("spawnHeight: " + spawnHeight);
         spawnHeight = (10 * num) - 5.0f;
+        //Debug.Log("spawnHeight: " + spawnHeight);
+    }
+
+    public float Get_Spawn_Height()
+    {
+        return spawnHeight;
     }
    
 }
