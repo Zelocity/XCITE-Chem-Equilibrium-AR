@@ -5,11 +5,14 @@ using System.Linq;
 
 public class ParticleGeneration : MonoBehaviour
 {
-    //Prefab of obbject being generated, aka molecule
-    //public GameObject prefab;
-    //Gameobject to be created 
+    
+    public GameObject spawner;
+    private float spawn_x, spawn_y, spawn_z;
+
+
+
     private GameObject generate;
-    private float spawnHeight;
+    private float spawnHeight = 1;
     //List to hold all objects
     [SerializeField] static public List<GameObject> moleculeList = null;
     [SerializeField] static public List<GameObject> N2O4List = null;
@@ -20,14 +23,24 @@ public class ParticleGeneration : MonoBehaviour
         N2O4List = new List<GameObject>();
     }
 
+    private void Update()
+    {
+        spawn_x = spawner.transform.position.x;
+        spawn_y = spawner.transform.position.y;
+        spawn_z = spawner.transform.position.z;
+    }
+
     //function takes in the type of object, the number of object it should spawn, and the position to spawn it at. 
     public void InstantiateGameObjects(GameObject prefab, int count, Vector3 position, bool isSpliting) 
     {
+        //Debug.Log("x: " + spawner.transform.position.x);
+        //Debug.Log("y: " + spawner.transform.position.y);
+        //Debug.Log("z: " + spawner.transform.position.z);
         //Assign random variables to x, y, z rotation axis
         var rV = prefab.transform.rotation.eulerAngles;
 
 
-        float splitDistance = .35f;
+        float splitDistance = .035f;
         float newPos_X = position.x;
         float newPos_Y = position.y;
         float newPos_Z = position.z;
@@ -45,7 +58,20 @@ public class ParticleGeneration : MonoBehaviour
                 if (!isSpliting)
                 {
                     //randPos holds random position
-                    position = new Vector3(Random.Range(-3.2f, 3.2f), Random.Range(-5f, spawnHeight), Random.Range(-3.2f, 3.2f));
+
+                    newPos_X = Random.Range(spawn_x + 0.03f, spawn_x + 0.48f);
+                    newPos_Y = Random.Range(spawn_y - .1f, spawn_y + .1f);
+                    newPos_Z = Random.Range(spawn_z - .168f, spawn_z + 0.168f);
+
+                    //newPos_X = Random.Range(spawn_x - 1.2f, spawn_x + 1.2f);
+                    //newPos_Y = Random.Range(spawn_y - .2f, spawn_y + (.2f + 4f * spawnHeight));
+                    //newPos_Z = Random.Range(spawn_z - 2.4f, spawn_z + 2.4f);
+
+                    //Debug.Log("spawn_y + (.2f + 10f * spawnHeight): " + (spawn_y + (.2f + 10f * spawnHeight)));
+
+
+
+                    position = new Vector3(newPos_X, newPos_Y, newPos_Z);
                 }
                 else
                 {
@@ -162,13 +188,20 @@ public class ParticleGeneration : MonoBehaviour
 
     public void Spawn_Height(float num)
     {
-        spawnHeight = (10 * num) - 5.0f;
-        //Debug.Log("spawnHeight: " + spawnHeight);
+
+        spawnHeight = num;
+        Debug.LogWarning("this: " + (spawner.transform.position.y + 1.9f) + " SpawnHeight: " + spawnHeight + " num: " + num);
     }
 
     public float Get_Spawn_Height()
     {
         return spawnHeight;
     }
-   
+
+    public GameObject Get_Spawner()
+    {
+        return spawner;
+    }
+
+
 }

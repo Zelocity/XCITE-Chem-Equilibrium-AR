@@ -154,8 +154,11 @@ public class UIScript : MonoBehaviour
 
         //inputs percentage in decimal to set spawn height since spawn length is 10 and lid distance is 412.
         //there's probably a better way to do this.
-        particleGen.GetComponent<ParticleGeneration>().Spawn_Height(1 - (lid_level_diff / 412f));
 
+
+
+        particleGen.GetComponent<ParticleGeneration>().Spawn_Height(1 - lid_level_diff / 412f);
+ 
 
 
     }
