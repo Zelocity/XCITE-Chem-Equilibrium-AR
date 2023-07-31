@@ -6,7 +6,7 @@ using System.Linq;
 public class ParticleGeneration : MonoBehaviour
 {
     
-    public GameObject spawner;
+    public GameObject spawn;
     private float spawn_x, spawn_y, spawn_z;
 
 
@@ -25,21 +25,16 @@ public class ParticleGeneration : MonoBehaviour
 
     private void Update()
     {
-        spawn_x = spawner.transform.position.x;
-        spawn_y = spawner.transform.position.y;
-        spawn_z = spawner.transform.position.z;
+        spawn_x = spawn.transform.position.x;
+        spawn_y = spawn.transform.position.y;
+        spawn_z = spawn.transform.position.z;
     }
 
     //function takes in the type of object, the number of object it should spawn, and the position to spawn it at. 
     public void InstantiateGameObjects(GameObject prefab, int count, Vector3 position, bool isSpliting) 
     {
-        //Debug.Log("x: " + spawner.transform.position.x);
-        //Debug.Log("y: " + spawner.transform.position.y);
-        //Debug.Log("z: " + spawner.transform.position.z);
         //Assign random variables to x, y, z rotation axis
         var rV = prefab.transform.rotation.eulerAngles;
-
-
         float splitDistance = .035f;
         float newPos_X = position.x;
         float newPos_Y = position.y;
@@ -62,10 +57,6 @@ public class ParticleGeneration : MonoBehaviour
                     newPos_X = Random.Range(spawn_x + 0.03f, spawn_x + 0.48f);
                     newPos_Y = Random.Range(spawn_y - .1f, spawn_y + .1f);
                     newPos_Z = Random.Range(spawn_z - .168f, spawn_z + 0.168f);
-
-                    //newPos_X = Random.Range(spawn_x - 1.2f, spawn_x + 1.2f);
-                    //newPos_Y = Random.Range(spawn_y - .2f, spawn_y + (.2f + 4f * spawnHeight));
-                    //newPos_Z = Random.Range(spawn_z - 2.4f, spawn_z + 2.4f);
 
                     //Debug.Log("spawn_y + (.2f + 10f * spawnHeight): " + (spawn_y + (.2f + 10f * spawnHeight)));
 
@@ -190,7 +181,7 @@ public class ParticleGeneration : MonoBehaviour
     {
 
         spawnHeight = num;
-        Debug.LogWarning("this: " + (spawner.transform.position.y + 1.9f) + " SpawnHeight: " + spawnHeight + " num: " + num);
+        Debug.LogWarning("this: " + (spawn.transform.position.y + 1.9f) + " SpawnHeight: " + spawnHeight + " num: " + num);
     }
 
     public float Get_Spawn_Height()
@@ -200,8 +191,12 @@ public class ParticleGeneration : MonoBehaviour
 
     public GameObject Get_Spawner()
     {
-        return spawner;
+        return spawn;
     }
 
+    public void Set_Spawner(GameObject newSpawn)
+    {
+        spawn = newSpawn;
+    }
 
 }

@@ -8,10 +8,10 @@ public class ParticlePhysics : MonoBehaviour
     private Rigidbody rb;
 
     [Header("Speed")]
-    private float maxSpeed = .2f;
+    private float maxSpeed = 2f;
     private float minSpeed = 0;
     private float speedRange = .05f;
-    private float avgSpeed = .1f;
+    private float avgSpeed = 0.3f;
 
 
 

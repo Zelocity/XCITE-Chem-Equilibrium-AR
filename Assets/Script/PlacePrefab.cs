@@ -8,9 +8,14 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 [RequireComponent(typeof(ARRaycastManager), typeof(ARPlaneManager))]
 public class PlacePrefab : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject prefab;
+    [Header("GameObjects")]
+    [SerializeField] private GameObject beaker;
+    [SerializeField] private GameObject particleGen;
+    [SerializeField] private GameObject P_Up_Button;
+    [SerializeField] private GameObject P_Down_Button;
 
+
+    [Header("Ray Cast")]
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
@@ -44,10 +49,19 @@ public class PlacePrefab : MonoBehaviour
 
         if (aRRaycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.PlaneWithinPolygon) && !placed)
         {
-            Pose pose = hits[0].pose;
-            GameObject obj = Instantiate(prefab, pose.position, pose.rotation);
             placed = true;
-         
+            Pose pose = hits[0].pose;
+            GameObject obj = Instantiate(beaker, pose.position, pose.rotation);
+            particleGen.GetComponent<ParticleGeneration>().Set_Spawner(GameObject.Find("/Regular Beaker(Clone)/Particle_Spawner"));
+            P_Up_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
+            P_Down_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
+           
         }
+    }
+
+
+    public bool Get_Placed()
+    {
+        return placed;
     }
 }
