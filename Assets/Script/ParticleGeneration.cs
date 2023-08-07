@@ -54,9 +54,9 @@ public class ParticleGeneration : MonoBehaviour
                 {
                     //randPos holds random position
 
-                    newPos_X = Random.Range(spawn_x + 0.03f, spawn_x + 0.48f);
-                    newPos_Y = Random.Range(spawn_y - .1f, spawn_y + .1f);
-                    newPos_Z = Random.Range(spawn_z - .168f, spawn_z + 0.168f);
+                    newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
+                    newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + 0.48f);
+                    newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
 
                     //Debug.Log("spawn_y + (.2f + 10f * spawnHeight): " + (spawn_y + (.2f + 10f * spawnHeight)));
 

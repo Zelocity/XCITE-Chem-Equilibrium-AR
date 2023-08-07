@@ -24,6 +24,7 @@ public class PlacePrefab : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        GameObject.Find("/Canvas/UI").SetActive(true);
         aRRaycastManager = GetComponent<ARRaycastManager>();
         aRPlaneManager = GetComponent<ARPlaneManager>();
         
@@ -53,9 +54,13 @@ public class PlacePrefab : MonoBehaviour
             Pose pose = hits[0].pose;
             GameObject obj = Instantiate(beaker, pose.position, pose.rotation);
             particleGen.GetComponent<ParticleGeneration>().Set_Spawner(GameObject.Find("/Regular Beaker(Clone)/Particle_Spawner"));
-            P_Up_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
             P_Down_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
-           
+            P_Up_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
+
+
+
+            GameObject.Find("/Canvas/UI").SetActive(true);
+            
         }
     }
 

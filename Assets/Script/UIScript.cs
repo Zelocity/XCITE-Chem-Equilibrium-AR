@@ -8,6 +8,7 @@ public class UIScript : MonoBehaviour
 {
 
     public GameObject PlaceObject;
+    public bool start = true;
 
     [Header("N2O")]
     public TextMeshProUGUI NO2_Counter;
@@ -39,8 +40,6 @@ public class UIScript : MonoBehaviour
 
     private void Start()
     {
-
-        
         switch (tag)
         {
             case "Untagged":
@@ -55,7 +54,7 @@ public class UIScript : MonoBehaviour
                 break;
 
             case "Pressure":
-                lid_start_pos = lid.transform.localPosition.z;
+                lid_start_pos = lid.transform.localPosition.y;
                 break;
 
             case "Temperature":
@@ -67,9 +66,15 @@ public class UIScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+    
+        //if (PlaceObject.GetComponent<PlacePrefab>().Get_Placed())
+        //{
+            if (start)
+            {
 
-        if (PlaceObject.GetComponent<PlacePrefab>().Get_Placed())
-        {
+                Start();
+                start = false;
+            }
             switch (tag)
             {
                 case "Untagged":
@@ -95,7 +100,6 @@ public class UIScript : MonoBehaviour
                     break;
 
                 case "Pressure":
-
                     //Lid_Movemwen
                     if (up_lid_pressure)
                     {
@@ -107,7 +111,7 @@ public class UIScript : MonoBehaviour
                     }
                     break;
             }
-        }
+        //}
 
     }
 
@@ -153,18 +157,18 @@ public class UIScript : MonoBehaviour
 
     public void Lid_Movement()
     {
-        lid_current_pos = lid.transform.localPosition.z;
+        lid_current_pos = lid.transform.localPosition.y;
         float lid_level_diff = lid_start_pos - lid_current_pos;
 
         if (up_lid_pressure == true && lid_start_pos > lid_current_pos)
         {
             //Debug.Log("go up");
-            lid.transform.Translate(Vector3.forward * Time.deltaTime);
+            lid.transform.Translate(Vector3.right * Time.deltaTime *.2f);
         }
         else if (down_lid_pressure == true && lid_level_diff < 412)
         {
             //Debug.Log("go down");
-            lid.transform.Translate(Vector3.back * Time.deltaTime);
+            lid.transform.Translate(Vector3.left * Time.deltaTime * .2f);
         }
 
         //inputs percentage in decimal to set spawn height since spawn length is 10 and lid distance is 412.
