@@ -7,9 +7,14 @@ using UnityEngine;
 
 public class N2O4Split : MonoBehaviour
 {
+    [Header("Particle")]
     public GameObject particleGen;
+
+    [Header ("Time")]
     float timer = 0f;
     [SerializeField] public int time_to_split = 0;
+
+    [Header("Particle List")]
     private int listSize = 0;
     private static int thisIndex;
 
@@ -35,6 +40,7 @@ public class N2O4Split : MonoBehaviour
                 //Debug.Log("X: " + transform.localPosition.x + " Y: " + transform.localPosition.y + " Z: " + transform.localPosition.z);
 
                 particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 2, transform.position, true);
+                //particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 2, help, true);
                 timer = 0f;
             }
         } else

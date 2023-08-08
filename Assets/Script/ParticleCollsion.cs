@@ -5,12 +5,8 @@ using System.Linq;
 
 public class ParticleCollsion : MonoBehaviour
 {
+    [Header ("Particle")]
     public GameObject particleGen;
-    private GameObject generateN2O4;
-
-    //boolean for checking if particles collided already.
-    public bool doNothing;
-    
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -20,15 +16,12 @@ public class ParticleCollsion : MonoBehaviour
         //Gets collider of particle which collisioned with another object
         Collider thisCollider = collision.GetContact(0).thisCollider;
 
-        //if particles already collided, return and do nothing.
-        if (doNothing) return;
-
         // else continue, and check if nitrogens hit.
         if (thisCollider.CompareTag("Nitrogen") && otherCollider.CompareTag("Nitrogen"))
         {
             //Save the position of collision
             Vector3 position = collision.contacts[0].point;
-            collision.gameObject.GetComponent<ParticleCollsion>().doNothing = true;
+            //collision.gameObject.GetComponent<ParticleCollsion>().doNothing = true;
 
             //Save index of this gameObject from the NO2 List
             int otherIndex = ParticleGeneration.moleculeList.IndexOf(collision.gameObject);

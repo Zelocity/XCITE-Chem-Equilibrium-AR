@@ -7,40 +7,39 @@ using TMPro;
 public class UIScript : MonoBehaviour
 {
 
-    public GameObject particleGen;
+    public GameObject PlaceObject;
+    public bool start = true;
 
-    //N2O
+    [Header("N2O")]
     public TextMeshProUGUI NO2_Counter;
     public static int numNO2;
 
-    //N2O4
+    [Header("N2O4")]
     public TextMeshProUGUI N2O4_Counter;
     public static int numN2O4;
 
-    //Particle Concentration
-    public TextMeshProUGUI mag_str;
-    private static List<int> conc_option = new List<int>() { 1, 5, 10, 25, 50 };
-    private static int mag_num;
-    private static int conc_select = 0;
+    [Header("Particle Generation")]
+    public GameObject particleGen;
+    public GameObject spawn;
+    public TextMeshProUGUI conc_str;
+    public Slider conc_slider;
+    private static int conc_num = 1;
 
-    //Lid
+    [Header("Lid")]
     public GameObject lid;
     private static float lid_start_pos;
     private static float lid_current_pos;
     private static bool up_lid_pressure;
     private static bool down_lid_pressure;
 
-    //Temperature
+    [Header("Temperature")]
     public Slider temp_slider;
     private static bool temp_point_up;
-    private static float curr_value;
     //public static  TextMeshProUGUI temp_str;
 
 
     private void Start()
     {
-
-        
         switch (tag)
         {
             case "Untagged":
@@ -48,81 +47,87 @@ public class UIScript : MonoBehaviour
 
             case "N02 Counter":
                 N02Count();
-                return;
+                break;
 
             case "N204 Counter":
                 N2O4_Counter = GetComponent<TextMeshProUGUI>();
-                return;
-
-            case "Magnitude Num":
-                mag_str = GetComponent<TextMeshProUGUI>();
-                return;
+                break;
 
             case "Pressure":
-                lid_start_pos = lid.transform.localPosition.z;
-                return;
+                lid_start_pos = lid.transform.localPosition.y;
+                break;
 
             case "Temperature":
-                Temperature_Change(temp_slider.value);
-                return;
+                Temperature_Change(5.5f);
+                break;
         }
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        switch (tag)
-        {
-            case "Untagged":
-                break;
+    
+        //if (PlaceObject.GetComponent<PlacePrefab>().Get_Placed())
+        //{
+            if (start)
+            {
 
-            case "N02 Counter":
-                N02Count();
-                return;
+                Start();
+                start = false;
+            }
+            switch (tag)
+            {
+                case "Untagged":
+                    break;
 
-            case "N204 Counter":
-                N204Count();
-                return;
+                case "N02 Counter":
+                    N02Count();
+                    break;
 
-            case "Magnitude Num":
-                MagnitudeNum();
-                return;
+                case "N204 Counter":
+                    N204Count();
+                    break;
 
-            case "Temperature":
-                if (temp_point_up)
-                {
-                    //float temp_difference = curr_value - prev_value;
-                    //Debug.Log("Curr value: " + curr_value + "prev value: " + prev_value + "temp diff: " + temp_difference);
+                case "Magnitude Num":
+                    MagnitudeNum();
+                    break;
 
-                    Temperature_Change(temp_slider.value);
-                    
-                }
-                else
-                {
-                    //prev_value = curr_value;
-                }
-                return;
+                case "Temperature":
+                    if (temp_point_up)
+                    {
+                        Temperature_Change(temp_slider.value);
+                    }
+                    break;
 
-            case "Pressure":
-                if ((up_lid_pressure || down_lid_pressure)) { Lid_Movement(); }
-                return;
-        }
-        
+                case "Pressure":
+                    //Lid_Movemwen
+                    if (up_lid_pressure)
+                    {
+                        Lid_Movement();
+                    }
+                    else if (down_lid_pressure)
+                    {
+                        Lid_Movement();
+                    }
+                    break;
+            }
+        //}
+
     }
 
 
     public void CreateButton()
     {
         //create NO2 object with specified quantity at random location. IGNORE THIRD PARAMETER HERE, 4th indicates if particle is splitting.
-        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), conc_option[conc_select], new Vector3(0,0,0), false);
-        numNO2 += conc_option[conc_select];
+        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), conc_num, new Vector3(0,0,0), false);
+        numNO2 += conc_num;
     }
 
     public void DestroyButton()
     {
         if (numNO2 != 0)
         {
-            int numConc = conc_option[conc_select];
+            int numConc = conc_num;
             if (numConc > numNO2)
             {
                 numConc = numNO2;
@@ -135,18 +140,6 @@ public class UIScript : MonoBehaviour
 
         }
         //Debug.Log(numNO2);
-    }
-
-    public void Add_Conc()
-    {
-        if (conc_select == conc_option.Count - 1) return;
-        conc_select++;
-    }
-
-    public void Subtract_Conc()
-    {
-        if (conc_select <= 0) return;
-        conc_select--;
     }
 
     public void Clear_Particles()
@@ -164,19 +157,24 @@ public class UIScript : MonoBehaviour
 
     public void Lid_Movement()
     {
-        lid_current_pos = lid.transform.localPosition.z;
+        lid_current_pos = lid.transform.localPosition.y;
         float lid_level_diff = lid_start_pos - lid_current_pos;
 
         if (up_lid_pressure == true && lid_start_pos > lid_current_pos)
         {
             //Debug.Log("go up");
-            lid.transform.Translate(Vector3.forward * Time.deltaTime);
+            lid.transform.Translate(Vector3.right * Time.deltaTime *.2f);
         }
         else if (down_lid_pressure == true && lid_level_diff < 412)
         {
             //Debug.Log("go down");
-            lid.transform.Translate(Vector3.back * Time.deltaTime);
+            lid.transform.Translate(Vector3.left * Time.deltaTime * .2f);
         }
+
+        //inputs percentage in decimal to set spawn height since spawn length is 10 and lid distance is 412.
+        //there's probably a better way to do this.
+
+        particleGen.GetComponent<ParticleGeneration>().Spawn_Height(1 - lid_level_diff / 412f);
     }
 
     public void Temperature_Change(float value)
@@ -202,15 +200,14 @@ public class UIScript : MonoBehaviour
     public void N02Count()
     {
         numNO2 = ParticleGeneration.moleculeList.Count;
-        numN2O4 = ParticleGeneration.N2O4List.Count;
-        NO2_Counter.text = numNO2.ToString();
+        NO2_Counter.text = "NO<sub>2</sub> = " + numNO2.ToString();
     }
 
     public void N204Count()
     {
-        numNO2 = ParticleGeneration.moleculeList.Count;
         numN2O4 = ParticleGeneration.N2O4List.Count;
-        string str = numN2O4.ToString(); N2O4_Counter.text = str;
+        string str = "N<sub>2</sub>O<sub>4</sub> = " + numN2O4.ToString();
+        N2O4_Counter.text = str;
     }
 
     public void Pressure_Up_Button(bool up) { up_lid_pressure = up; }
@@ -219,6 +216,8 @@ public class UIScript : MonoBehaviour
 
     public void Temp_Slider(bool up) { temp_point_up = up; }
 
-    public void MagnitudeNum() { string str = conc_option[conc_select].ToString(); mag_str.text = str; }
+    public void MagnitudeNum() { conc_num = (int)conc_slider.value; conc_str.text = conc_num.ToString(); }
+
+    public void Set_Lid(GameObject newLid) { lid = newLid; }
 
 }

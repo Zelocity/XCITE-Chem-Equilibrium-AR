@@ -6,18 +6,14 @@ public class ParticlePhysics : MonoBehaviour
 {
     [Header("Rigidbody")]
     private Rigidbody rb;
-
-    [Header("Speed")]
-    private float maxSpeed = 10;
-    private float minSpeed = 0;
-    private float speedRange = 1;
-    private float avgSpeed;
-
-
-
-    private float speedMultiplier = 1f;
     private Vector3 lastFrameVelocity;
-    float currMultiplier;
+
+    [Header("movement")]
+    private float maxSpeed = .4f;
+    private float minSpeed = 0;
+    private float speedRange = .03f;
+    private float avgSpeed = 0.17f;
+    private float vNum1, vNum2, vNum3;
 
 
     // Start is called before the first frame update
@@ -26,28 +22,20 @@ public class ParticlePhysics : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         //Particle is given a random velocity vector at start
-        float randNum = Random.Range(1f, 4f);
-        rb.velocity = new Vector3(-20, -20, -20);
-        //Note: could implement a multiplier for different particle speeds
+        
+        vNum1 = Random.Range(-5f, 5f);
+        vNum2 = Random.Range(-5f, 5f);
+        vNum3 = Random.Range(-5f, 5f);
+        rb.velocity = new Vector3(vNum1, vNum2, vNum3);
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
         //Debug.Log("average speed: " + avgSpeed);
         Speed_Range(avgSpeed, speedRange);
         lastFrameVelocity = rb.velocity;
-
-        if (speedMultiplier != currMultiplier)
-        {
-            Debug.Log("Speed Multiplier: " + speedMultiplier + " rb.velocity: " + rb.velocity);
-            //Debug.Log("Setting/Changing Current Speed");
-            rb.velocity *= speedMultiplier;
-
-        }
-        currMultiplier = speedMultiplier;
 
     }
 
@@ -62,15 +50,12 @@ public class ParticlePhysics : MonoBehaviour
         var direction = Vector3.Reflect(lastFrameVelocity.normalized, collisionNormal);
 
         //Debug.Log("Out Direction: " + direction);
-        rb.velocity = direction.normalized * Mathf.Max(speed, 2);
+        rb.velocity = direction.normalized * Mathf.Max(speed, 2f);
          
     }
 
-    public void Speed_Limit(float min, float max) {
-
-        //if (gameObject.name == "NO2(Clone)") {
-        //    Debug.Log("Current Speed: " + rb.velocity.magnitude);
-        //}
+    public void Speed_Limit(float min, float max)
+    {
         
         if (rb.velocity.magnitude > max)
         {
@@ -78,18 +63,17 @@ public class ParticlePhysics : MonoBehaviour
         }
         if (rb.velocity.magnitude < min)
         {
-            rb.velocity *= 1.1f;
+            rb.velocity *= 1.05f;
         }
-        if (gameObject.name == "NO2(Clone)")
-        {
-            //Debug.Log("Current Speed: " + rb.velocity.magnitude);
-        }
+        //if (gameObject.name == "NO2(Clone)")
+        //{
+        //  Debug.Log("Current Speed: " + rb.velocity.magnitude);
+        //}
     }
 
     public void Modify_Average_Speed(float value)
     {
         avgSpeed = value;
-        speedMultiplier = value; 
  
     }
 
