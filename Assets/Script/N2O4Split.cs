@@ -7,9 +7,14 @@ using UnityEngine;
 
 public class N2O4Split : MonoBehaviour
 {
+    [Header("Particle")]
     public GameObject particleGen;
+
+    [Header ("Time")]
     float timer = 0f;
     [SerializeField] public int time_to_split = 0;
+
+    [Header("Particle List")]
     private int listSize = 0;
     private static int thisIndex;
 

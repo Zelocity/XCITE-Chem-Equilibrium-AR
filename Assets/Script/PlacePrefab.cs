@@ -64,7 +64,6 @@ public class PlacePrefab : MonoBehaviour
         }
     }
 
-
     public bool Get_Placed()
     {
         return placed;

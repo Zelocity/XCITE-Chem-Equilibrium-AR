@@ -5,17 +5,19 @@ using System.Linq;
 
 public class ParticleGeneration : MonoBehaviour
 {
-    
-    public GameObject spawn;
-    private float spawn_x, spawn_y, spawn_z;
 
-
-
+    [Header("Particle")]
     private GameObject generate;
-    private float spawnHeight = 1;
-    //List to hold all objects
+    private float splitDistance = .03f;
     [SerializeField] static public List<GameObject> moleculeList = null;
     [SerializeField] static public List<GameObject> N2O4List = null;
+    
+
+    [Header("Spawn")]
+    public GameObject spawn;
+    private float spawn_x, spawn_y, spawn_z;
+    private float spawnHeight;
+
 
     private void Awake()
     {
@@ -35,7 +37,7 @@ public class ParticleGeneration : MonoBehaviour
     {
         //Assign random variables to x, y, z rotation axis
         var rV = prefab.transform.rotation.eulerAngles;
-        float splitDistance = .035f;
+        
         float newPos_X = position.x;
         float newPos_Y = position.y;
         float newPos_Z = position.z;
@@ -55,20 +57,14 @@ public class ParticleGeneration : MonoBehaviour
                     //randPos holds random position
 
                     newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
-                    newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + 0.48f);
+                    newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + (0.19f + (.29f * spawnHeight)));
                     newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
 
                     //Debug.Log("spawn_y + (.2f + 10f * spawnHeight): " + (spawn_y + (.2f + 10f * spawnHeight)));
-
-
-
                     position = new Vector3(newPos_X, newPos_Y, newPos_Z);
                 }
                 else
                 {
-                    position.x = newPos_X;
-                    position.y = newPos_Y;
-                    position.z = newPos_Z;
                     if (i != 0)
                     {
                         if (position.x < 0)
@@ -80,15 +76,6 @@ public class ParticleGeneration : MonoBehaviour
                             newPos_X -= splitDistance;
                         }
 
-                        if (position.y < spawnHeight - 5)
-                        {
-                            newPos_Y += splitDistance;
-                        }
-                        else
-                        {
-                            newPos_Y -= splitDistance;
-                        }
-
                         if (position.z < 0)
                         {
                             newPos_Z += splitDistance;
@@ -97,10 +84,11 @@ public class ParticleGeneration : MonoBehaviour
                         {
                             newPos_Z -= splitDistance;
                         }
-                        position.x = newPos_X;
-                        position.y = newPos_Y;
-                        position.z = newPos_Z;
+                        
                     }
+                    position.x = newPos_X;
+                    position.y = newPos_Y;
+                    position.z = newPos_Z;
                 }
                 
                 //generate holds an instant of prefab with random position and current rotation

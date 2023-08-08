@@ -6,18 +6,14 @@ public class ParticlePhysics : MonoBehaviour
 {
     [Header("Rigidbody")]
     private Rigidbody rb;
-
-    [Header("Speed")]
-    private float maxSpeed = 2f;
-    private float minSpeed = 0;
-    private float speedRange = .05f;
-    private float avgSpeed = 0.3f;
-
-
-
-    private float speedMultiplier = 1.2f;
     private Vector3 lastFrameVelocity;
-    float currMultiplier;
+
+    [Header("movement")]
+    private float maxSpeed = .4f;
+    private float minSpeed = 0;
+    private float speedRange = .03f;
+    private float avgSpeed = 0.17f;
+    private float vNum1, vNum2, vNum3;
 
 
     // Start is called before the first frame update
@@ -26,30 +22,20 @@ public class ParticlePhysics : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         //Particle is given a random velocity vector at start
-        float num1, num2, num3;
-        num1 = Random.Range(-5f, 5f);
-        num2 = Random.Range(-5f, 5f);
-        num3 = Random.Range(-5f, 5f);
-        rb.velocity = new Vector3(num1, num2, num3);
+        
+        vNum1 = Random.Range(-5f, 5f);
+        vNum2 = Random.Range(-5f, 5f);
+        vNum3 = Random.Range(-5f, 5f);
+        rb.velocity = new Vector3(vNum1, vNum2, vNum3);
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
         //Debug.Log("average speed: " + avgSpeed);
         Speed_Range(avgSpeed, speedRange);
         lastFrameVelocity = rb.velocity;
-
-        //if (speedMultiplier != currMultiplier)
-        //{
-        //    Debug.Log("Speed Multiplier: " + speedMultiplier + " rb.velocity: " + rb.velocity);
-        //    //Debug.Log("Setting/Changing Current Speed");
-        //    rb.velocity *= speedMultiplier;
-
-        //}
-        //currMultiplier = speedMultiplier;
 
     }
 
@@ -88,7 +74,6 @@ public class ParticlePhysics : MonoBehaviour
     public void Modify_Average_Speed(float value)
     {
         avgSpeed = value;
-        speedMultiplier = value; 
  
     }
 
