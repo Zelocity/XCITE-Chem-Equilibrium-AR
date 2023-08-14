@@ -19,12 +19,14 @@ public class PlacePrefab : MonoBehaviour
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+    [Header("Condition Before Placing")]
     bool placed = false;
+    bool greeted = false;
 
     // Start is called before the first frame update
     void Awake()
     {
-        GameObject.Find("/Canvas/UI").SetActive(true);
         aRRaycastManager = GetComponent<ARRaycastManager>();
         aRPlaneManager = GetComponent<ARPlaneManager>();
         
@@ -48,7 +50,7 @@ public class PlacePrefab : MonoBehaviour
     {
         if (finger.index != 0) return;
 
-        if (aRRaycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.PlaneWithinPolygon) && !placed)
+        if (aRRaycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.PlaneWithinPolygon) && !placed && !greeted)
         {
             placed = true;
             Pose pose = hits[0].pose;
@@ -57,15 +59,9 @@ public class PlacePrefab : MonoBehaviour
             P_Down_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
             P_Up_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
 
-
-
-            GameObject.Find("/Canvas/UI").SetActive(true);
+            //GameObject.Find("AR Session Origin/Trackables").SetActive(false);
+            GameObject.Find("/Canvas/UI/Up_Button_BG_N").SetActive(true);
             
         }
-    }
-
-    public bool Get_Placed()
-    {
-        return placed;
     }
 }

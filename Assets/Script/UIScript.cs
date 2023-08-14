@@ -7,8 +7,6 @@ using TMPro;
 public class UIScript : MonoBehaviour
 {
 
-    public GameObject PlaceObject;
-    public bool start = true;
 
     [Header("N2O")]
     public TextMeshProUGUI NO2_Counter;
@@ -58,7 +56,7 @@ public class UIScript : MonoBehaviour
                 break;
 
             case "Temperature":
-                Temperature_Change(5.5f);
+                Temperature_Change(0.15f);
                 break;
         }
 
@@ -69,12 +67,12 @@ public class UIScript : MonoBehaviour
     
         //if (PlaceObject.GetComponent<PlacePrefab>().Get_Placed())
         //{
-            if (start)
-            {
+            //if (start)
+            //{
 
-                Start();
-                start = false;
-            }
+            //    Start();
+            //    start = false;
+            //}
             switch (tag)
             {
                 case "Untagged":
@@ -200,13 +198,15 @@ public class UIScript : MonoBehaviour
     public void N02Count()
     {
         numNO2 = ParticleGeneration.moleculeList.Count;
-        NO2_Counter.text = "NO<sub>2</sub> = " + numNO2.ToString();
+        NO2_Counter.text = numNO2.ToString();
+        //NO2_Counter.text = "NO<sub>2</sub> = " + numNO2.ToString();
     }
 
     public void N204Count()
     {
         numN2O4 = ParticleGeneration.N2O4List.Count;
-        string str = "N<sub>2</sub>O<sub>4</sub> = " + numN2O4.ToString();
+        string str = numN2O4.ToString();
+        //string str = "N<sub>2</sub>O<sub>4</sub> = " + numN2O4.ToString();
         N2O4_Counter.text = str;
     }
 
@@ -219,5 +219,11 @@ public class UIScript : MonoBehaviour
     public void MagnitudeNum() { conc_num = (int)conc_slider.value; conc_str.text = conc_num.ToString(); }
 
     public void Set_Lid(GameObject newLid) { lid = newLid; }
+
+    public void Dismiss_Welcome()
+    {
+        GameObject.Find("AR Session Origin").GetComponent<PlacePrefab>().enabled = true;
+
+    }
 
 }
