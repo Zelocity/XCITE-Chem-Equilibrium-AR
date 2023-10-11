@@ -266,6 +266,90 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 94683402}
   m_CullTransparentMesh: 1
+--- !u!1 &142337006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 142337009}
+  - component: {fileID: 142337008}
+  - component: {fileID: 142337007}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!81 &142337007
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142337006}
+  m_Enabled: 1
+--- !u!20 &142337008
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142337006}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &142337009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142337006}
+  m_LocalRotation: {x: 0.56098574, y: 0.43045926, z: -0.5609854, w: 0.4304595}
+  m_LocalPosition: {x: 0.59, y: 1.21, z: 0.265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 75, y: -90, z: -180}
 --- !u!1 &223974226
 GameObject:
   m_ObjectHideFlags: 0
@@ -2770,7 +2854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1234071339
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3188,6 +3272,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!1 &1327250809
@@ -3205,7 +3290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1327250810
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3558,7 +3643,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1619288362
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4516,7 +4601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 86180370315938996, guid: 3e5b1a32b9a8748a2bff7e2667bf95ba, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 86180370315939018, guid: 3e5b1a32b9a8748a2bff7e2667bf95ba, type: 3}
       propertyPath: m_RootOrder
@@ -4524,15 +4609,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 86180370315939018, guid: 3e5b1a32b9a8748a2bff7e2667bf95ba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.36
       objectReference: {fileID: 0}
     - target: {fileID: 86180370315939018, guid: 3e5b1a32b9a8748a2bff7e2667bf95ba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.16
       objectReference: {fileID: 0}
     - target: {fileID: 86180370315939018, guid: 3e5b1a32b9a8748a2bff7e2667bf95ba, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -8.26
       objectReference: {fileID: 0}
     - target: {fileID: 86180370315939018, guid: 3e5b1a32b9a8748a2bff7e2667bf95ba, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5560,6 +5645,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 6086832902607369057}
 --- !u!114 &6086832902607369057
@@ -5746,7 +5832,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7027,6 +7113,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!114 &6086832902880576590
@@ -7291,6 +7378,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!114 &6086832902889150221
@@ -7455,6 +7543,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!222 &6086832902964400737
@@ -7626,8 +7715,8 @@ RectTransform:
   m_Father: {fileID: 6086832903908452665}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.46428576, y: 0}
-  m_AnchorMax: {x: 0.46428576, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 1.300003, y: -0.39999962}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7839,6 +7928,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!114 &6086832903014636209
@@ -8257,6 +8347,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!114 &6086832903116388133
@@ -8423,6 +8514,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!114 &6086832903117274667
@@ -8597,6 +8689,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!114 &6086832903122462670
@@ -9283,7 +9376,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.46428576, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9451,6 +9544,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!222 &6086832903219920659
@@ -10481,6 +10575,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!114 &6086832903432048522
@@ -10741,6 +10836,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 6086832904385409064}
   lid: {fileID: 1577749883}
   temp_slider: {fileID: 0}
 --- !u!114 &6086832903507781389
@@ -10756,29 +10852,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates:
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 6086832903507781388}
-          m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
-          m_MethodName: Pressure_Down_Button
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 6086832903507781388}
           m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
-          m_MethodName: Pressure_Down_Button
+          m_MethodName: Lid_Down
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -10787,6 +10867,22 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 1
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6086832903507781388}
+          m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
+          m_MethodName: Lid_Down
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
           m_CallState: 2
 --- !u!114 &6086832903507781390
 MonoBehaviour:
@@ -11994,6 +12090,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!114 &6086832903799344869
@@ -12391,6 +12488,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 6086832903860503393}
 --- !u!114 &6086832903860503393
@@ -12921,8 +13019,8 @@ GameObject:
   - component: {fileID: 6086832904009225482}
   - component: {fileID: 6086832904009225481}
   - component: {fileID: 6086832904009225480}
-  - component: {fileID: 6086832904009225591}
   - component: {fileID: 6086832904009225590}
+  - component: {fileID: 6086832904009225591}
   m_Layer: 5
   m_Name: P_Up_Button
   m_TagString: Pressure
@@ -12970,7 +13068,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 6086832904009225591}
           m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
-          m_MethodName: Pressure_Up_Button
+          m_MethodName: Lid_Up
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -12986,7 +13084,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 6086832904009225591}
           m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
-          m_MethodName: Pressure_Up_Button
+          m_MethodName: Lid_Up
           m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -13010,11 +13108,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NO2_Counter: {fileID: 0}
   N2O4_Counter: {fileID: 0}
-  particleGen: {fileID: 6086832903846732456}
+  particleGen: {fileID: 0}
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
-  lid: {fileID: 1577749883}
+  pressureManager: {fileID: 6086832904385409064}
+  lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!1 &6086832904135853577
 GameObject:
@@ -13650,6 +13749,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!114 &6086832904188833754
@@ -14173,7 +14273,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.000017166138, y: 9}
   m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14397,6 +14497,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 0}
   conc_slider: {fileID: 0}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!114 &6086832904336081313
@@ -14445,7 +14546,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6086832904336081312}
         m_TargetAssemblyTypeName: UIScript, Assembly-CSharp
-        m_MethodName: Clear_Particles
+        m_MethodName: Clear_Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14593,6 +14694,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 6086832903184274029}
   conc_slider: {fileID: 6086832904338646558}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!114 &6086832904338646558
@@ -14696,6 +14798,7 @@ GameObject:
   - component: {fileID: 6086832904354228671}
   - component: {fileID: 6086832904354228670}
   - component: {fileID: 6086832904354228669}
+  - component: {fileID: 6086832904354228672}
   m_Layer: 5
   m_Name: Reset_Button
   m_TagString: Untagged
@@ -14767,7 +14870,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6086832904354228670}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6086832904354228672}
+        m_TargetAssemblyTypeName: Reset_All, Assembly-CSharp
+        m_MethodName: Reset_Particle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6086832904354228670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14806,6 +14921,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6086832904354228667}
   m_CullTransparentMesh: 1
+--- !u!114 &6086832904354228672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6086832904354228667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a91d6cbffb244588a9c019bfd18f18c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleGen: {fileID: 6086832903846732456}
 --- !u!1 &6086832904385409064
 GameObject:
   m_ObjectHideFlags: 0
@@ -14815,6 +14943,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6086832904385409065}
+  - component: {fileID: 6086832904385409066}
   m_Layer: 5
   m_Name: Pressure
   m_TagString: Pressure
@@ -14846,6 +14975,19 @@ RectTransform:
   m_AnchoredPosition: {x: 247.01988, y: -138.68661}
   m_SizeDelta: {x: 249.9, y: 50.700012}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6086832904385409066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6086832904385409064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fb0d80f34bf4fbba8ebb92b9611e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Lid: {fileID: 1577749883}
 --- !u!1 &6086832904390348823
 GameObject:
   m_ObjectHideFlags: 0
@@ -15022,6 +15164,7 @@ MonoBehaviour:
   spawn: {fileID: 0}
   conc_str: {fileID: 6086832903123822417}
   conc_slider: {fileID: 6086832904395430930}
+  pressureManager: {fileID: 0}
   lid: {fileID: 0}
   temp_slider: {fileID: 0}
 --- !u!114 &6086832904395430930

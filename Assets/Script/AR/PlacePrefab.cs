@@ -55,9 +55,15 @@ public class PlacePrefab : MonoBehaviour
             placed = true;
             Pose pose = hits[0].pose;
             GameObject obj = Instantiate(beaker, pose.position, pose.rotation);
-            particleGen.GetComponent<ParticleGeneration>().Set_Spawner(GameObject.Find("/Regular Beaker(Clone)/Particle_Spawner"));
-            P_Down_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
-            P_Up_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
+
+            particleGen.GetComponent<ParticleGeneration>().Set_Spawner(GameObject.Find("/Regular Beaker/Particle_Spawner"));
+            P_Down_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker/Lid"));
+            P_Up_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker/Lid"));
+
+
+            //particleGen.GetComponent<ParticleGeneration>().Set_Spawner(GameObject.Find("/Regular Beaker(Clone)/Particle_Spawner"));
+            //P_Down_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
+            //P_Up_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
 
             //GameObject.Find("AR Session Origin/Trackables").SetActive(false);
             GameObject.Find("/Canvas/UI/Up_Button_BG_N").SetActive(true);

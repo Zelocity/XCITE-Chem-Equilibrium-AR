@@ -187,4 +187,13 @@ public class ParticleGeneration : MonoBehaviour
         spawn = newSpawn;
     }
 
+    public void Clear_Particles()
+    {
+        while (moleculeList.Count != 0 || N2O4List.Count != 0)
+        {
+            DestroyGameObjects("N2O4", 0);
+            DestroyGameObjects("NO2", 0);
+        }
+    }
+
 }
