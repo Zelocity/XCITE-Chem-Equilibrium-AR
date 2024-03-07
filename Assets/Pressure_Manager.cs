@@ -9,8 +9,6 @@ public class Pressure_Manager : MonoBehaviour
     private float lidStartPos;
     private float spawnHeight;
 
-     
-
     public void Lid_Up()
     {
         if(lidStartPos > lidCurrPos)

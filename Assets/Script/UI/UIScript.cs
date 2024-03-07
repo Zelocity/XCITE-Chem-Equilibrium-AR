@@ -117,7 +117,6 @@ public class UIScript : MonoBehaviour
             }
 
         }
-
     }
 
     public void Clear_Button()
