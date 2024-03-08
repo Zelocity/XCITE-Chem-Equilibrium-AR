@@ -135,11 +135,11 @@ public class UIScript_V2 : MonoBehaviour
 
     public void Set_Lid(GameObject newLid) { pressureManager.GetComponent<Pressure_Manager>().Set_Lid(newLid); }
 
-    //public void Dismiss_Welcome()
-    //{
-    //    GameObject.Find("AR Session Origin").GetComponent<PlacePrefab>().enabled = true;
+    public void Dismiss_Welcome()
+    {
+        GameObject.Find("AR Session Origin").GetComponent<PlacePrefab>().enabled = true;
 
-    //}
+    }
 
 
 }

@@ -59,15 +59,15 @@ public class PlacePrefab : MonoBehaviour
             //particleGen.GetComponent<ParticleGeneration>().Set_Spawner(GameObject.Find("/Regular Beaker/Particle_Spawner"));
             //P_Down_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker/Lid"));
             //P_Up_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker/Lid"));
-
+            GameObject.Find("/Canvas/UI/Neutral").SetActive(true);
 
             particleGen.GetComponent<ParticleGeneration>().Set_Spawner(GameObject.Find("/Regular Beaker(Clone)/Particle_Spawner"));
             P_Down_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
             P_Up_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
 
             //GameObject.Find("AR Session Origin/Trackables").SetActive(false);
-            GameObject.Find("/Canvas/UI/Up_Button_BG_N").SetActive(true);
             
+
         }
     }
 }
