@@ -22,22 +22,42 @@ public class UIScript_V2 : MonoBehaviour
     public Slider conc_slider;
     private static int conc_num = 1;
 
-    //[Header("Lid")]
-    //public GameObject pressureManager;
-    //public GameObject lid;
-    //private static bool upLidActive;
-    //private static bool downLidActive;
+    [Header("Lid")]
+    public GameObject pressureManager;
+    public GameObject lid;
+    private static bool upLidActive;
+    private static bool downLidActive;
 
-    //[Header("Temperature")]
-    //public Slider temp_slider;
-    //private static bool temp_point_up;
-    // Start is called before the first frame update
+    [Header("Temperature")]
+    public Slider temp_slider;
+    private static bool temp_point_up;
 
+
+    private void Start()
+    {
+        Temperature_Change(0.15f);
+    }
 
     private void FixedUpdate()
     {
         N02Count();
         N204Count();
+        MagnitudeNum();
+
+        if (temp_point_up)
+        {
+            Temperature_Change(temp_slider.value);
+        }
+
+        if (upLidActive)
+        {
+            pressureManager.GetComponent<Pressure_Manager>().Lid_Up();
+        }
+        else if (downLidActive)
+        {
+            pressureManager.GetComponent<Pressure_Manager>().Lid_Down();
+            
+        }
     }
 
     public void CreateButton()
@@ -82,38 +102,38 @@ public class UIScript_V2 : MonoBehaviour
         N2O4_Counter.text = numN2O4.ToString();
     }
 
-    //public void Temperature_Change(float value)
-    //{
-    //    List<GameObject> NO2_List = ParticleGeneration.moleculeList;
-    //    List<GameObject> N2O4_List = ParticleGeneration.N2O4List;
+    public void Temperature_Change(float value)
+    {
+        List<GameObject> NO2_List = ParticleGeneration.moleculeList;
+        List<GameObject> N2O4_List = ParticleGeneration.N2O4List;
 
-    //    int i = 0;
-    //    while (i < NO2_List.Count)
-    //    {
-    //        NO2_List[i].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
-    //        i++;
-    //    }
+        int i = 0;
+        while (i < NO2_List.Count)
+        {
+            NO2_List[i].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
+            i++;
+        }
 
-    //    int j = 0;
-    //    while (j < N2O4_List.Count)
-    //    {
-    //        N2O4_List[j].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
-    //        j++;
-    //    }
-    //}
-
-
+        int j = 0;
+        while (j < N2O4_List.Count)
+        {
+            N2O4_List[j].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
+            j++;
+        }
+    }
 
 
-    //public void Lid_Up(bool up) { upLidActive = up; }
 
-    //public void Lid_Down(bool down) { downLidActive = down; }
 
-    //public void Temp_Slider(bool up) { temp_point_up = up; }
+    public void Lid_Up(bool up) { upLidActive = up; }
 
-    //public void MagnitudeNum() { conc_num = (int)conc_slider.value; conc_str.text = conc_num.ToString(); }
+    public void Lid_Down(bool down) { downLidActive = down; }
 
-    //public void Set_Lid(GameObject newLid) { pressureManager.GetComponent<Pressure_Manager>().Set_Lid(newLid); }
+    public void Temp_Slider(bool up) { temp_point_up = up; }
+
+    public void MagnitudeNum() { conc_num = (int)conc_slider.value; conc_str.text = conc_num.ToString();  }
+
+    public void Set_Lid(GameObject newLid) { pressureManager.GetComponent<Pressure_Manager>().Set_Lid(newLid); }
 
     //public void Dismiss_Welcome()
     //{
