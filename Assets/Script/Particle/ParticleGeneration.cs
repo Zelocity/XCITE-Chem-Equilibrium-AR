@@ -2,14 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Particles; 
 
 public class ParticleGeneration : MonoBehaviour
 {
-
     [Header("Particle")]
+    
+    List<List<Particle>> particleList_;
+
+    //List of spawnable gameobjects.
+    public GameObject[] molecules;
+
+    List<Particle> N20;
+
+    List<Particle> N204;
+    public Particle particle;
+
     private GameObject generate;
     private float splitDistance = .03f;
-    [SerializeField] static public List<GameObject> moleculeList = null;
+    //[SerializeField] static public List<GameObject> moleculeList = null;
     [SerializeField] static public List<GameObject> N2O4List = null;
     
 
@@ -18,10 +29,24 @@ public class ParticleGeneration : MonoBehaviour
     private float spawn_x, spawn_y, spawn_z;
     private float spawnHeight;
 
-
     private void Awake()
     {
-        moleculeList = new List<GameObject>();
+        molecules = Resources.LoadAll<GameObject>("Prefabs");
+
+        N20 = new List<Particle>();
+        N204 = new List<Particle>();
+
+        particleList_.Add(N20);
+        particleList_.Add(N204);
+
+
+
+        //Particle N20_Mole = new Particle("N02", generate, false);
+        //N204_Mole
+
+
+
+        //moleculeList = new List<GameObject>();
         N2O4List = new List<GameObject>();
     }
 
@@ -90,6 +115,10 @@ public class ParticleGeneration : MonoBehaviour
                     position.y = newPos_Y;
                     position.z = newPos_Z;
                 }
+
+
+
+                
                 
                 //generate holds an instant of prefab with random position and current rotation
                 generate = Instantiate(prefab, position, prefab.transform.rotation);

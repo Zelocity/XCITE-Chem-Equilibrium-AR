@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Particles;
 
-public class UIScript : MonoBehaviour
+public class UIScript_V2 : MonoBehaviour
 {
+
     [Header("N2O")]
     public TextMeshProUGUI NO2_Counter;
     public static int numNO2;
@@ -15,6 +17,7 @@ public class UIScript : MonoBehaviour
     public static int numN2O4;
 
     [Header("Particle Generation")]
+    
     public GameObject particleGen;
     public GameObject spawn;
     public TextMeshProUGUI conc_str;
@@ -30,74 +33,56 @@ public class UIScript : MonoBehaviour
     [Header("Temperature")]
     public Slider temp_slider;
     private static bool temp_point_up;
-    //public static  TextMeshProUGUI temp_str;
 
 
     private void Start()
     {
-        switch (tag)
-        {
-            case "Untagged":
-                break;
 
-            case "N02 Counter":
-                N02Count();
-                break;
+        // particle = new Particle();
+        // particle
+        // generate = Instantiate(prefab, position, prefab.transform.rotation);
 
-            case "N204 Counter":
-                N2O4_Counter = GetComponent<TextMeshProUGUI>();
-                break;
+        // //adds instant to the NO2 list.
+        // moleculeList.Add(generate);
 
-            case "Temperature":
-                Temperature_Change(0.15f);
-                break;
-        }
 
+
+
+
+
+
+
+
+
+        Temperature_Change(0.15f);
     }
 
     private void FixedUpdate()
     {
-        switch (tag)
+        N02Count();
+        N204Count();
+        MagnitudeNum();
+
+        if (temp_point_up)
         {
-            case "Untagged":
-                break;
-
-            case "N02 Counter":
-                N02Count();
-                break;
-
-            case "N204 Counter":
-                N204Count();
-                break;
-
-            case "Magnitude Num":
-                MagnitudeNum();
-                break;
-
-            case "Temperature":
-                if (temp_point_up)
-                {
-                    Temperature_Change(temp_slider.value);
-                }
-                break;
-            case "Pressure":
-                if (upLidActive)
-                {
-                    pressureManager.GetComponent<Pressure_Manager>().Lid_Up();
-                }
-                else if (downLidActive)
-                {
-                    pressureManager.GetComponent<Pressure_Manager>().Lid_Down();
-                }
-            break;
+            Temperature_Change(temp_slider.value);
         }
 
+        if (upLidActive)
+        {
+            pressureManager.GetComponent<Pressure_Manager>().Lid_Up();
+        }
+        else if (downLidActive)
+        {
+            pressureManager.GetComponent<Pressure_Manager>().Lid_Down();
+            
+        }
     }
 
     public void CreateButton()
     {
         //create NO2 object with specified quantity at random location. IGNORE THIRD PARAMETER HERE, 4th indicates if particle is splitting.
-        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), conc_num, new Vector3(0,0,0), false);
+        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("N02"), conc_num, new Vector3(0, 0, 0), false);
         numNO2 += conc_num;
     }
 
@@ -113,24 +98,39 @@ public class UIScript : MonoBehaviour
 
             for (int i = 0; i < numConc; i++)
             {
-                particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("NO2" ,-1);
+                particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("NO2", -1);
             }
-
         }
     }
+
 
     public void Clear_Button()
     {
         particleGen.GetComponent<ParticleGeneration>().Clear_Particles();
     }
 
+    public void N02Count()
+    {
+        numNO2 = ParticleGeneration.moleculeList.Count;
+        NO2_Counter.text = numNO2.ToString();
+    }
+
+    public void N204Count()
+    {
+        numN2O4 = ParticleGeneration.N2O4List.Count;
+        N2O4_Counter.text = numN2O4.ToString();
+    }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
     public void Temperature_Change(float value)
     {
         List<GameObject> NO2_List = ParticleGeneration.moleculeList;
         List<GameObject> N2O4_List = ParticleGeneration.N2O4List;
 
         int i = 0;
-        while (i < NO2_List.Count) {
+        while (i < NO2_List.Count)
+        {
             NO2_List[i].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
             i++;
         }
@@ -143,19 +143,17 @@ public class UIScript : MonoBehaviour
         }
     }
 
-
-    public void N02Count()
-    {
-        numNO2 = ParticleGeneration.moleculeList.Count;
-        NO2_Counter.text = numNO2.ToString();
+    public void Select_Particle(int num) { 
+        // switch (num) { 
+        //     case 0:
+        //         particleName = "N02";
+        //         break;
+        //     case 1:
+        //         particleName = "";
+        //         break;
+        // }
     }
 
-    public void N204Count()
-    {
-        numN2O4 = ParticleGeneration.N2O4List.Count;
-        string str = numN2O4.ToString();
-        N2O4_Counter.text = str;
-    }
 
     public void Lid_Up(bool up) { upLidActive = up; }
 
@@ -163,7 +161,7 @@ public class UIScript : MonoBehaviour
 
     public void Temp_Slider(bool up) { temp_point_up = up; }
 
-    public void MagnitudeNum() { conc_num = (int)conc_slider.value; conc_str.text = conc_num.ToString(); }
+    public void MagnitudeNum() { conc_num = (int)conc_slider.value; conc_str.text = conc_num.ToString();  }
 
     public void Set_Lid(GameObject newLid) { pressureManager.GetComponent<Pressure_Manager>().Set_Lid(newLid); }
 
@@ -173,4 +171,7 @@ public class UIScript : MonoBehaviour
 
     }
 
+
 }
+
+
