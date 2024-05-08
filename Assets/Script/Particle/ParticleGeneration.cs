@@ -8,20 +8,21 @@ public class ParticleGeneration : MonoBehaviour
 {
     [Header("Particle")]
     
-    List<List<Particle>> particleList_;
+    public List<List<GameObject>> particleList;
 
     //List of spawnable gameobjects.
     public GameObject[] molecules;
 
-    List<Particle> N20;
+    private List<Particle> particles;
 
-    List<Particle> N204;
-    public Particle particle;
+    private List<GameObject> tempList;
+
+    private Particle particle;
+
+    private Particle selectedParticle;
 
     private GameObject generate;
     private float splitDistance = .03f;
-    //[SerializeField] static public List<GameObject> moleculeList = null;
-    [SerializeField] static public List<GameObject> N2O4List = null;
     
 
     [Header("Spawn")]
@@ -31,23 +32,24 @@ public class ParticleGeneration : MonoBehaviour
 
     private void Awake()
     {
-        molecules = Resources.LoadAll<GameObject>("Prefabs");
+        particleList = new List<List<GameObject>>();
+        particles = new List<Particle>();
+        
+        for (int i = 0; i < molecules.Length; i++)
+        {
+            tempList = new List<GameObject>();
+            particleList.Add(tempList);
 
-        N20 = new List<Particle>();
-        N204 = new List<Particle>();
+            particle = new Particle(molecules[i].name, molecules[i], false);
+            particles.Add(particle);
+            
+        }
 
-        particleList_.Add(N20);
-        particleList_.Add(N204);
+        //for (int j = 0; j < particleList.Count; j++)
+        //{
+        //    Debug.Log("molecule added: " + particleList[j][0].getName());
+        //}
 
-
-
-        //Particle N20_Mole = new Particle("N02", generate, false);
-        //N204_Mole
-
-
-
-        //moleculeList = new List<GameObject>();
-        N2O4List = new List<GameObject>();
     }
 
     private void Update()
@@ -58,141 +60,171 @@ public class ParticleGeneration : MonoBehaviour
     }
 
     //function takes in the type of object, the number of object it should spawn, and the position to spawn it at. 
-    public void InstantiateGameObjects(GameObject prefab, int count, Vector3 position, bool isSpliting) 
+    public void InstantiateGameObjects(string particleName, int count, Vector3 position)
     {
-        //Assign random variables to x, y, z rotation axis
-        var rV = prefab.transform.rotation.eulerAngles;
-        
+        selectedParticle = selectParticle(particleName);
+
+        int particleIndex = selectParticleIndex(particleName);
+
+        if (selectedParticle == null || particleIndex == -1) return;
+
+        // particle's gameobject
+        GameObject selectedParticleObj = selectedParticle.getGameObject();
+        bool selectedParticleSplit = selectedParticle.getSplitable();
+
+        //////Assign random variables to x, y, z rotation axis
+        var rV = selectedParticleObj.transform.rotation.eulerAngles;
+
         float newPos_X = position.x;
         float newPos_Y = position.y;
         float newPos_Z = position.z;
 
-        //Create new molecule at random position and add it to list
+        ////Create new molecule at random position and add it to list
         for (int i = 0; i < count; i++)
         {
             rV.x = Random.Range(-180f, 180f);
             rV.y = Random.Range(-180f, 180f);
             rV.z = Random.Range(-180f, 180f);
-            prefab.transform.rotation = Quaternion.Euler(rV);
+            selectedParticleObj.transform.rotation = Quaternion.Euler(rV);
+
+            newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
+            newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + (0.19f + (.29f * spawnHeight)));
+            newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
+
+            //Debug.Log("spawn_y + (.2f + 10f * spawnHeight): " + (spawn_y + (.2f + 10f * spawnHeight)));
+            position = new Vector3(newPos_X, newPos_Y, newPos_Z);
+
+            generate = Instantiate(selectedParticleObj, position, selectedParticleObj.transform.rotation);
+
+            particleList[particleIndex].Add(generate);
+
+
+            //if (particleObj.CompareTag("NO2"))
+            //{
+            //if (!isSpliting)
+            //{
+            //randPos holds random position
+            //newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
+            //        newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + (0.19f + (.29f * spawnHeight)));
+            //        newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
+
+            //        //Debug.Log("spawn_y + (.2f + 10f * spawnHeight): " + (spawn_y + (.2f + 10f * spawnHeight)));
+            //        position = new Vector3(newPos_X, newPos_Y, newPos_Z);
+            //    //}
+            //else
+            //{
+            //    if (i != 0)
+            //    {
+            //        if (position.x < 0) { newPos_X += splitDistance; }
+            //        else { newPos_X -= splitDistance; }
+
+            //        if (position.z < 0) { newPos_Z += splitDistance; }
+            //        else { newPos_Z -= splitDistance; }
+            //    }
+            //    position.x = newPos_X;
+            //    position.y = newPos_Y;
+            //    position.z = newPos_Z;
+            //}
+
+            //generate holds an instant of prefab with random position and current rotation
+
+
+
+            //adds instant to the NO2 list.
+            //moleculeList.Add(generate);
+
+                //Debug.Log("Molecule List count after spawn = " + m
+
+            }
             //checks to see if tag is NO2 or N2O4
-            if (prefab.CompareTag("NO2"))
-            {
-                if (!isSpliting)
-                {
-                    //randPos holds random position
+            //oleculeList.Count);
+            //    }
+            //    else if (prefab.CompareTag("N2O4"))
+            //    {
+            //        //generate holds an instant of prefab with position from parameter and current rotation.
+            //        generate = Instantiate(prefab, position, prefab.transform.rotation);
 
-                    newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
-                    newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + (0.19f + (.29f * spawnHeight)));
-                    newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
-
-                    //Debug.Log("spawn_y + (.2f + 10f * spawnHeight): " + (spawn_y + (.2f + 10f * spawnHeight)));
-                    position = new Vector3(newPos_X, newPos_Y, newPos_Z);
-                }
-                else
-                {
-                    if (i != 0)
-                    {
-                        if (position.x < 0)
-                        {
-                            newPos_X += splitDistance;
-                        }
-                        else
-                        {
-                            newPos_X -= splitDistance;
-                        }
-
-                        if (position.z < 0)
-                        {
-                            newPos_Z += splitDistance;
-                        }
-                        else
-                        {
-                            newPos_Z -= splitDistance;
-                        }
-                        
-                    }
-                    position.x = newPos_X;
-                    position.y = newPos_Y;
-                    position.z = newPos_Z;
-                }
-
-
-
-                
-                
-                //generate holds an instant of prefab with random position and current rotation
-                generate = Instantiate(prefab, position, prefab.transform.rotation);
-
-                //adds instant to the NO2 list.
-                moleculeList.Add(generate);
-
-                //Debug.Log("Molecule List count after spawn = " + moleculeList.Count);
-            }
-            else if(prefab.CompareTag("N2O4"))
-            {
-                //generate holds an instant of prefab with position from parameter and current rotation.
-                generate = Instantiate(prefab, position, prefab.transform.rotation);
-
-                //adds instant to the N2O4 list.
-                N2O4List.Add(generate);
-            }
-            generate.transform.Translate(new Vector3(0, 0, 1 * Time.deltaTime));
+            //        //adds instant to the N2O4 list.
+            //        N2O4List.Add(generate);
+            //    }
+            //    generate.transform.Translate(new Vector3(0, 0, 1 * Time.deltaTime));
+            //}
+            //Debug.Log("MOLECULE LIST:" + moleculeList.Count);
+            //Debug.Log("N2O4 LIST:" + N2O4List.Count);
         }
-        //Debug.Log("MOLECULE LIST:" + moleculeList.Count);
-        //Debug.Log("N2O4 LIST:" + N2O4List.Count);
-    }
+
+
+
+
+
+
+
 
     //Function to destroy molecules
-    //Currently it only destroys last object that was added to list after creating one
-    public void DestroyGameObjects(string tag, int index)
+    public void DestroyGameObjects(string particleName, int index)
     {
-        int MolcurrCount = moleculeList.Count;
-        int N2O4currCount = N2O4List.Count;
+        int particleIndex = selectParticleIndex(particleName);
+        int particleCount = particleList[particleIndex].Count;
+        int particleListCount = particleList.Count;
 
-        if (tag == "NO2" && MolcurrCount > 0)
-        {
-            if (index == -1)
-            {
-                Destroy(moleculeList[MolcurrCount - 1]);
-                moleculeList.RemoveAt(MolcurrCount - 1);
-                moleculeList.TrimExcess();
-            }
-            else
-            {
-                Destroy(moleculeList[index]);
-                moleculeList.RemoveAt(index);
-                moleculeList.TrimExcess();
-            }
-            //Debug.Log("Molecule List count after deletion = " + moleculeList.Count);
-        }
+        Debug.Log("index: " + particleIndex);
+        Debug.Log("count: " + particleCount);
+        Debug.Log("pcount: " + particleListCount);
 
-        if (tag == "N2O4" && N2O4currCount > 0)
+        if (particleCount > 0)
         {
-            if (index == -1)
-            {
-                Destroy(N2O4List[N2O4currCount - 1]);
-                N2O4List.RemoveAt(N2O4currCount - 1);
-                N2O4List.TrimExcess();
-            }
-            else
-            {
-                Destroy(N2O4List[index]);
-                N2O4List.RemoveAt(index);
-                N2O4List.TrimExcess();
-            }
-            //Debug.Log("N2O4 List count after deletion = " + N2O4List.Count);
+            Destroy(particleList[particleIndex][particleCount - 1]);
+            particleList[particleIndex].RemoveAt(particleCount - 1);
+            particleList[particleIndex].TrimExcess();
         }
     }
 
-    public List<GameObject> GetNO2List()
+
+    public Particle selectParticle(string name)
     {
-        return moleculeList;
+        //reset particleObj
+        selectedParticle = null;
+
+        // if the particleList is empty then return;
+        if (particles.Count <= 0) return null;
+
+        // find particle in particleName and set gameObject
+        for (int i = 0; i < particles.Count; i++)
+        {
+            if (name == particles[i].getName())
+            {
+                selectedParticle = particles[i];
+            }
+        }
+
+        // if cannot find particleObj then return;
+        if (selectedParticle == null) return null;
+
+        return selectedParticle;
     }
 
-    public List<GameObject> GetN2O4List()
+
+    public int selectParticleIndex(string name)
     {
-        return N2O4List;
+        //reset particleObj
+        int index = -1;
+
+        // if the particleList is empty then return;
+        if (particles.Count <= 0) { return -1; }
+
+        // find particle in particleName and set gameObject
+        for (int i = 0; i < particles.Count; i++)
+        {
+            if (name == particles[i].getName())
+            {
+                index = i;
+            }
+        }
+        if (index == -1) { return -1;}
+
+        return index;
     }
+
 
     public void Spawn_Height(float num)
     {
@@ -216,12 +248,21 @@ public class ParticleGeneration : MonoBehaviour
         spawn = newSpawn;
     }
 
+    public List<List<GameObject>> getParticleList()
+    {
+        return particleList;
+    }
+
     public void Clear_Particles()
     {
-        while (moleculeList.Count != 0 || N2O4List.Count != 0)
+        for (int i = 0; i < particleList.Count; i++)
         {
-            DestroyGameObjects("N2O4", 0);
-            DestroyGameObjects("NO2", 0);
+            List<GameObject> objs = particleList[i];
+            while(objs.Count != 0)
+            {
+                DestroyGameObjects(molecules[i].name, 0);
+            }
+
         }
     }
 

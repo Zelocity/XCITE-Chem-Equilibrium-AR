@@ -4,11 +4,13 @@ using UnityEngine;
 
 
 namespace Particles{ 
-    public class Particle: MonoBehaviour
+    public class Particle
     {
         private string name_;
 
         private GameObject gameObject_;
+
+        public Object object_; 
         
         private bool splitable_;
 
@@ -18,13 +20,19 @@ namespace Particles{
             splitable_ = splitable;
         }
 
-        public string get_name() { return name_; }
+        public bool getSplitable() { return splitable_; }
 
-        public bool get_splitable() { return splitable_; }
+        public GameObject getGameObject() { return gameObject_; }
 
-        public GameObject get_gameObject() { return gameObject_; }
+        public string getName() { return name_; }
+
+        public void setGameObject(GameObject obj) { gameObject_ = obj; }
+
+        public void setObject(Object obj) { object_ = obj; }
 
     }
+
+    
 
 
 }

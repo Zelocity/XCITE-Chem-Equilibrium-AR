@@ -38,51 +38,41 @@ public class UIScript_V2 : MonoBehaviour
     private void Start()
     {
 
-        // particle = new Particle();
-        // particle
         // generate = Instantiate(prefab, position, prefab.transform.rotation);
 
         // //adds instant to the NO2 list.
         // moleculeList.Add(generate);
 
 
-
-
-
-
-
-
-
-
-        Temperature_Change(0.15f);
+        //Temperature_Change(0.15f);
     }
 
     private void FixedUpdate()
     {
-        N02Count();
+        //N02Count();
         N204Count();
-        MagnitudeNum();
+        //MagnitudeNum();
 
-        if (temp_point_up)
-        {
-            Temperature_Change(temp_slider.value);
-        }
+        //if (temp_point_up)
+        //{
+        //    Temperature_Change(temp_slider.value);
+        //}
 
-        if (upLidActive)
-        {
-            pressureManager.GetComponent<Pressure_Manager>().Lid_Up();
-        }
-        else if (downLidActive)
-        {
-            pressureManager.GetComponent<Pressure_Manager>().Lid_Down();
-            
-        }
+        //if (upLidActive)
+        //{
+        //    pressureManager.GetComponent<Pressure_Manager>().Lid_Up();
+        //}
+        //else if (downLidActive)
+        //{
+        //    pressureManager.GetComponent<Pressure_Manager>().Lid_Down();
+
+        //}
     }
 
     public void CreateButton()
     {
         //create NO2 object with specified quantity at random location. IGNORE THIRD PARAMETER HERE, 4th indicates if particle is splitting.
-        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("N02"), conc_num, new Vector3(0, 0, 0), false);
+        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects("N2O4", conc_num, new Vector3(0, 0, 0));
         numNO2 += conc_num;
     }
 
@@ -98,7 +88,7 @@ public class UIScript_V2 : MonoBehaviour
 
             for (int i = 0; i < numConc; i++)
             {
-                particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("NO2", -1);
+                particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("N2O4", -1);
             }
         }
     }
@@ -109,39 +99,45 @@ public class UIScript_V2 : MonoBehaviour
         particleGen.GetComponent<ParticleGeneration>().Clear_Particles();
     }
 
-    public void N02Count()
-    {
-        numNO2 = ParticleGeneration.moleculeList.Count;
-        NO2_Counter.text = numNO2.ToString();
-    }
+    //public void N02Count()
+    //{
+    //    numNO2 = ParticleGeneration.moleculeList.Count;
+    //    NO2_Counter.text = numNO2.ToString();
+    //}
 
     public void N204Count()
     {
-        numN2O4 = ParticleGeneration.N2O4List.Count;
+        List<List<GameObject>> particleList = particleGen.GetComponent<ParticleGeneration>().getParticleList();
+        //Debug.Log(particleList.Count);
+        numN2O4 = particleList[1].Count;
         N2O4_Counter.text = numN2O4.ToString();
     }
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////
-    public void Temperature_Change(float value)
-    {
-        List<GameObject> NO2_List = ParticleGeneration.moleculeList;
-        List<GameObject> N2O4_List = ParticleGeneration.N2O4List;
 
-        int i = 0;
-        while (i < NO2_List.Count)
-        {
-            NO2_List[i].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
-            i++;
-        }
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    ///
 
-        int j = 0;
-        while (j < N2O4_List.Count)
-        {
-            N2O4_List[j].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
-            j++;
-        }
-    }
+
+    //public void Temperature_Change(float value)
+    //{
+    //    List<GameObject> NO2_List = ParticleGeneration.moleculeList;
+    //    List<GameObject> N2O4_List = ParticleGeneration.N2O4List;
+
+    //    int i = 0;
+    //    while (i < NO2_List.Count)
+    //    {
+    //        NO2_List[i].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
+    //        i++;
+    //    }
+
+    //    int j = 0;
+    //    while (j < N2O4_List.Count)
+    //    {
+    //        N2O4_List[j].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
+    //        j++;
+    //    }
+    //}
 
     public void Select_Particle(int num) { 
         // switch (num) { 
