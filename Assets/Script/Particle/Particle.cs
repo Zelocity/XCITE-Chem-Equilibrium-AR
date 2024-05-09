@@ -9,8 +9,6 @@ namespace Particles{
         private string name_;
 
         private GameObject gameObject_;
-
-        public Object object_; 
         
         private bool splitable_;
 
@@ -20,15 +18,16 @@ namespace Particles{
             splitable_ = splitable;
         }
 
+
+        //GETTERS
         public bool getSplitable() { return splitable_; }
 
         public GameObject getGameObject() { return gameObject_; }
 
         public string getName() { return name_; }
 
+        //SETTERS
         public void setGameObject(GameObject obj) { gameObject_ = obj; }
-
-        public void setObject(Object obj) { object_ = obj; }
 
     }
 

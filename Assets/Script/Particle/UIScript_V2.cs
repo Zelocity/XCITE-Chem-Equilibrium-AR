@@ -72,7 +72,7 @@ public class UIScript_V2 : MonoBehaviour
     public void CreateButton()
     {
         //create NO2 object with specified quantity at random location. IGNORE THIRD PARAMETER HERE, 4th indicates if particle is splitting.
-        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects("N2O4", conc_num, new Vector3(0, 0, 0));
+        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects("N2O4", conc_num, new Vector3(0, 0, 0));        
         numNO2 += conc_num;
     }
 
@@ -108,8 +108,9 @@ public class UIScript_V2 : MonoBehaviour
     public void N204Count()
     {
         List<List<GameObject>> particleList = particleGen.GetComponent<ParticleGeneration>().getParticleList();
+        int index = particleGen.GetComponent<ParticleGeneration>().selectParticleIndex("N2O4");
         //Debug.Log(particleList.Count);
-        numN2O4 = particleList[1].Count;
+        numN2O4 = particleList[index].Count;
         N2O4_Counter.text = numN2O4.ToString();
     }
 

@@ -45,10 +45,10 @@ public class ParticleGeneration : MonoBehaviour
             
         }
 
-        //for (int j = 0; j < particleList.Count; j++)
-        //{
-        //    Debug.Log("molecule added: " + particleList[j][0].getName());
-        //}
+        for (int j = 0; j < particleList.Count; j++)
+        {
+           Debug.Log("molecule added: " + particles[j].getName());
+        }
 
     }
 
