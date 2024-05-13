@@ -72,7 +72,7 @@ public class UIScript_V2 : MonoBehaviour
     public void CreateButton()
     {
         //create NO2 object with specified quantity at random location. IGNORE THIRD PARAMETER HERE, 4th indicates if particle is splitting.
-        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects("N2O4", conc_num, new Vector3(0, 0, 0));        
+        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects("NO2", conc_num, new Vector3(0, 0, 0), false);        
         numNO2 += conc_num;
     }
 

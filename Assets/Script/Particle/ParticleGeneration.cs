@@ -42,13 +42,16 @@ public class ParticleGeneration : MonoBehaviour
 
             particle = new Particle(molecules[i].name, molecules[i], false);
             particles.Add(particle);
-            
         }
 
-        for (int j = 0; j < particleList.Count; j++)
-        {
-           Debug.Log("molecule added: " + particles[j].getName());
-        }
+        selectParticle("N2O4").setSplitable(true);
+
+
+        List<Particle> temp = new List<Particle>();
+
+        temp.Add(selectParticle("NO2"));
+
+        selectParticle("N2O4").setSplitable(true);
 
     }
 
@@ -60,7 +63,7 @@ public class ParticleGeneration : MonoBehaviour
     }
 
     //function takes in the type of object, the number of object it should spawn, and the position to spawn it at. 
-    public void InstantiateGameObjects(string particleName, int count, Vector3 position)
+    public void InstantiateGameObjects(string particleName, int count, Vector3 position, bool split)
     {
         selectedParticle = selectParticle(particleName);
 
@@ -79,6 +82,8 @@ public class ParticleGeneration : MonoBehaviour
         float newPos_Y = position.y;
         float newPos_Z = position.z;
 
+        Vector3 pos;
+
         ////Create new molecule at random position and add it to list
         for (int i = 0; i < count; i++)
         {
@@ -87,78 +92,23 @@ public class ParticleGeneration : MonoBehaviour
             rV.z = Random.Range(-180f, 180f);
             selectedParticleObj.transform.rotation = Quaternion.Euler(rV);
 
-            newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
-            newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + (0.19f + (.29f * spawnHeight)));
-            newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
+            if (split) { 
+                pos = position; 
+            } else { 
+                newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
+                newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + (0.19f + (.29f * spawnHeight)));
+                newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
+                pos = new Vector3(newPos_X, newPos_Y, newPos_Z);
+            }
 
             //Debug.Log("spawn_y + (.2f + 10f * spawnHeight): " + (spawn_y + (.2f + 10f * spawnHeight)));
-            position = new Vector3(newPos_X, newPos_Y, newPos_Z);
-
+            position = pos;
             generate = Instantiate(selectedParticleObj, position, selectedParticleObj.transform.rotation);
 
             particleList[particleIndex].Add(generate);
 
-
-            //if (particleObj.CompareTag("NO2"))
-            //{
-            //if (!isSpliting)
-            //{
-            //randPos holds random position
-            //newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
-            //        newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + (0.19f + (.29f * spawnHeight)));
-            //        newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
-
-            //        //Debug.Log("spawn_y + (.2f + 10f * spawnHeight): " + (spawn_y + (.2f + 10f * spawnHeight)));
-            //        position = new Vector3(newPos_X, newPos_Y, newPos_Z);
-            //    //}
-            //else
-            //{
-            //    if (i != 0)
-            //    {
-            //        if (position.x < 0) { newPos_X += splitDistance; }
-            //        else { newPos_X -= splitDistance; }
-
-            //        if (position.z < 0) { newPos_Z += splitDistance; }
-            //        else { newPos_Z -= splitDistance; }
-            //    }
-            //    position.x = newPos_X;
-            //    position.y = newPos_Y;
-            //    position.z = newPos_Z;
-            //}
-
-            //generate holds an instant of prefab with random position and current rotation
-
-
-
-            //adds instant to the NO2 list.
-            //moleculeList.Add(generate);
-
-                //Debug.Log("Molecule List count after spawn = " + m
-
-            }
-            //checks to see if tag is NO2 or N2O4
-            //oleculeList.Count);
-            //    }
-            //    else if (prefab.CompareTag("N2O4"))
-            //    {
-            //        //generate holds an instant of prefab with position from parameter and current rotation.
-            //        generate = Instantiate(prefab, position, prefab.transform.rotation);
-
-            //        //adds instant to the N2O4 list.
-            //        N2O4List.Add(generate);
-            //    }
-            //    generate.transform.Translate(new Vector3(0, 0, 1 * Time.deltaTime));
-            //}
-            //Debug.Log("MOLECULE LIST:" + moleculeList.Count);
-            //Debug.Log("N2O4 LIST:" + N2O4List.Count);
         }
-
-
-
-
-
-
-
+    }
 
     //Function to destroy molecules
     public void DestroyGameObjects(string particleName, int index)
@@ -167,14 +117,18 @@ public class ParticleGeneration : MonoBehaviour
         int particleCount = particleList[particleIndex].Count;
         int particleListCount = particleList.Count;
 
-        Debug.Log("index: " + particleIndex);
-        Debug.Log("count: " + particleCount);
-        Debug.Log("pcount: " + particleListCount);
+        // Debug.Log("index: " + particleIndex);
+        // Debug.Log("count: " + particleCount);
+        // Debug.Log("pcount: " + particleListCount);
 
-        if (particleCount > 0)
+        if (particleCount > 0 && index == -1)
         {
             Destroy(particleList[particleIndex][particleCount - 1]);
             particleList[particleIndex].RemoveAt(particleCount - 1);
+            particleList[particleIndex].TrimExcess();
+        } else if (particleCount > 0 && index >= 0) { 
+            Destroy(particleList[particleIndex][index]);
+            particleList[particleIndex].RemoveAt(index);
             particleList[particleIndex].TrimExcess();
         }
     }
@@ -248,11 +202,6 @@ public class ParticleGeneration : MonoBehaviour
         spawn = newSpawn;
     }
 
-    public List<List<GameObject>> getParticleList()
-    {
-        return particleList;
-    }
-
     public void Clear_Particles()
     {
         for (int i = 0; i < particleList.Count; i++)
@@ -264,6 +213,10 @@ public class ParticleGeneration : MonoBehaviour
             }
 
         }
+    }
+
+    public List<List<GameObject>> getParticleList() { 
+        return particleList;
     }
 
 }
