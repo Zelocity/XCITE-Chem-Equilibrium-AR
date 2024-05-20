@@ -132,6 +132,7 @@ public class UIScript_V2 : MonoBehaviour
                 particleList[i][k].GetComponent<ParticlePhysics>().Modify_Average_Speed(currTempSpeed);
                 k++;
             }
+            k = 0;
        }
     }
 
