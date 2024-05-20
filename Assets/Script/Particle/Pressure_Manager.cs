@@ -11,6 +11,7 @@ public class Pressure_Manager : MonoBehaviour
 
     public void Lid_Up()
     {
+        Debug.Log("lidStartPos: " + lidStartPos + " currPos: " + lidCurrPos);
         if(lidStartPos > lidCurrPos)
         {
             Lid.transform.Translate(Vector3.right * Time.deltaTime * .2f);

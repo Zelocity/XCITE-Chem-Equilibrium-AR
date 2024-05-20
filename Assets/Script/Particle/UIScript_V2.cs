@@ -34,6 +34,8 @@ public class UIScript_V2 : MonoBehaviour
     public Slider temp_slider;
     private static bool temp_point_up;
 
+    private float currTempSpeed = 0.15f;
+
 
     private void Start()
     {
@@ -44,7 +46,7 @@ public class UIScript_V2 : MonoBehaviour
         // moleculeList.Add(generate);
 
 
-        //Temperature_Change(0.15f);
+        Temperature_Change(currTempSpeed);
     }
 
     private void FixedUpdate()
@@ -53,20 +55,20 @@ public class UIScript_V2 : MonoBehaviour
         N204Count();
         //MagnitudeNum();
 
-        //if (temp_point_up)
-        //{
-        //    Temperature_Change(temp_slider.value);
-        //}
+        if (temp_point_up)
+        {
+           Temperature_Change(temp_slider.value);
+        }
 
-        //if (upLidActive)
-        //{
-        //    pressureManager.GetComponent<Pressure_Manager>().Lid_Up();
-        //}
-        //else if (downLidActive)
-        //{
-        //    pressureManager.GetComponent<Pressure_Manager>().Lid_Down();
+        if (upLidActive)
+        {
+           pressureManager.GetComponent<Pressure_Manager>().Lid_Up();
+        }
+        else if (downLidActive)
+        {
+           pressureManager.GetComponent<Pressure_Manager>().Lid_Down();
 
-        //}
+        }
     }
 
     public void CreateButton()
@@ -120,25 +122,18 @@ public class UIScript_V2 : MonoBehaviour
     ///
 
 
-    //public void Temperature_Change(float value)
-    //{
-    //    List<GameObject> NO2_List = ParticleGeneration.moleculeList;
-    //    List<GameObject> N2O4_List = ParticleGeneration.N2O4List;
-
-    //    int i = 0;
-    //    while (i < NO2_List.Count)
-    //    {
-    //        NO2_List[i].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
-    //        i++;
-    //    }
-
-    //    int j = 0;
-    //    while (j < N2O4_List.Count)
-    //    {
-    //        N2O4_List[j].GetComponent<ParticlePhysics>().Modify_Average_Speed(value);
-    //        j++;
-    //    }
-    //}
+    public void Temperature_Change(float value)
+    {
+       List<List<GameObject>> particleList = particleGen.GetComponent<ParticleGeneration>().getParticleList();
+       int k = 0;
+       for (int i = 0; i < particleList.Count; i++) {
+            while (k < particleList[i].Count) {
+                currTempSpeed = value *.05f;
+                particleList[i][k].GetComponent<ParticlePhysics>().Modify_Average_Speed(currTempSpeed);
+                k++;
+            }
+       }
+    }
 
     public void Select_Particle(int num) { 
         // switch (num) { 
@@ -166,6 +161,11 @@ public class UIScript_V2 : MonoBehaviour
     {
         GameObject.Find("AR Session Origin").GetComponent<PlacePrefab>().enabled = true;
 
+    }
+
+    public float Get_CurrentTemp()
+    {
+        return currTempSpeed;
     }
 
 
