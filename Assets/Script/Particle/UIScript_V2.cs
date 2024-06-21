@@ -36,6 +36,8 @@ public class UIScript_V2 : MonoBehaviour
 
     private float currTempSpeed = 0.15f;
 
+    private float num = 0;
+
 
     private void Start()
     {
@@ -45,7 +47,7 @@ public class UIScript_V2 : MonoBehaviour
         // //adds instant to the NO2 list.
         // moleculeList.Add(generate);
 
-
+        
         Temperature_Change(currTempSpeed);
     }
 
