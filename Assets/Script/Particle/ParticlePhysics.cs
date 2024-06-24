@@ -22,7 +22,7 @@ public class ParticlePhysics : MonoBehaviour
     void Start()
     {
         UIScript = GameObject.Find("UIManager");
-        avgSpeed = UIScript.GetComponent<UIScript_V2>().Get_CurrentTemp();
+        avgSpeed = UIScript.GetComponent<UIManager>().Get_CurrentTemp();
         rb = GetComponent<Rigidbody>();
 
         

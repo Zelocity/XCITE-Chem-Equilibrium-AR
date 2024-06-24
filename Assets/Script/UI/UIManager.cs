@@ -5,20 +5,13 @@ using UnityEngine.UI;
 using TMPro;
 using Particles;
 
-public class UIScript_V2 : MonoBehaviour
+public class UIManager: MonoBehaviour
 {
-
-    [Header("N2O")]
-    public TextMeshProUGUI NO2_Counter;
-    public static int numNO2;
-
-    [Header("N2O4")]
-    public TextMeshProUGUI N2O4_Counter;
-    public static int numN2O4;
 
     [Header("Particle Generation")]
     
     public GameObject particleGen;
+    private ParticleGeneration particleManager;
     public GameObject spawn;
     public TextMeshProUGUI conc_str;
     public Slider conc_slider;
@@ -38,6 +31,17 @@ public class UIScript_V2 : MonoBehaviour
 
     private float num = 0;
 
+    [Header("Particle List Panel")]
+    public GameObject prefabButton;
+    public RectTransform ParentPanel;
+    private int selectedParticleByUser = 0;
+
+
+    private void Awake()
+    {
+        particleManager = particleGen.GetComponent<ParticleGeneration>();
+        
+    }
 
     private void Start()
     {
@@ -46,15 +50,13 @@ public class UIScript_V2 : MonoBehaviour
 
         // //adds instant to the NO2 list.
         // moleculeList.Add(generate);
-
         
+        Generate_ParticleList();
         Temperature_Change(currTempSpeed);
     }
 
     private void FixedUpdate()
     {
-        //N02Count();
-        N204Count();
         //MagnitudeNum();
 
         if (temp_point_up)
@@ -76,31 +78,18 @@ public class UIScript_V2 : MonoBehaviour
     public void CreateButton()
     {
         //create NO2 object with specified quantity at random location. IGNORE THIRD PARAMETER HERE, 4th indicates if particle is splitting.
-        particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects("NO2", conc_num, new Vector3(0, 0, 0), false);        
-        numNO2 += conc_num;
+        particleManager.InstantiateGameObjects("NO2", conc_num, new Vector3(0, 0, 0), false);        
     }
 
     public void DestroyButton()
     {
-        if (numNO2 != 0)
-        {
-            int numConc = conc_num;
-            if (numConc > numNO2)
-            {
-                numConc = numNO2;
-            }
-
-            for (int i = 0; i < numConc; i++)
-            {
-                particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("N2O4", -1);
-            }
-        }
+        particleManager.DestroyGameObjects("N2O4", -1);
     }
 
 
     public void Clear_Button()
     {
-        particleGen.GetComponent<ParticleGeneration>().Clear_Particles();
+        particleManager.Clear_Particles();
     }
 
     //public void N02Count()
@@ -108,15 +97,6 @@ public class UIScript_V2 : MonoBehaviour
     //    numNO2 = ParticleGeneration.moleculeList.Count;
     //    NO2_Counter.text = numNO2.ToString();
     //}
-
-    public void N204Count()
-    {
-        List<List<GameObject>> particleList = particleGen.GetComponent<ParticleGeneration>().getParticleList();
-        int index = particleGen.GetComponent<ParticleGeneration>().selectParticleIndex("N2O4");
-        //Debug.Log(particleList.Count);
-        numN2O4 = particleList[index].Count;
-        N2O4_Counter.text = numN2O4.ToString();
-    }
 
 
 
@@ -126,7 +106,7 @@ public class UIScript_V2 : MonoBehaviour
 
     public void Temperature_Change(float value)
     {
-       List<List<GameObject>> particleList = particleGen.GetComponent<ParticleGeneration>().getParticleList();
+       List<List<GameObject>> particleList = particleManager.getParticleList();
        int k = 0;
        for (int i = 0; i < particleList.Count; i++) {
             while (k < particleList[i].Count) {
@@ -172,6 +152,33 @@ public class UIScript_V2 : MonoBehaviour
     }
 
 
+
+    private void Generate_ParticleList()
+    {
+        int offset = 0; 
+        List<List<GameObject>> particleList = particleManager.getParticleList();
+
+        for (int i = 0; i < particleList.Count; i++)
+        {
+            GameObject goButton = (GameObject)Instantiate(prefabButton);
+            Transform childTransform = goButton.transform.Find("Button");
+            goButton.transform.SetParent(ParentPanel, false);
+            goButton.transform.localScale = new Vector3(1, 1, 1);
+            goButton.transform.Translate(new Vector3(0, offset, 0));
+
+
+
+            int tempint = i;
+            Button tempButton = childTransform.GetComponent<Button>();
+            tempButton.onClick.AddListener(() => ButtonClicked(tempint));
+            offset -= 50;
+        }
+    }
+
+    void ButtonClicked(int buttonNo)
+    {
+        selectedParticleByUser = buttonNo;
+    }
 }
 
 
