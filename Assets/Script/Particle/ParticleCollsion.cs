@@ -25,7 +25,7 @@ public class ParticleCollsion : MonoBehaviour
         //Gets collider of particle which collisioned with another object
         Collider thisCollider = collision.GetContact(0).thisCollider;
 
-        List<List<GameObject>> particleList = particleGen.GetComponent<ParticleGeneration>().getParticleList();
+        List<List<GameObject>> particleList = particleGen.GetComponent<ParticleGeneration>().getParticleIndexList();
 
         // else continue, and check if nitrogens hit.
         if (thisCollider.CompareTag("Nitrogen") && otherCollider.CompareTag("Nitrogen"))

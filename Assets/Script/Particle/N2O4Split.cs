@@ -30,7 +30,7 @@ public class N2O4Split : MonoBehaviour
 
     void Update()
     {
-        particleList = particleGen.GetComponent<ParticleGeneration>().getParticleList();
+        particleList = particleGen.GetComponent<ParticleGeneration>().getParticleIndexList();
         index = particleGen.GetComponent<ParticleGeneration>().selectParticleIndex("N2O4");
         listSize = particleList[index].Count;
         thisIndex = particleList[index].IndexOf(gameObject);

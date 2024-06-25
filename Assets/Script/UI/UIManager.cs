@@ -11,6 +11,7 @@ public class UIManager: MonoBehaviour
     [Header("Particle Generation")]
     
     public GameObject particleGen;
+    private string particleName;
     private ParticleGeneration particleManager;
     public GameObject spawn;
     public TextMeshProUGUI conc_str;
@@ -26,15 +27,17 @@ public class UIManager: MonoBehaviour
     [Header("Temperature")]
     public Slider temp_slider;
     private static bool temp_point_up;
-
     private float currTempSpeed = 0.15f;
-
-    private float num = 0;
 
     [Header("Particle List Panel")]
     public GameObject prefabButton;
     public RectTransform ParentPanel;
     private int selectedParticleByUser = 0;
+
+    [Header("Text")]
+    [SerializeField] TextMeshProUGUI particleNameText;
+    [SerializeField] TextMeshProUGUI particleCountText;
+
 
 
     private void Awake()
@@ -45,19 +48,15 @@ public class UIManager: MonoBehaviour
 
     private void Start()
     {
-
-        // generate = Instantiate(prefab, position, prefab.transform.rotation);
-
-        // //adds instant to the NO2 list.
-        // moleculeList.Add(generate);
-        
         Generate_ParticleList();
         Temperature_Change(currTempSpeed);
     }
 
     private void FixedUpdate()
     {
-        //MagnitudeNum();
+        particleName = particleManager.getParticleName(selectedParticleByUser);
+        setParticleNameText();
+        setParticleCountText();
 
         if (temp_point_up)
         {
@@ -77,13 +76,12 @@ public class UIManager: MonoBehaviour
 
     public void CreateButton()
     {
-        //create NO2 object with specified quantity at random location. IGNORE THIRD PARAMETER HERE, 4th indicates if particle is splitting.
-        particleManager.InstantiateGameObjects("NO2", conc_num, new Vector3(0, 0, 0), false);        
+        particleManager.InstantiateGameObjects(particleName, conc_num, new Vector3(0, 0, 0), false);        
     }
 
     public void DestroyButton()
     {
-        particleManager.DestroyGameObjects("N2O4", -1);
+        particleManager.DestroyGameObjects(particleName, -1);
     }
 
 
@@ -91,12 +89,6 @@ public class UIManager: MonoBehaviour
     {
         particleManager.Clear_Particles();
     }
-
-    //public void N02Count()
-    //{
-    //    numNO2 = ParticleGeneration.moleculeList.Count;
-    //    NO2_Counter.text = numNO2.ToString();
-    //}
 
 
 
@@ -106,7 +98,7 @@ public class UIManager: MonoBehaviour
 
     public void Temperature_Change(float value)
     {
-       List<List<GameObject>> particleList = particleManager.getParticleList();
+       List<List<GameObject>> particleList = particleManager.getParticleIndexList();
        int k = 0;
        for (int i = 0; i < particleList.Count; i++) {
             while (k < particleList[i].Count) {
@@ -116,17 +108,6 @@ public class UIManager: MonoBehaviour
             }
             k = 0;
        }
-    }
-
-    public void Select_Particle(int num) { 
-        // switch (num) { 
-        //     case 0:
-        //         particleName = "N02";
-        //         break;
-        //     case 1:
-        //         particleName = "";
-        //         break;
-        // }
     }
 
 
@@ -156,7 +137,7 @@ public class UIManager: MonoBehaviour
     private void Generate_ParticleList()
     {
         int offset = 0; 
-        List<List<GameObject>> particleList = particleManager.getParticleList();
+        List<List<GameObject>> particleList = particleManager.getParticleIndexList();
 
         for (int i = 0; i < particleList.Count; i++)
         {
@@ -178,6 +159,16 @@ public class UIManager: MonoBehaviour
     void ButtonClicked(int buttonNo)
     {
         selectedParticleByUser = buttonNo;
+    }
+
+    void setParticleNameText()
+    {
+        particleNameText.text = particleName;
+    }
+
+    void setParticleCountText()
+    {
+        particleCountText.text = particleManager.getParticleCount(selectedParticleByUser).ToString();
     }
 }
 

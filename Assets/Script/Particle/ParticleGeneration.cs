@@ -187,16 +187,6 @@ public class ParticleGeneration : MonoBehaviour
         Debug.LogWarning("this: " + (spawn.transform.position.y + 1.9f) + " SpawnHeight: " + spawnHeight + " num: " + num);
     }
 
-    public float Get_Spawn_Height()
-    {
-        return spawnHeight;
-    }
-
-    public GameObject Get_Spawner()
-    {
-        return spawn;
-    }
-
     public void Set_Spawner(GameObject newSpawn)
     {
         spawn = newSpawn;
@@ -215,8 +205,33 @@ public class ParticleGeneration : MonoBehaviour
         }
     }
 
-    public List<List<GameObject>> getParticleList() { 
+    public float Get_Spawn_Height()
+    {
+        return spawnHeight;
+    }
+
+    public GameObject Get_Spawner()
+    {
+        return spawn;
+    }
+
+    public string getParticleName(int index)
+    {
+        return particles[index].getName();
+    }
+
+    public List<List<GameObject>> getParticleIndexList() { 
         return particleList;
+    }
+
+    public List<GameObject> getParticleList(int index)
+    {
+        return particleList[index];
+    }
+
+    public int getParticleCount(int index)
+    {
+        return particleList[index].Count;
     }
 
 }
