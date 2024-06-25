@@ -9,17 +9,23 @@ public class ParticlePhysics : MonoBehaviour
     private Vector3 lastFrameVelocity;
 
     [Header("movement")]
-    private float maxSpeed = .4f;
+    private float maxSpeed = 10f;
     private float minSpeed = 0;
     private float speedRange = .03f;
     private float avgSpeed = 0.17f;
     private float vNum1, vNum2, vNum3;
 
+    [Header("UI Script")]
+    private GameObject UIScript;
 
     // Start is called before the first frame update
     void Start()
     {
+        UIScript = GameObject.Find("UIManager");
+        avgSpeed = UIScript.GetComponent<UIManager>().Get_CurrentTemp();
         rb = GetComponent<Rigidbody>();
+
+        
 
         //Particle is given a random velocity vector at start
         
