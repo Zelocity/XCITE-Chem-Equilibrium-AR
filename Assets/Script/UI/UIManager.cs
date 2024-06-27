@@ -14,9 +14,9 @@ public class UIManager: MonoBehaviour
     private string particleName;
     private ParticleGeneration particleManager;
     public GameObject spawn;
-    public TextMeshProUGUI conc_str;
-    public Slider conc_slider;
-    private static int conc_num = 1;
+    public TextMeshProUGUI quantityNumText;
+    public Slider quantitySlider;
+    private static int quantityNum = 1;
 
     [Header("Lid")]
     public GameObject pressureManager;
@@ -57,6 +57,7 @@ public class UIManager: MonoBehaviour
         particleName = particleManager.getParticleName(selectedParticleByUser);
         setParticleNameText();
         setParticleCountText();
+        particleQuantity();
 
         if (temp_point_up)
         {
@@ -76,7 +77,7 @@ public class UIManager: MonoBehaviour
 
     public void CreateButton()
     {
-        particleManager.InstantiateGameObjects(particleName, conc_num, new Vector3(0, 0, 0), false);        
+        particleManager.InstantiateGameObjects(particleName, quantityNum, new Vector3(0, 0, 0), false);        
     }
 
     public void DestroyButton()
@@ -117,7 +118,7 @@ public class UIManager: MonoBehaviour
 
     public void Temp_Slider(bool up) { temp_point_up = up; }
 
-    public void MagnitudeNum() { conc_num = (int)conc_slider.value; conc_str.text = conc_num.ToString();  }
+    public void particleQuantity() { quantityNum = (int)quantitySlider.value; quantityNumText.text = quantityNum.ToString();  }
 
     public void Set_Lid(GameObject newLid) { pressureManager.GetComponent<Pressure_Manager>().Set_Lid(newLid); }
 
