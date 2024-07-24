@@ -190,6 +190,7 @@ public class ParticleGeneration : MonoBehaviour
     public void Set_Spawner(GameObject newSpawn)
     {
         spawn = newSpawn;
+        Debug.Log("SPAWNER SET!!");
     }
 
     public void Clear_Particles()

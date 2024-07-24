@@ -5194,8 +5194,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beaker: {fileID: 86180370315938996, guid: 3e5b1a32b9a8748a2bff7e2667bf95ba, type: 3}
   particleGen: {fileID: 6086832903846732456}
-  P_Up_Button: {fileID: 0}
-  P_Down_Button: {fileID: 0}
 --- !u!114 &782628379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12879,7 +12877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 86180370315938996, guid: 3e5b1a32b9a8748a2bff7e2667bf95ba, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 86180370315939018, guid: 3e5b1a32b9a8748a2bff7e2667bf95ba, type: 3}
       propertyPath: m_RootOrder
