@@ -76,6 +76,7 @@ PlayerSettings:
   androidMinimumWindowWidth: 400
   androidMinimumWindowHeight: 300
   androidFullscreenMode: 1
+  androidAutoRotationBehavior: 1
   defaultIsNativeResolution: 1
   macRetinaSupport: 1
   runInBackground: 1
@@ -137,13 +138,7 @@ PlayerSettings:
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
   bundleVersion: 0.1
-  preloadedAssets:
-  - {fileID: 11400000, guid: 202c5a979ed534e548bac08aa4e464bf, type: 2}
-  - {fileID: 7859527703788863682, guid: 512c851ed382a024aa22258fe9d58044, type: 2}
-  - {fileID: 11400000, guid: 9dae7d87914854f49bc9b2006495a178, type: 2}
-  - {fileID: 3804289912329007288, guid: 94589a552ba12a548bc6108dff5356fe, type: 2}
-  - {fileID: 4800000, guid: e7c77f6eaab324a819efdc13b8125a39, type: 3}
-  - {fileID: 4800000, guid: 6743a50a812740be8c0aa3fccc46fae9, type: 3}
+  preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -165,6 +160,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.XCITE.ChemEquilibrium
+    Standalone: com.XCITE.Chem-Equilibrium
     iPhone: com.XCITE.Chem-Equilibrium
   buildNumber:
     Standalone: 0
