@@ -22,7 +22,7 @@ public class ParticleGeneration : MonoBehaviour
     private Particle selectedParticle;
 
     private GameObject generate;
-    private float splitDistance = .03f;
+    //private float splitDistance = .03f;
     
 
     [Header("Spawn")]
