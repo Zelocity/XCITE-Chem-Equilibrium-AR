@@ -54,7 +54,9 @@ public class PlacePrefab : MonoBehaviour
         {
             placed = true;
             Pose pose = hits[0].pose;
+            Debug.Log("ABOUT TO CREATE");
             GameObject obj = Instantiate(beaker, pose.position, pose.rotation);
+            Debug.Log("BEAKER CREATED");
             particleGen.GetComponent<ParticleGeneration>().Set_Spawner(obj);
             GameObject.Find("/Canvas/UI/Neutral").SetActive(true);
             //GameObject.Find("AR Session Origin/Trackables").SetActive(false);

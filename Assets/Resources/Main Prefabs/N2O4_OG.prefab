@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 8527307730808888242}
   - component: {fileID: 8527307730808888241}
   m_Layer: 6
-  m_Name: N2O4
+  m_Name: N2O4_OG
   m_TagString: N2O4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +134,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594254369828424730}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4387526, y: 0.7348435, z: -0.51239926, w: 0.070343174}
+  m_LocalRotation: {x: -0.51581824, y: -0.27192247, z: -0.6356812, w: 0.50586474}
   m_LocalPosition: {x: -211.5, y: -0, z: 0}
   m_LocalScale: {x: 0.00022900605, y: 0.00022900605, z: 0.00022900605}
   m_ConstrainProportionsScale: 0
