@@ -7,10 +7,8 @@ using Particles;
 
 public class UIManager: MonoBehaviour
 {
-
     [Header("Particle Generation")]
-    
-    public GameObject particleGen;
+    [SerializeField] private GameObject particleGen;
     private string particleName;
     private ParticleGeneration particleManager;
     public GameObject spawn;

@@ -62,7 +62,6 @@ public class ParticlePhysics : MonoBehaviour
 
     public void Speed_Limit(float min, float max)
     {
-        
         if (rb.velocity.magnitude > max)
         {
             rb.velocity = Vector3.ClampMagnitude(rb.velocity, max);
@@ -71,10 +70,6 @@ public class ParticlePhysics : MonoBehaviour
         {
             rb.velocity *= 1.05f;
         }
-        //if (gameObject.name == "NO2(Clone)")
-        //{
-        //  Debug.Log("Current Speed: " + rb.velocity.magnitude);
-        //}
     }
 
     public void Modify_Average_Speed(float value)
@@ -85,7 +80,6 @@ public class ParticlePhysics : MonoBehaviour
 
     public void Speed_Range(float avgSpeed, float numFromAvg)
     {
-
         float min, max;
         min = avgSpeed - numFromAvg;
         max = avgSpeed + numFromAvg;
@@ -98,14 +92,7 @@ public class ParticlePhysics : MonoBehaviour
         {
             min = minSpeed;
         }
-        //if (gameObject.name == "NO2(Clone)")
-        //{
-        //    Debug.LogWarning(min + " " + max);
-        //}
-        
-        Speed_Limit(min, max);
-
-
+       Speed_Limit(min, max);
     }
 }
 
