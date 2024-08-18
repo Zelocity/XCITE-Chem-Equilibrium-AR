@@ -11,8 +11,8 @@ public class PlacePrefab : MonoBehaviour
     [Header("GameObjects")]
     [SerializeField] private GameObject beaker;
     [SerializeField] private GameObject particleGen;
-    [SerializeField] private GameObject P_Up_Button;
-    [SerializeField] private GameObject P_Down_Button;
+    //[SerializeField] private GameObject P_Up_Button;
+    //[SerializeField] private GameObject P_Down_Button;
 
 
     [Header("Ray Cast")]
@@ -54,19 +54,13 @@ public class PlacePrefab : MonoBehaviour
         {
             placed = true;
             Pose pose = hits[0].pose;
+            Debug.Log("ABOUT TO CREATE");
             GameObject obj = Instantiate(beaker, pose.position, pose.rotation);
-
-            //particleGen.GetComponent<ParticleGeneration>().Set_Spawner(GameObject.Find("/Regular Beaker/Particle_Spawner"));
-            //P_Down_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker/Lid"));
-            //P_Up_Button.GetComponent<UIScript>().Set_Lid(GameObject.Find("/Regular Beaker/Lid"));
+            Debug.Log("BEAKER CREATED");
+            particleGen.GetComponent<ParticleGeneration>().Set_Spawner(obj);
             GameObject.Find("/Canvas/UI/Neutral").SetActive(true);
-
-            particleGen.GetComponent<ParticleGeneration>().Set_Spawner(GameObject.Find("/Regular Beaker(Clone)/Particle_Spawner"));
-            P_Down_Button.GetComponent<UIManager>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
-            P_Up_Button.GetComponent<UIManager>().Set_Lid(GameObject.Find("/Regular Beaker(Clone)/Lid"));
-
             //GameObject.Find("AR Session Origin/Trackables").SetActive(false);
-            
+
 
         }
     }

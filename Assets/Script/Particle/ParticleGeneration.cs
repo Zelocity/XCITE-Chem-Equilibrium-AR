@@ -22,7 +22,7 @@ public class ParticleGeneration : MonoBehaviour
     private Particle selectedParticle;
 
     private GameObject generate;
-    private float splitDistance = .03f;
+    //private float splitDistance = .03f;
     
 
     [Header("Spawn")]
@@ -190,6 +190,7 @@ public class ParticleGeneration : MonoBehaviour
     public void Set_Spawner(GameObject newSpawn)
     {
         spawn = newSpawn;
+        Debug.Log("SPAWNER SET!!");
     }
 
     public void Clear_Particles()
