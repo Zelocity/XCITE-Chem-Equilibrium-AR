@@ -11,12 +11,12 @@ public class TemperatureManager : MonoBehaviour
     private ParticleGeneration particleManager;
 
     [Header("Slider")]
-    [SerializeField] private Slider tempSlider;
+    //[SerializeField] private Slider tempSlider;
     private float currTemp;
 
     [Header("Values")]
-    private int molQuantity;
-    private int molQuantity2;
+    private int molQuantity; // NO2
+    private int molQuantity2; // N2O4
     [SerializeField] private float dHrxn = -57.2f;
     [SerializeField] private float dSrxn = -175.83f;
     [SerializeField] private float R = 8.314f;
@@ -24,21 +24,27 @@ public class TemperatureManager : MonoBehaviour
     private double X;
 
     [Header("Quantity Limits")]
-    private int molQuantityLimit;
-    private int molQuantityLimit2;
+    private int molQuantityLimit; // NO2
+    private int molQuantityLimit2; // N2O4
+
+    //Speeds 
+    //                       
+    private float[] speedList = {0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
+                               0f, 0f, 0f, .17f, .17f, .17f, .17f, .17f, .17f, .17f};
+
+    private int tempIndex;
+
+    private int tempValue;
 
     void Start()
     {
         particleManager = particleGen.GetComponent<ParticleGeneration>();
+        //currTemp = tempSlider.value;
     }
 
     // Update is called once per frame
     void Update()
     {
-        molQuantity = particleManager.getParticleCount(particleManager.selectParticleIndex("NO2"));
-        molQuantity2 = particleManager.getParticleCount(particleManager.selectParticleIndex("N2O4"));
-        K = calculateKValue();
-        X = calculateXValue();
         adjustQuantityLimit();
     }
 
@@ -50,8 +56,14 @@ public class TemperatureManager : MonoBehaviour
         return (1/(8*K)) * (1+4*K*molQuantity - Math.Sqrt(1+16*K*molQuantity2+8*K*molQuantity));
     }
 
-    private void adjustQuantityLimit() { 
+    private void adjustQuantityLimit() {
+        molQuantity = particleManager.getParticleCount(particleManager.selectParticleIndex("NO2"));
+        molQuantity2 = particleManager.getParticleCount(particleManager.selectParticleIndex("N2O4"));
+        K = calculateKValue();
+        X = calculateXValue();
+        //NO2 
         molQuantityLimit = (int)(molQuantity-(2*X));
+        //N2O4
         molQuantityLimit2 = (int)(molQuantity2+X);
     }
 
@@ -60,5 +72,25 @@ public class TemperatureManager : MonoBehaviour
     }
     public int getMolQuantityLimit2() { 
         return molQuantity2; 
+    }
+
+
+    public bool getMolThresholdCheck (int select) {
+        if (select == 0) { // NO2
+            return molQuantity > molQuantityLimit; // return true if NO2 quantity is above threshold
+        } else if (select == 1) { //N2O4
+            return molQuantity2 < molQuantityLimit2; // return true if N2O4 quantity is below threshold
+        } 
+        Debug.LogWarning("Error: Type int select is out of bounds.");
+        return false;
+        
+    }
+    public float getSpeed() { 
+        return speedList[tempIndex]; 
+    }
+
+    public void setTemp(float num) { 
+        tempValue = (int)num;
+        tempIndex = (int)(num+100)/10;
     }
 }

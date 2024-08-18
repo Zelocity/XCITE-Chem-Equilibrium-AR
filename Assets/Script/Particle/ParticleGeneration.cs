@@ -23,18 +23,25 @@ public class ParticleGeneration : MonoBehaviour
 
     private GameObject generate;
     //private float splitDistance = .03f;
-    
 
     [Header("Spawn")]
     public GameObject spawn;
     private float spawn_x, spawn_y, spawn_z;
     private float spawnHeight;
 
+    [Header("Temperature")] 
+
+    [SerializeField] private GameObject tempGen;
+
+    private TemperatureManager temperatureManager;
+
     private void Awake()
     {
+        temperatureManager = tempGen.GetComponent<TemperatureManager>();
+
         particleList = new List<List<GameObject>>();
         particles = new List<Particle>();
-        
+
         for (int i = 0; i < molecules.Length; i++)
         {
             tempList = new List<GameObject>();
@@ -63,12 +70,10 @@ public class ParticleGeneration : MonoBehaviour
     }
 
     //function takes in the type of object, the number of object it should spawn, and the position to spawn it at. 
-    public void InstantiateGameObjects(string particleName, int count, Vector3 position, bool split)
+    public void InstantiateGameObjects(string particleName, int count, Vector3 position)
     {
         selectedParticle = selectParticle(particleName);
-
         int particleIndex = selectParticleIndex(particleName);
-
         if (selectedParticle == null || particleIndex == -1) return;
 
         // particle's gameobject
@@ -82,8 +87,6 @@ public class ParticleGeneration : MonoBehaviour
         float newPos_Y = position.y;
         float newPos_Z = position.z;
 
-        Vector3 pos;
-
         ////Create new molecule at random position and add it to list
         for (int i = 0; i < count; i++)
         {
@@ -92,22 +95,28 @@ public class ParticleGeneration : MonoBehaviour
             rV.z = Random.Range(-180f, 180f);
             selectedParticleObj.transform.rotation = Quaternion.Euler(rV);
 
-            if (split) { 
-                pos = position; 
-            } else { 
-                newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
-                newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + (0.19f + (.29f * spawnHeight)));
-                newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
-                pos = new Vector3(newPos_X, newPos_Y, newPos_Z);
-            }
-
             //Debug.Log("spawn_y + (.2f + 10f * spawnHeight): " + (spawn_y + (.2f + 10f * spawnHeight)));
-            position = pos;
             generate = Instantiate(selectedParticleObj, position, selectedParticleObj.transform.rotation);
 
             particleList[particleIndex].Add(generate);
 
         }
+    }
+
+    public void randomParticleSpawn (string name, int num) { 
+        float newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
+        float newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + (0.19f + (.29f * spawnHeight)));
+        float newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
+        Vector3 position = new Vector3(newPos_X, newPos_Y, newPos_Z);
+        InstantiateGameObjects(name, num, position);     
+    }
+    public void splitParticleSpawn (int index) { 
+        DestroyGameObjects("N2O4", index);
+        float newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
+        float newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + (0.19f + (.29f * spawnHeight)));
+        float newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
+        Vector3 position = new Vector3(newPos_X, newPos_Y, newPos_Z);
+        InstantiateGameObjects("NO2", 2, transform.position);    
     }
 
     //Function to destroy molecules
@@ -234,5 +243,4 @@ public class ParticleGeneration : MonoBehaviour
     {
         return particleList[index].Count;
     }
-
 }

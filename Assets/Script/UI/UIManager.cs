@@ -9,7 +9,6 @@ public class UIManager: MonoBehaviour
 {
     [Header("Particle Generation")]
     [SerializeField] private GameObject particleGen;
-    private string particleName;
     private ParticleGeneration particleManager;
     public GameObject spawn;
     public TextMeshProUGUI quantityNumText;
@@ -23,9 +22,11 @@ public class UIManager: MonoBehaviour
     private static bool downLidActive;
 
     [Header("Temperature")]
-    public Slider temp_slider;
+    [SerializeField] private GameObject tempGen;
+    private TemperatureManager temperatureManager;
+    public Slider tempSlider;
     private static bool temp_point_up;
-    private float currTempSpeed = 0.15f;
+    //private float currTempSpeed = 0.15f;
 
     [Header("Particle List Panel")]
     public GameObject prefabButton;
@@ -36,18 +37,20 @@ public class UIManager: MonoBehaviour
     [SerializeField] TextMeshProUGUI particleNameText;
     [SerializeField] TextMeshProUGUI particleCountText;
 
-
+    private string particleName;
 
     private void Awake()
     {
         particleManager = particleGen.GetComponent<ParticleGeneration>();
+        temperatureManager = tempGen.GetComponent<TemperatureManager>();
         
     }
 
     private void Start()
     {
+        temperatureManager.setTemp(tempSlider.value);
         Generate_ParticleList();
-        Temperature_Change(currTempSpeed);
+        //Temperature_Change(currTempSpeed);
     }
 
     private void FixedUpdate()
@@ -59,7 +62,7 @@ public class UIManager: MonoBehaviour
 
         if (temp_point_up)
         {
-           Temperature_Change(temp_slider.value);
+           temperatureManager.setTemp(tempSlider.value);
         }
 
         if (upLidActive)
@@ -75,7 +78,8 @@ public class UIManager: MonoBehaviour
 
     public void CreateButton()
     {
-        particleManager.InstantiateGameObjects(particleName, quantityNum, new Vector3(0, 0, 0), false);        
+        particleManager.randomParticleSpawn(particleName, quantityNum);
+           
     }
 
     public void DestroyButton()
@@ -97,16 +101,16 @@ public class UIManager: MonoBehaviour
 
     public void Temperature_Change(float value)
     {
-       List<List<GameObject>> particleList = particleManager.getParticleIndexList();
-       int k = 0;
-       for (int i = 0; i < particleList.Count; i++) {
-            while (k < particleList[i].Count) {
-                currTempSpeed = value *.05f;
-                particleList[i][k].GetComponent<ParticlePhysics>().Modify_Average_Speed(currTempSpeed);
-                k++;
-            }
-            k = 0;
-       }
+    //    List<List<GameObject>> particleList = particleManager.getParticleIndexList();
+    //    int k = 0;
+    //    for (int i = 0; i < particleList.Count; i++) {
+    //         while (k < particleList[i].Count) {
+    //             currTempSpeed = value *.05f;
+    //             particleList[i][k].GetComponent<ParticlePhysics>().Modify_Average_Speed(currTempSpeed);
+    //             k++;
+    //         }
+    //         k = 0;
+    //    }
     }
 
 
@@ -124,11 +128,6 @@ public class UIManager: MonoBehaviour
     {
         GameObject.Find("AR Session Origin").GetComponent<PlacePrefab>().enabled = true;
 
-    }
-
-    public float Get_CurrentTemp()
-    {
-        return currTempSpeed;
     }
 
 

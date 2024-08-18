@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-
 public class N2O4Split : MonoBehaviour
 {
     [Header("Particle")]
-    public GameObject particleGen;
+    private GameObject particleGen;
+
+    private ParticleGeneration particleManager;
 
     [Header ("Time")]
     float timer = 0f;
@@ -24,7 +23,8 @@ public class N2O4Split : MonoBehaviour
 
     void Start()
     {
-        particleGen = GameObject.Find("ParticleGeneration");
+       particleGen = GameObject.Find("ParticleGeneration");
+       particleManager = particleGen.GetComponent<ParticleGeneration>();
        timer = 0f;
     }
 
@@ -39,14 +39,17 @@ public class N2O4Split : MonoBehaviour
        if (listSize > 0 && gameObject.name == "N2O4(Clone)")
        {
            timer += Time.deltaTime;
-           if (timer >= time_to_split)
+           if ((timer >= time_to_split))
            {
+
+
+                particleManager.splitParticleSpawn(thisIndex);
                //Debug.Log("5 SECONDS PASSED. About to delete " + thisIndex + " This Object: " + gameObject.name + " N2O4 Count: " + listSize);
-               particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("N2O4", thisIndex);
+               //particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("N2O4", thisIndex);
 
                //Debug.Log("X: " + transform.localPosition.x + " Y: " + transform.localPosition.y + " Z: " + transform.localPosition.z);
 
-               particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects("NO2", 2, transform.position, true);
+               //particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects("NO2", 2, transform.position);
                //particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 2, help, true);
                timer = 0f;
            }

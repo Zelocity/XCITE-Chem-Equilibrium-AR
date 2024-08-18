@@ -16,13 +16,19 @@ public class ParticlePhysics : MonoBehaviour
     private float vNum1, vNum2, vNum3;
 
     [Header("UI Script")]
+
+    private GameObject tempGen;
+    private TemperatureManager temperatureManager;
     private GameObject UIScript;
+    
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        UIScript = GameObject.Find("UIManager");
-        avgSpeed = UIScript.GetComponent<UIManager>().Get_CurrentTemp();
+
+        tempGen = GameObject.Find("TemperatureManager");
+        temperatureManager = tempGen.GetComponent<TemperatureManager>();
+        avgSpeed = temperatureManager.getSpeed();
         rb = GetComponent<Rigidbody>();
 
         
