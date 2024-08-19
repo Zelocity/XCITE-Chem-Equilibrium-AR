@@ -10,13 +10,20 @@ public class ParticleCollsion : MonoBehaviour
 
     int index = 0;
 
+    [SerializeField] private GameObject tempGen;
 
+    private TemperatureManager temperatureManager;
     void Start () { 
+        tempGen = GameObject.Find("TemperatureManager");
+        temperatureManager = tempGen.GetComponent<TemperatureManager>();
         particleGen = GameObject.Find("ParticleGeneration");
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        // if N2O4 goes above the threshold then cancel and return.
+        if (temperatureManager.getMolThresholdCheck(1)) return;
+
         index = particleGen.GetComponent<ParticleGeneration>().selectParticleIndex("NO2");
 
         //Gets collider for object that was hit by the particle from molecule

@@ -21,10 +21,17 @@ public class N2O4Split : MonoBehaviour
 
     private int index = -1;
 
+    [Header("Temperature")]
+    [SerializeField] public GameObject tempGen;
+    private TemperatureManager temperatureManager;
+
     void Start()
     {
        particleGen = GameObject.Find("ParticleGeneration");
        particleManager = particleGen.GetComponent<ParticleGeneration>();
+
+       tempGen = GameObject.Find("TemperatureManager");
+       temperatureManager = tempGen.GetComponent<TemperatureManager>();
        timer = 0f;
     }
 
@@ -39,19 +46,10 @@ public class N2O4Split : MonoBehaviour
        if (listSize > 0 && gameObject.name == "N2O4(Clone)")
        {
            timer += Time.deltaTime;
-           if ((timer >= time_to_split))
+           if ((timer >= time_to_split && temperatureManager.getMolThresholdCheck(0)))
            {
-
-
                 particleManager.splitParticleSpawn(thisIndex, transform.position);
-               //Debug.Log("5 SECONDS PASSED. About to delete " + thisIndex + " This Object: " + gameObject.name + " N2O4 Count: " + listSize);
-               //particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("N2O4", thisIndex);
-
-               //Debug.Log("X: " + transform.localPosition.x + " Y: " + transform.localPosition.y + " Z: " + transform.localPosition.z);
-
-               //particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects("NO2", 2, transform.position);
-               //particleGen.GetComponent<ParticleGeneration>().InstantiateGameObjects(GameObject.Find("NO2"), 2, help, true);
-               timer = 0f;
+                timer = 0f;
            }
        } else
        {

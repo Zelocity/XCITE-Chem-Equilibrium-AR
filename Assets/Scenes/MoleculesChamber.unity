@@ -706,7 +706,7 @@ RectTransform:
   m_GameObject: {fileID: 131017682}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9758631, y: 2.578617, z: 4.406589}
+  m_LocalScale: {x: 1.7663031, y: 2.3051288, z: 4.406589}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1279456311}
@@ -714,7 +714,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -15, y: -9}
+  m_AnchoredPosition: {x: -15, y: -10.511}
   m_SizeDelta: {x: 68.478, y: -0.9094}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &131017684
@@ -4845,7 +4845,7 @@ RectTransform:
   m_GameObject: {fileID: 714798990}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5994271, y: 0.61670995, z: 0.23822679}
+  m_LocalScale: {x: 0.5093572, y: 0.52404314, z: 0.23822679}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2046162989}
@@ -7341,7 +7341,7 @@ RectTransform:
   m_GameObject: {fileID: 1144127746}
   m_LocalRotation: {x: -0, y: -0, z: -0.70710707, w: 0.70710653}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.40222302, y: 31.834024, z: 1}
+  m_LocalScale: {x: 0.09957835, y: 30.258184, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 879151034}
@@ -7364,7 +7364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.63576895, g: 0.82933897, b: 0.8584906, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8344,7 +8344,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 152.3, y: 4.999903}
+  m_AnchoredPosition: {x: 150, y: 4.999903}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1288756563
@@ -9885,7 +9885,7 @@ RectTransform:
   m_GameObject: {fileID: 1481697199}
   m_LocalRotation: {x: -0, y: -0, z: 0.7072493, w: 0.7069643}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 75.87884, y: 0.04933918, z: 1.0707}
+  m_LocalScale: {x: 75.87884, y: 0.025794525, z: 1.0707}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 192299787}
@@ -12366,7 +12366,7 @@ RectTransform:
   m_GameObject: {fileID: 2046162988}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4809094, y: 0.29997382, z: 0.4602428}
+  m_LocalScale: {x: 0.33106673, y: 0.23634337, z: 0.4602428}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 714798991}
@@ -12761,14 +12761,14 @@ RectTransform:
   m_GameObject: {fileID: 2083361462}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5101398, y: 0.29595742, z: 0.1977372}
+  m_LocalScale: {x: 0.3838649, y: 0.23935696, z: 0.1977372}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1322437879}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -229, y: -651.2}
+  m_AnchoredPosition: {x: -225.6, y: -651.2}
   m_SizeDelta: {x: 219.307, y: 213.0721}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2083361465
@@ -13080,14 +13080,14 @@ RectTransform:
   m_GameObject: {fileID: 2121587150}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5101398, y: 0.29595736, z: 0.19773717}
+  m_LocalScale: {x: 0.3838649, y: 0.23935692, z: 0.19773717}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1322437879}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -94.999985, y: -651.2}
+  m_AnchoredPosition: {x: -94.8, y: -651.2}
   m_SizeDelta: {x: 219.307, y: 213.0721}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2121587153

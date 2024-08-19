@@ -74,9 +74,9 @@ public class TemperatureManager : MonoBehaviour
 
     public bool getMolThresholdCheck (int select) {
         if (select == 0) { // NO2
-            return molQuantity > molQuantityLimit; // return true if NO2 quantity is above threshold
+            return molQuantity < molQuantityLimit; // return true if NO2 quantity is above threshold
         } else if (select == 1) { //N2O4
-            return molQuantity2 < molQuantityLimit2; // return true if N2O4 quantity is below threshold
+            return molQuantity2 > molQuantityLimit2; // return true if N2O4 quantity is below threshold
         } 
         Debug.LogWarning("Error: Type int select is out of bounds.");
         return false;
