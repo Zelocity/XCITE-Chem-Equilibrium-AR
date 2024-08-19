@@ -58,6 +58,7 @@ public class Pressure_Manager : MonoBehaviour
         Lid = newLid;
         lidStartPos = Lid.transform.localPosition.y;
         lidCurrPos = lidStartPos;
+        Debug.Log("LID SET");
     }
 
     public void Set_Spawn_Height()

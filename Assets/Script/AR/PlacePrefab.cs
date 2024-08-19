@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 
 
 [RequireComponent(typeof(ARRaycastManager), typeof(ARPlaneManager))]
@@ -11,6 +14,9 @@ public class PlacePrefab : MonoBehaviour
     [Header("GameObjects")]
     [SerializeField] private GameObject beaker;
     [SerializeField] private GameObject particleGen;
+    [SerializeField] private GameObject pressureManager;
+    [SerializeField] private GameObject testBeaker;
+    [SerializeField] private GameObject UIDisplay;
     //[SerializeField] private GameObject P_Up_Button;
     //[SerializeField] private GameObject P_Down_Button;
 
@@ -24,7 +30,6 @@ public class PlacePrefab : MonoBehaviour
     bool placed = false;
     bool greeted = false;
 
-    // Start is called before the first frame update
     void Awake()
     {
         aRRaycastManager = GetComponent<ARRaycastManager>();
@@ -34,6 +39,13 @@ public class PlacePrefab : MonoBehaviour
 
     private void OnEnable()
     {
+#if UNITY_EDITOR
+        if (EditorApplication.isPlaying)
+        {
+            UIDisplay.SetActive(true);
+            testBeaker.SetActive(true);
+        }
+#endif
         EnhancedTouch.TouchSimulation.Enable();
         EnhancedTouch.EnhancedTouchSupport.Enable();
         EnhancedTouch.Touch.onFingerDown += FingerDown;
@@ -50,15 +62,20 @@ public class PlacePrefab : MonoBehaviour
     {
         if (finger.index != 0) return;
 
+        //detect finger press
         if (aRRaycastManager.Raycast(finger.currentTouch.screenPosition, hits, TrackableType.PlaneWithinPolygon) && !placed && !greeted)
         {
+            //set flag and create beaker object
             placed = true;
             Pose pose = hits[0].pose;
-            Debug.Log("ABOUT TO CREATE");
             GameObject obj = Instantiate(beaker, pose.position, pose.rotation);
-            Debug.Log("BEAKER CREATED");
+            //set spawner component from beaker
             particleGen.GetComponent<ParticleGeneration>().Set_Spawner(obj);
-            GameObject.Find("/Canvas/UI/Neutral").SetActive(true);
+            //turn on ui
+            UIDisplay.SetActive(true);
+            //find lid and set it for pressure manager
+            GameObject lid = obj.transform.GetChild(3).gameObject;
+            pressureManager.GetComponent<Pressure_Manager>().Set_Lid(lid);
             //GameObject.Find("AR Session Origin/Trackables").SetActive(false);
 
 
