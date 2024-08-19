@@ -26,7 +26,8 @@ public class UIManager: MonoBehaviour
     private TemperatureManager temperatureManager;
     public Slider tempSlider;
     private static bool temp_point_up;
-    //private float currTempSpeed = 0.15f;
+    public TextMeshProUGUI eqNumText;
+    public TextMeshProUGUI tempText;
 
     [Header("Particle List Panel")]
     public GameObject prefabButton;
@@ -50,7 +51,6 @@ public class UIManager: MonoBehaviour
     {
         temperatureManager.setTemp(tempSlider.value);
         Generate_ParticleList();
-        //Temperature_Change(currTempSpeed);
     }
 
     private void FixedUpdate()
@@ -58,6 +58,8 @@ public class UIManager: MonoBehaviour
         particleName = particleManager.getParticleName(selectedParticleByUser);
         setParticleNameText();
         setParticleCountText();
+        setParticleEqText();
+        setTemperatureText();
         particleQuantity();
 
         if (temp_point_up)
@@ -99,21 +101,6 @@ public class UIManager: MonoBehaviour
     ///
 
 
-    public void Temperature_Change(float value)
-    {
-    //    List<List<GameObject>> particleList = particleManager.getParticleIndexList();
-    //    int k = 0;
-    //    for (int i = 0; i < particleList.Count; i++) {
-    //         while (k < particleList[i].Count) {
-    //             currTempSpeed = value *.05f;
-    //             particleList[i][k].GetComponent<ParticlePhysics>().Modify_Average_Speed(currTempSpeed);
-    //             k++;
-    //         }
-    //         k = 0;
-    //    }
-    }
-
-
     public void Lid_Up(bool up) { upLidActive = up; }
 
     public void Lid_Down(bool down) { downLidActive = down; }
@@ -130,27 +117,42 @@ public class UIManager: MonoBehaviour
 
     }
 
-
-
     private void Generate_ParticleList()
     {
         int offset = 0; 
         List<List<GameObject>> particleList = particleManager.getParticleIndexList();
 
+        Object[] spriteList  = Resources.LoadAll("Texture2D", typeof(Sprite));
+
         for (int i = 0; i < particleList.Count; i++)
         {
+            //Spawning Prefab
             GameObject goButton = (GameObject)Instantiate(prefabButton);
             Transform childTransform = goButton.transform.Find("Button");
             goButton.transform.SetParent(ParentPanel, false);
             goButton.transform.localScale = new Vector3(1, 1, 1);
             goButton.transform.Translate(new Vector3(0, offset, 0));
 
-
-
+            //Button
             int tempint = i;
             Button tempButton = childTransform.GetComponent<Button>();
             tempButton.onClick.AddListener(() => ButtonClicked(tempint));
-            offset -= 50;
+            offset -= 120;
+
+            //Name
+            childTransform = goButton.transform.Find("Button").transform.Find("Name");
+            TextMeshProUGUI particlePanelName = childTransform.GetComponent<TextMeshProUGUI>();
+            particlePanelName.text = particleManager.getParticleName(tempint);
+
+            childTransform = goButton.transform.Find("Button").transform.Find("Image");
+            Image image = childTransform.GetComponent<Image>();
+
+            Sprite sprite = (Sprite)spriteList[tempint];
+
+            image.sprite = sprite; 
+            //Texture2D tex = Resources.Load<Texture2D>("NO2");
+            //image.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+            
         }
     }
 
@@ -167,6 +169,15 @@ public class UIManager: MonoBehaviour
     void setParticleCountText()
     {
         particleCountText.text = particleManager.getParticleCount(selectedParticleByUser).ToString();
+    }
+
+    void setParticleEqText()
+    {
+        eqNumText.text = temperatureManager.getMolQuantityLimit(selectedParticleByUser).ToString();
+    }
+    void setTemperatureText()
+    {
+        tempText.text = temperatureManager.getTemp().ToString() + "°";
     }
 }
 

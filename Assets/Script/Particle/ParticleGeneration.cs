@@ -51,8 +51,6 @@ public class ParticleGeneration : MonoBehaviour
             particles.Add(particle);
         }
 
-        selectParticle("N2O4").setSplitable(true);
-
 
         List<Particle> temp = new List<Particle>();
 
@@ -104,19 +102,19 @@ public class ParticleGeneration : MonoBehaviour
     }
 
     public void randomParticleSpawn (string name, int num) { 
-        float newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
-        float newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + (0.19f + (.29f * spawnHeight)));
-        float newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
-        Vector3 position = new Vector3(newPos_X, newPos_Y, newPos_Z);
-        InstantiateGameObjects(name, num, position);     
+        for (int i = 0; i < num; i++) { 
+            float newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
+            float newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + (0.19f + (.29f * spawnHeight)));
+            float newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
+            Vector3 position = new Vector3(newPos_X, newPos_Y, newPos_Z);
+            InstantiateGameObjects(name, 1, position);     
+        }
+        
     }
-    public void splitParticleSpawn (int index) { 
+    public void splitParticleSpawn (int index, Vector3 position) { 
         DestroyGameObjects("N2O4", index);
-        float newPos_X = Random.Range(spawn_x - .168f, spawn_x + 0.168f);
-        float newPos_Y = Random.Range(spawn_y + 0.03f, spawn_y + (0.19f + (.29f * spawnHeight)));
-        float newPos_Z = Random.Range(spawn_z - .1f, spawn_z + .1f);
-        Vector3 position = new Vector3(newPos_X, newPos_Y, newPos_Z);
-        InstantiateGameObjects("NO2", 2, transform.position);    
+        randomParticleSpawn("NO2", 2);
+        // InstantiateGameObjects("NO2", 2, position);    
     }
 
     //Function to destroy molecules

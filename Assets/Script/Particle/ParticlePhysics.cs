@@ -25,13 +25,10 @@ public class ParticlePhysics : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-
         tempGen = GameObject.Find("TemperatureManager");
         temperatureManager = tempGen.GetComponent<TemperatureManager>();
         avgSpeed = temperatureManager.getSpeed();
         rb = GetComponent<Rigidbody>();
-
-        
 
         //Particle is given a random velocity vector at start
         
@@ -78,7 +75,7 @@ public class ParticlePhysics : MonoBehaviour
         }
     }
 
-    public void Modify_Average_Speed(float value)
+    public void modifySpeed(float value)
     {
         avgSpeed = value;
  

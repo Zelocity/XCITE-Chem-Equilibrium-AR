@@ -43,7 +43,7 @@ public class N2O4Split : MonoBehaviour
            {
 
 
-                particleManager.splitParticleSpawn(thisIndex);
+                particleManager.splitParticleSpawn(thisIndex, transform.position);
                //Debug.Log("5 SECONDS PASSED. About to delete " + thisIndex + " This Object: " + gameObject.name + " N2O4 Count: " + listSize);
                //particleGen.GetComponent<ParticleGeneration>().DestroyGameObjects("N2O4", thisIndex);
 

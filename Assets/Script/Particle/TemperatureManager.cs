@@ -10,10 +10,6 @@ public class TemperatureManager : MonoBehaviour
     [SerializeField] public GameObject particleGen;
     private ParticleGeneration particleManager;
 
-    [Header("Slider")]
-    //[SerializeField] private Slider tempSlider;
-    private float currTemp;
-
     [Header("Values")]
     private int molQuantity; // NO2
     private int molQuantity2; // N2O4
@@ -30,7 +26,7 @@ public class TemperatureManager : MonoBehaviour
     //Speeds 
     //                       
     private float[] speedList = {0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,
-                               0f, 0f, 0f, .17f, .17f, .17f, .17f, .17f, .17f, .17f};
+                               .04f, .08f, .12f, .16f, .20f, .24f, .28f, .32f, .36f, .4f};
 
     private int tempIndex;
 
@@ -39,7 +35,6 @@ public class TemperatureManager : MonoBehaviour
     void Start()
     {
         particleManager = particleGen.GetComponent<ParticleGeneration>();
-        //currTemp = tempSlider.value;
     }
 
     // Update is called once per frame
@@ -49,7 +44,7 @@ public class TemperatureManager : MonoBehaviour
     }
 
     private double calculateKValue() {
-        return Math.Exp(-((dHrxn*1000)/(R*(currTemp+273.15))) + (dSrxn/R));
+        return Math.Exp(-((dHrxn*1000)/(R*(tempValue+273.15))) + (dSrxn/R));
     }
 
     private double calculateXValue() {
@@ -67,13 +62,15 @@ public class TemperatureManager : MonoBehaviour
         molQuantityLimit2 = (int)(molQuantity2+X);
     }
 
-    public int getMolQuantityLimit() { 
-        return molQuantity;
+    public int getMolQuantityLimit(int select) { 
+        if (select == 0) { 
+            return molQuantityLimit;
+        } else if (select == 1) { 
+            return molQuantityLimit2;
+        }
+        Debug.LogWarning("Error: Type int select is out of bounds.");
+        return -1;
     }
-    public int getMolQuantityLimit2() { 
-        return molQuantity2; 
-    }
-
 
     public bool getMolThresholdCheck (int select) {
         if (select == 0) { // NO2
@@ -89,8 +86,22 @@ public class TemperatureManager : MonoBehaviour
         return speedList[tempIndex]; 
     }
 
+    public int getTemp() { 
+        return tempValue;
+    }
+
     public void setTemp(float num) { 
         tempValue = (int)num;
         tempIndex = (int)(num+100)/10;
+
+        List<List<GameObject>> particleList = particleManager.getParticleIndexList();
+        int k = 0;
+        for (int i = 0; i < particleList.Count; i++) {
+            while (k < particleList[i].Count) {
+                particleList[i][k].GetComponent<ParticlePhysics>().modifySpeed(getSpeed());
+                k++;
+            }
+            k = 0;
+        }
     }
 }
