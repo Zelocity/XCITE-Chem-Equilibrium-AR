@@ -137,7 +137,7 @@ public class UIManager: MonoBehaviour
             int tempint = i;
             Button tempButton = childTransform.GetComponent<Button>();
             tempButton.onClick.AddListener(() => ButtonClicked(tempint));
-            offset -= 120;
+            offset -= 150;
 
             //Name
             childTransform = goButton.transform.Find("Button").transform.Find("Name");
