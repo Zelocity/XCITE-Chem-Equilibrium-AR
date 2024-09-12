@@ -25,7 +25,8 @@ public class UIManager: MonoBehaviour
     [SerializeField] private GameObject tempGen;
     private TemperatureManager temperatureManager;
     public Slider tempSlider;
-    private static bool temp_point_up;
+    private float tempValue;
+    private static bool tempPointerUp;
     public TextMeshProUGUI eqNumText;
     public TextMeshProUGUI tempText;
 
@@ -37,7 +38,6 @@ public class UIManager: MonoBehaviour
     [Header("Text")]
     [SerializeField] TextMeshProUGUI particleNameText;
     [SerializeField] TextMeshProUGUI particleCountText;
-
     private string particleName;
 
     private void Awake()
@@ -49,7 +49,8 @@ public class UIManager: MonoBehaviour
 
     private void Start()
     {
-        temperatureManager.setTemp(tempSlider.value);
+        tempValue = tempSlider.value;
+        temperatureManager.setTemp(tempValue);
         Generate_ParticleList();
     }
 
@@ -62,9 +63,10 @@ public class UIManager: MonoBehaviour
         setTemperatureText();
         particleQuantity();
 
-        if (temp_point_up)
+        if (tempPointerUp)
         {
-           temperatureManager.setTemp(tempSlider.value);
+           setTempValue();
+           temperatureManager.setTemp(tempValue);
         }
 
         if (upLidActive)
@@ -78,6 +80,16 @@ public class UIManager: MonoBehaviour
         }
     }
 
+    
+
+    public void Dismiss_Welcome()
+    {
+        GameObject.Find("AR Session Origin").GetComponent<PlacePrefab>().enabled = true;
+
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //PARTICLE FUNCTIONS
+    
     public void CreateButton()
     {
         particleManager.randomParticleSpawn(particleName, quantityNum);
@@ -95,29 +107,7 @@ public class UIManager: MonoBehaviour
         particleManager.Clear_Particles();
     }
 
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-    ///
-
-
-    public void Lid_Up(bool up) { upLidActive = up; }
-
-    public void Lid_Down(bool down) { downLidActive = down; }
-
-    public void Temp_Slider(bool up) { temp_point_up = up; }
-
-    public void particleQuantity() { quantityNum = (int)quantitySlider.value; quantityNumText.text = quantityNum.ToString();  }
-
-    public void Set_Lid(GameObject newLid) { pressureManager.GetComponent<Pressure_Manager>().Set_Lid(newLid); }
-
-    public void Dismiss_Welcome()
-    {
-        GameObject.Find("AR Session Origin").GetComponent<PlacePrefab>().enabled = true;
-
-    }
-
-    private void Generate_ParticleList()
+     private void Generate_ParticleList()
     {
         int offset = 0; 
         List<List<GameObject>> particleList = particleManager.getParticleIndexList();
@@ -136,7 +126,7 @@ public class UIManager: MonoBehaviour
             //Button
             int tempint = i;
             Button tempButton = childTransform.GetComponent<Button>();
-            tempButton.onClick.AddListener(() => ButtonClicked(tempint));
+            tempButton.onClick.AddListener(() => setSelectedParticle(tempint));
             offset -= 150;
 
             //Name
@@ -155,12 +145,6 @@ public class UIManager: MonoBehaviour
             
         }
     }
-
-    void ButtonClicked(int buttonNo)
-    {
-        selectedParticleByUser = buttonNo;
-    }
-
     void setParticleNameText()
     {
         particleNameText.text = particleName;
@@ -171,14 +155,55 @@ public class UIManager: MonoBehaviour
         particleCountText.text = particleManager.getParticleCount(selectedParticleByUser).ToString();
     }
 
+    public void setParticleCountTextObj(TextMeshProUGUI newParticleCountText) { 
+        particleCountText = newParticleCountText;
+        
+    }
+
     void setParticleEqText()
     {
         eqNumText.text = temperatureManager.getMolQuantityLimit(selectedParticleByUser).ToString();
+    }
+
+    public void particleQuantity() { quantityNum = (int)quantitySlider.value; quantityNumText.text = quantityNum.ToString();  }
+
+    public void setSelectedParticle(int buttonNo)
+    {
+        selectedParticleByUser = buttonNo;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    
+    //TEMPERATURE FUNCTIONS
+    public void setTempSlider(Slider newTempSlider) {
+        tempSlider = newTempSlider;
+    }
+
+    void setTempValue() { 
+        tempValue = tempSlider.value;
+    }
+
+    public void setTemperatureOBJ(TextMeshProUGUI newTempText) { 
+        tempText = newTempText;
     }
     void setTemperatureText()
     {
         tempText.text = temperatureManager.getTemp().ToString() + "°";
     }
+     public void Temp_Slider(bool up) { tempPointerUp = up; }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    //PRESSURE FUNCTIONS
+    public void Set_Lid(GameObject newLid) { pressureManager.GetComponent<Pressure_Manager>().Set_Lid(newLid); }
+
+    public void Lid_Up(bool up) { upLidActive = up; }
+
+    public void Lid_Down(bool down) { downLidActive = down; }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////
 }
+
+
 
 
