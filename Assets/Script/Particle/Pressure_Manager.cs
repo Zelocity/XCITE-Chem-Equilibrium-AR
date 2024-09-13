@@ -19,7 +19,7 @@ public class Pressure_Manager : MonoBehaviour
 
     public void Lid_Up()
     {
-        Debug.Log("lidStartPos: " + lidStartPos + " currPos: " + lidCurrPos);
+        //Debug.Log("lidStartPos: " + lidStartPos + " currPos: " + lidCurrPos);
         if(lidStartPos >= lidCurrPos)
         {
             lidCurrPos++;
@@ -30,7 +30,7 @@ public class Pressure_Manager : MonoBehaviour
     public void Lid_Down()
     {
         //float levelDiff = Get_Lid_Level_Diff()
-        Debug.Log("lidStartPos: " + lidStartPos + " currPos: " + lidCurrPos);
+        //Debug.Log("lidStartPos: " + lidStartPos + " currPos: " + lidCurrPos);
         if(lidCurrPos > 617)
         {
             lidCurrPos--;
@@ -58,7 +58,7 @@ public class Pressure_Manager : MonoBehaviour
         Lid = newLid;
         lidStartPos = Lid.transform.localPosition.y;
         lidCurrPos = lidStartPos;
-        Debug.Log("LID SET");
+        //Debug.Log("LID SET");
     }
 
     public void Set_Spawn_Height()
